@@ -22,8 +22,6 @@ namespace ControlWorks.UI.BarTender
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            txtJobname.Focus();
-
             string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
             string keyboardPath = Path.Combine(progFiles, "TabTip.exe");
             var keyboardProc = Process.Start(keyboardPath);
@@ -31,7 +29,8 @@ namespace ControlWorks.UI.BarTender
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            pictureBox1.Image = Properties.Resources.Label_Sample;
+            lblTemplateName.Text = "Sample_Temple_Name_Example";
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)

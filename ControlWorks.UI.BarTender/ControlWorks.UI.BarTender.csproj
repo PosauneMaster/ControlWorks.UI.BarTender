@@ -90,6 +90,7 @@
     <None Include="Resources\Rotate-Right.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Label Sample.PNG" />
     <Content Include="Webalys-Kameleon.pics-Conveyor-Belt.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

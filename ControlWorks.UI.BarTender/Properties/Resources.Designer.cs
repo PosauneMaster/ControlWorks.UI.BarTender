@@ -63,6 +63,16 @@ namespace ControlWorks.UI.BarTender.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Label_Sample {
+            get {
+                object obj = ResourceManager.GetObject("Label_Sample", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Rotate_Left {
             get {
                 object obj = ResourceManager.GetObject("Rotate_Left", resourceCulture);
@@ -77,6 +87,16 @@ namespace ControlWorks.UI.BarTender.Properties {
             get {
                 object obj = ResourceManager.GetObject("Rotate_Right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon Webalys_Kameleon_pics_Conveyor_Belt {
+            get {
+                object obj = ResourceManager.GetObject("Webalys_Kameleon_pics_Conveyor_Belt", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }
