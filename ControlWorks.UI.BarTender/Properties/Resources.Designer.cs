@@ -63,9 +63,29 @@ namespace ControlWorks.UI.BarTender.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap greenlight2 {
+            get {
+                object obj = ResourceManager.GetObject("greenlight2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Label_Sample {
             get {
                 object obj = ResourceManager.GetObject("Label_Sample", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap redlight {
+            get {
+                object obj = ResourceManager.GetObject("redlight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -86,6 +106,16 @@ namespace ControlWorks.UI.BarTender.Properties {
         internal static System.Drawing.Bitmap Rotate_Right {
             get {
                 object obj = ResourceManager.GetObject("Rotate_Right", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap TransparentLight {
+            get {
+                object obj = ResourceManager.GetObject("TransparentLight", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
