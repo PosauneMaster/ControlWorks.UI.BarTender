@@ -2,15 +2,31 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
+//string keyboardPath = Path.Combine(progFiles, "TabTip.exe");
+//var keyboardProc = Process.Start(keyboardPath);
+
+
+
 namespace ControlWorks.UI.BarTender
 {
+    public enum LabelPositon
+    {
+        Custom,
+        Edge,
+        Center
+    }
+
+
     public partial class frmMain : Form
     {
         public frmMain()
@@ -29,6 +45,13 @@ namespace ControlWorks.UI.BarTender
             panel3.Paint += Panel1_Paint;
             panel4.Paint += Panel1_Paint;
             panel5.Paint += Panel1_Paint;
+
+            cboLabelSize.Items.Add("4 x 4");
+            cboLabelSize.Items.Add("4 x 6");
+
+            cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
+
+
         }
 
         private void Panel1_Paint(object sender, PaintEventArgs e)
@@ -108,5 +131,40 @@ namespace ControlWorks.UI.BarTender
 
             toolStripLabel2.Text = tabcontrol.SelectedTab.Text;
         }
+
+        //private void txtHeight_MouseUp(object sender, MouseEventArgs e)
+        //{
+        //    var frm = new frmNumpad(txtHeight);
+
+        //    Point location = txtHeight.PointToScreen(Point.Empty);
+
+        //    var x = location.X - frm.Width / 2;
+        //    var y = location.Y + 30;
+
+
+        //    frm.Location = new Point(x, y);
+
+        //    frm.Show();
+        //}
+
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            TextBox txt = sender as TextBox;
+
+            if (txt != null)
+            {
+                var frm = new frmNumpad(txt);
+
+                Point location = txt.PointToScreen(Point.Empty);
+
+                var x = location.X - frm.Width / 2;
+                var y = location.Y + 30;
+
+                frm.Location = new Point(x, y);
+
+                frm.Show();
+            }
+        }
     }
 }
+

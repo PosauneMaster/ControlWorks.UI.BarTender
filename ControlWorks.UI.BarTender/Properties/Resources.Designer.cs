@@ -63,9 +63,39 @@ namespace ControlWorks.UI.BarTender.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arrow_Previous_16xSM {
+            get {
+                object obj = ResourceManager.GetObject("arrow_Previous_16xSM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap dot_medium {
+            get {
+                object obj = ResourceManager.GetObject("dot_medium", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap greenlight2 {
             get {
                 object obj = ResourceManager.GetObject("greenlight2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap image001 {
+            get {
+                object obj = ResourceManager.GetObject("image001", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -77,6 +107,16 @@ namespace ControlWorks.UI.BarTender.Properties {
             get {
                 object obj = ResourceManager.GetObject("Label_Sample", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon MovePrevious_7195 {
+            get {
+                object obj = ResourceManager.GetObject("MovePrevious_7195", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
