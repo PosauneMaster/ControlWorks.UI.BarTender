@@ -19,16 +19,17 @@ using System.Windows.Forms;
 
 namespace ControlWorks.UI.BarTender
 {
-    public enum LabelPositon
-    {
-        Custom,
-        Edge,
-        Center
-    }
-
-
     public partial class frmMain : Form
     {
+        private readonly string _labelsizesmall = "4 x 4";
+        private readonly string _labelsizelarge = "4 x 6";
+
+        private Point _smallLabelCenterLocation; //165, 190
+        private Point _largeLabelCenterLocation; //165, 160
+        private Point _labelEdgeLocation;   //327, 3
+
+        private LabelService _labelService;
+
         public frmMain()
         {
             InitializeComponent();
@@ -46,11 +47,78 @@ namespace ControlWorks.UI.BarTender
             panel4.Paint += Panel1_Paint;
             panel5.Paint += Panel1_Paint;
 
-            cboLabelSize.Items.Add("4 x 4");
-            cboLabelSize.Items.Add("4 x 6");
+            pnlBox.Paint += PnlBox_Paint;
+
+            cboLabelSize.Items.Add(_labelsizesmall);
+            cboLabelSize.Items.Add(_labelsizelarge);
+            cboLabelSize.SelectedIndex = 1;
+
+            _smallLabelCenterLocation = pb4x4.Location;
+            _largeLabelCenterLocation = pb4x6.Location;
+            _labelEdgeLocation = new Point(327, 3);
+
 
             cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
+            cboLabelPosition.SelectedIndex = 2;
 
+            _labelService = new LabelService();
+            _labelService.LabelSizeChanged += _labelService_LabelSizeChanged;
+            _labelService.LabelPositionChanged += _labelService_LabelPositionChanged;
+        }
+
+        private void PnlBox_Paint(object sender, PaintEventArgs e)
+        {
+            using (Pen pen = new Pen(Color.Black))
+            {
+                try
+                {
+                    Point pLeft = new Point(0, pnlBox.Height / 2);
+                    Point pRight = new Point(pb4x4.Left, pnlBox.Height / 2);
+
+                    Point pLeft2 = new Point(pb4x4.Right, pnlBox.Height / 2);
+                    Point pRight2 = new Point(pnlBox.Right, pnlBox.Height / 2);
+
+                    e.Graphics.DrawLine(pen, pLeft, pRight);
+                    e.Graphics.DrawLine(pen, pLeft2, pRight2);
+
+                }
+                catch (Exception ex) { }
+            }
+        }
+
+        private void _labelService_LabelPositionChanged(object sender, LabelServiceEventArgs e)
+        {
+            if (e.Label.Position == LabelPositon.Center)
+            {
+                pb4x4.Location = _smallLabelCenterLocation;
+                pb4x6.Location = _largeLabelCenterLocation;
+            }
+            else if(e.Label.Position == LabelPositon.Edge)
+            {
+                pb4x4.Location = _labelEdgeLocation;
+                pb4x6.Location = _labelEdgeLocation;
+            }
+            else
+            {
+                pb4x4.Location = _smallLabelCenterLocation;
+                pb4x6.Location = _largeLabelCenterLocation;
+            }
+        }
+
+        private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
+        {
+            Debug.WriteLine($"Label Size selected = {e.Label.Size}");
+
+            if (e.Label.Size == LabelSize.dimension4x4)
+            {
+                pb4x4.Visible = true;
+                pb4x6.Visible = false;
+            }
+            else
+            {
+                pb4x4.Visible = false;
+                pb4x6.Visible = true;
+            }
 
         }
 
@@ -62,6 +130,7 @@ namespace ControlWorks.UI.BarTender
                 {
                     e.Graphics.FillRectangle(brush, panel2.ClientRectangle);
                 }
+
             }
             catch (Exception ex) { }
         }
@@ -132,21 +201,6 @@ namespace ControlWorks.UI.BarTender
             toolStripLabel2.Text = tabcontrol.SelectedTab.Text;
         }
 
-        //private void txtHeight_MouseUp(object sender, MouseEventArgs e)
-        //{
-        //    var frm = new frmNumpad(txtHeight);
-
-        //    Point location = txtHeight.PointToScreen(Point.Empty);
-
-        //    var x = location.X - frm.Width / 2;
-        //    var y = location.Y + 30;
-
-
-        //    frm.Location = new Point(x, y);
-
-        //    frm.Show();
-        //}
-
         private void OnMouseUp(object sender, MouseEventArgs e)
         {
             TextBox txt = sender as TextBox;
@@ -163,6 +217,46 @@ namespace ControlWorks.UI.BarTender
                 frm.Location = new Point(x, y);
 
                 frm.Show();
+            }
+        }
+
+        private void cboLabelPosition_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cbo = sender as ComboBox;
+            if (cbo != null)
+            {
+                LabelPositon position;
+
+                if(Enum.TryParse<LabelPositon>(cbo.SelectedItem.ToString(), out position))
+                {
+                    if (_labelService != null)
+                    {
+                        _labelService.ChangeLabelPosition(position);
+                    }
+                }
+            }
+        }
+
+        private void cboLabelSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var cbo = sender as ComboBox;
+
+            if (cbo != null)
+            {
+                LabelSize size;
+                if (cbo.SelectedItem.ToString() == _labelsizesmall)
+                {
+                    size = LabelSize.dimension4x4;
+                }
+                else
+                {
+                    size = LabelSize.dimension4x6;
+                }
+
+                if (_labelService != null)
+                {
+                    _labelService.ChangeLabelSize(size);
+                }
             }
         }
     }

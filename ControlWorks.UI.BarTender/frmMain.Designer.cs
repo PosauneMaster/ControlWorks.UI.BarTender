@@ -40,10 +40,12 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.pnlBox = new System.Windows.Forms.Panel();
-            this.pbLabel = new System.Windows.Forms.PictureBox();
+            this.pb4x6 = new System.Windows.Forms.PictureBox();
+            this.pb4x4 = new System.Windows.Forms.PictureBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnRotate = new System.Windows.Forms.Button();
             this.cboLabelPosition = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.cboLabelSize = new System.Windows.Forms.ComboBox();
@@ -66,7 +68,8 @@
             this.panel3.SuspendLayout();
             this.panel6.SuspendLayout();
             this.pnlBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLabel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb4x6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb4x4)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -187,29 +190,44 @@
             // 
             this.pnlBox.BackColor = System.Drawing.Color.Peru;
             this.pnlBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pnlBox.Controls.Add(this.pbLabel);
+            this.pnlBox.Controls.Add(this.pb4x6);
+            this.pnlBox.Controls.Add(this.pb4x4);
             this.pnlBox.Location = new System.Drawing.Point(41, 40);
             this.pnlBox.Name = "pnlBox";
             this.pnlBox.Size = new System.Drawing.Size(454, 505);
             this.pnlBox.TabIndex = 0;
             // 
-            // pbLabel
+            // pb4x6
             // 
-            this.pbLabel.BackColor = System.Drawing.Color.White;
-            this.pbLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbLabel.Image = global::ControlWorks.UI.BarTender.Properties.Resources.image001;
-            this.pbLabel.Location = new System.Drawing.Point(163, 188);
-            this.pbLabel.Name = "pbLabel";
-            this.pbLabel.Size = new System.Drawing.Size(125, 125);
-            this.pbLabel.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbLabel.TabIndex = 0;
-            this.pbLabel.TabStop = false;
+            this.pb4x6.BackColor = System.Drawing.Color.White;
+            this.pb4x6.Image = global::ControlWorks.UI.BarTender.Properties.Resources.image001;
+            this.pb4x6.Location = new System.Drawing.Point(165, 160);
+            this.pb4x6.MaximumSize = new System.Drawing.Size(120, 180);
+            this.pb4x6.MinimumSize = new System.Drawing.Size(120, 180);
+            this.pb4x6.Name = "pb4x6";
+            this.pb4x6.Size = new System.Drawing.Size(120, 180);
+            this.pb4x6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pb4x6.TabIndex = 1;
+            this.pb4x6.TabStop = false;
+            this.pb4x6.Visible = false;
+            // 
+            // pb4x4
+            // 
+            this.pb4x4.BackColor = System.Drawing.Color.White;
+            this.pb4x4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pb4x4.Image = global::ControlWorks.UI.BarTender.Properties.Resources.image001;
+            this.pb4x4.Location = new System.Drawing.Point(165, 190);
+            this.pb4x4.Name = "pb4x4";
+            this.pb4x4.Size = new System.Drawing.Size(120, 120);
+            this.pb4x4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pb4x4.TabIndex = 0;
+            this.pb4x4.TabStop = false;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(271, 567);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(117, 50);
+            this.button2.Size = new System.Drawing.Size(120, 50);
             this.button2.TabIndex = 3;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -218,7 +236,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(148, 567);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 50);
+            this.button1.Size = new System.Drawing.Size(120, 50);
             this.button1.TabIndex = 2;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -226,6 +244,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.btnRotate);
             this.groupBox1.Controls.Add(this.cboLabelPosition);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.cboLabelSize);
@@ -243,6 +262,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
+            // btnRotate
+            // 
+            this.btnRotate.Image = global::ControlWorks.UI.BarTender.Properties.Resources.Rotate_Right;
+            this.btnRotate.Location = new System.Drawing.Point(88, 419);
+            this.btnRotate.Name = "btnRotate";
+            this.btnRotate.Size = new System.Drawing.Size(140, 80);
+            this.btnRotate.TabIndex = 9;
+            this.btnRotate.Text = "Rotate";
+            this.btnRotate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRotate.UseVisualStyleBackColor = true;
+            // 
             // cboLabelPosition
             // 
             this.cboLabelPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -251,6 +281,7 @@
             this.cboLabelPosition.Name = "cboLabelPosition";
             this.cboLabelPosition.Size = new System.Drawing.Size(150, 28);
             this.cboLabelPosition.TabIndex = 8;
+            this.cboLabelPosition.SelectedIndexChanged += new System.EventHandler(this.cboLabelPosition_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -269,6 +300,7 @@
             this.cboLabelSize.Name = "cboLabelSize";
             this.cboLabelSize.Size = new System.Drawing.Size(150, 28);
             this.cboLabelSize.TabIndex = 6;
+            this.cboLabelSize.SelectedIndexChanged += new System.EventHandler(this.cboLabelSize_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -402,7 +434,8 @@
             this.panel3.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.pnlBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbLabel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb4x6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb4x4)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage4.ResumeLayout(false);
@@ -438,11 +471,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel pnlBox;
-        private System.Windows.Forms.PictureBox pbLabel;
+        private System.Windows.Forms.PictureBox pb4x4;
         private System.Windows.Forms.ComboBox cboLabelPosition;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button btnRotate;
+        private System.Windows.Forms.PictureBox pb4x6;
     }
 }

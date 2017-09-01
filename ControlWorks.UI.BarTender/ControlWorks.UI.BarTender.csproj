@@ -67,6 +67,7 @@
     <Compile Include="frmNumpad.Designer.cs">
       <DependentUpon>frmNumpad.cs</DependentUpon>
     </Compile>
+    <Compile Include="LabelService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ucNumberPad.cs">
