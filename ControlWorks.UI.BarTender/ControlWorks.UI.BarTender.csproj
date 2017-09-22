@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrentBox.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +71,12 @@
     <Compile Include="LabelService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucLabelSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucLabelSettings.Designer.cs">
+      <DependentUpon>ucLabelSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucNumberPad.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -95,6 +102,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ucLabelSettings.resx">
+      <DependentUpon>ucLabelSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucNumberPad.resx">
       <DependentUpon>ucNumberPad.cs</DependentUpon>
     </EmbeddedResource>
@@ -126,6 +136,8 @@
     <None Include="Resources\MovePrevious_7195.ico" />
     <None Include="Resources\dot-medium.png" />
     <None Include="Resources\image001.png" />
+    <None Include="Resources\arrow_Next_16xLG_color.png" />
+    <None Include="Resources\arrow_Previous_16xLG_color.png" />
     <Content Include="Webalys-Kameleon.pics-Conveyor-Belt.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -21,14 +21,9 @@ namespace ControlWorks.UI.BarTender
 {
     public partial class frmMain : Form
     {
-        private readonly string _labelsizesmall = "4 x 4";
-        private readonly string _labelsizelarge = "4 x 6";
 
-        private Point _smallLabelCenterLocation; //165, 190
-        private Point _largeLabelCenterLocation; //165, 160
-        private Point _labelEdgeLocation;   //327, 3
 
-        private LabelService _labelService;
+
 
         public frmMain()
         {
@@ -43,28 +38,21 @@ namespace ControlWorks.UI.BarTender
 
             panel1.Paint += Panel1_Paint;
             panel2.Paint += Panel1_Paint;
-            panel3.Paint += Panel1_Paint;
             panel4.Paint += Panel1_Paint;
             panel5.Paint += Panel1_Paint;
 
-            pnlBox.Paint += PnlBox_Paint;
-
-            cboLabelSize.Items.Add(_labelsizesmall);
-            cboLabelSize.Items.Add(_labelsizelarge);
-            cboLabelSize.SelectedIndex = 1;
-
-            _smallLabelCenterLocation = pb4x4.Location;
-            _largeLabelCenterLocation = pb4x6.Location;
-            _labelEdgeLocation = new Point(327, 3);
 
 
-            cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
-            cboLabelPosition.SelectedIndex = 2;
 
-            _labelService = new LabelService();
-            _labelService.LabelSizeChanged += _labelService_LabelSizeChanged;
-            _labelService.LabelPositionChanged += _labelService_LabelPositionChanged;
+
+            //_labelService = new LabelService();
+            //_labelService.LabelSizeChanged += _labelService_LabelSizeChanged;
+            //_labelService.LabelPositionChanged += _labelService_LabelPositionChanged;
+
+            //SetCurrentBox();
+
         }
+
 
         private void PnlBox_Paint(object sender, PaintEventArgs e)
         {
@@ -72,55 +60,64 @@ namespace ControlWorks.UI.BarTender
             {
                 try
                 {
-                    Point pLeft = new Point(0, pnlBox.Height / 2);
-                    Point pRight = new Point(pb4x4.Left, pnlBox.Height / 2);
+                    //Point pLeft = new Point(0, pnlBox.Height / 2);
+                    //Point pRight = new Point(pb4x4.Left, pnlBox.Height / 2);
 
-                    Point pLeft2 = new Point(pb4x4.Right, pnlBox.Height / 2);
-                    Point pRight2 = new Point(pnlBox.Right, pnlBox.Height / 2);
+                    //Point pLeft2 = new Point(pb4x4.Right, pnlBox.Height / 2);
+                    //Point pRight2 = new Point(pnlBox.Right, pnlBox.Height / 2);
 
-                    e.Graphics.DrawLine(pen, pLeft, pRight);
-                    e.Graphics.DrawLine(pen, pLeft2, pRight2);
+                    //e.Graphics.DrawLine(pen, pLeft, pRight);
+                    //e.Graphics.DrawLine(pen, pLeft2, pRight2);
 
                 }
                 catch (Exception ex) { }
             }
         }
 
-        private void _labelService_LabelPositionChanged(object sender, LabelServiceEventArgs e)
-        {
-            if (e.Label.Position == LabelPositon.Center)
-            {
-                pb4x4.Location = _smallLabelCenterLocation;
-                pb4x6.Location = _largeLabelCenterLocation;
-            }
-            else if(e.Label.Position == LabelPositon.Edge)
-            {
-                pb4x4.Location = _labelEdgeLocation;
-                pb4x6.Location = _labelEdgeLocation;
-            }
-            else
-            {
-                pb4x4.Location = _smallLabelCenterLocation;
-                pb4x6.Location = _largeLabelCenterLocation;
-            }
-        }
+        //private void _labelService_LabelPositionChanged(object sender, LabelServiceEventArgs e)
+        //{
+        //    if (e.Label.Position == LabelPositon.Center)
+        //    {
+        //        pb4x4.Location = _smallLabelCenterLocation;
+        //        pb4x6.Location = _largeLabelCenterLocation;
+        //    }
+        //    else if(e.Label.Position == LabelPositon.Edge)
+        //    {
+        //        pb4x4.Location = _labelEdgeLocation;
+        //        pb4x6.Location = _labelEdgeLocation;
+        //    }
+        //    else
+        //    {
+        //        pb4x4.Location = _smallLabelCenterLocation;
+        //        pb4x6.Location = _largeLabelCenterLocation;
+        //    }
+        //}
 
-        private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
-        {
-            Debug.WriteLine($"Label Size selected = {e.Label.Size}");
+        //private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
+        //{
+        //    Debug.WriteLine($"Label Size selected = {e.Label.Size}");
 
-            if (e.Label.Size == LabelSize.dimension4x4)
-            {
-                pb4x4.Visible = true;
-                pb4x6.Visible = false;
-            }
-            else
-            {
-                pb4x4.Visible = false;
-                pb4x6.Visible = true;
-            }
+        //    if (e.Label.Size == LabelSize.dimension4x4)
+        //    {
+        //        pb4x4.Visible = true;
+        //        pb4x6.Visible = false;
+        //    }
+        //    else
+        //    {
+        //        pb4x4.Visible = false;
+        //        pb4x6.Visible = true;
+        //    }
 
-        }
+        //    SetCurrentBox();
+
+        //}
+
+        //private void SetCurrentBox()
+        //{
+        //    double boxHeight = Double.Parse(txtHeight.Text);
+        //    double boxWidth = Double.Parse(txtWidth.Text);
+        //    _currentBox = new CurrentBox(boxHeight, boxWidth, GetCurrentPictureBox(), pnlBox);
+        //}
 
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -220,45 +217,87 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
-        private void cboLabelPosition_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var cbo = sender as ComboBox;
-            if (cbo != null)
-            {
-                LabelPositon position;
+        //private void cboLabelPosition_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //var cbo = sender as ComboBox;
+        //    //if (cbo != null)
+        //    //{
+        //    //    LabelPositon position;
 
-                if(Enum.TryParse<LabelPositon>(cbo.SelectedItem.ToString(), out position))
-                {
-                    if (_labelService != null)
-                    {
-                        _labelService.ChangeLabelPosition(position);
-                    }
-                }
-            }
-        }
+        //    //    if(Enum.TryParse<LabelPositon>(cbo.SelectedItem.ToString(), out position))
+        //    //    {
+        //    //        if (_labelService != null)
+        //    //        {
+        //    //            _labelService.ChangeLabelPosition(position);
+        //    //        }
+        //    //    }
+        //    //}
+        //}
 
-        private void cboLabelSize_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            var cbo = sender as ComboBox;
+        //private void cboLabelSize_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    //var cbo = sender as ComboBox;
 
-            if (cbo != null)
-            {
-                LabelSize size;
-                if (cbo.SelectedItem.ToString() == _labelsizesmall)
-                {
-                    size = LabelSize.dimension4x4;
-                }
-                else
-                {
-                    size = LabelSize.dimension4x6;
-                }
+        //    //if (cbo != null)
+        //    //{
+        //    //    LabelSize size;
+        //    //    if (cbo.SelectedItem.ToString() == _labelsizesmall)
+        //    //    {
+        //    //        size = LabelSize.dimension4x4;
+        //    //    }
+        //    //    else
+        //    //    {
+        //    //        size = LabelSize.dimension4x6;
+        //    //    }
 
-                if (_labelService != null)
-                {
-                    _labelService.ChangeLabelSize(size);
-                }
-            }
-        }
+        //    //    if (_labelService != null)
+        //    //    {
+        //    //        _labelService.ChangeLabelSize(size);
+        //    //    }
+        //    //}
+        //}
+
+        //private void btnRight_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    tmrMoveRight.Start();
+        //}
+
+        //private void btnRight_KeyUp(object sender, KeyEventArgs e)
+        //{
+        //    tmrMoveRight.Stop();
+        //}
+
+
+        //private PictureBox GetCurrentPictureBox()
+        //{
+        //    if (pb4x4.Visible)
+        //    {
+        //        return pb4x4;
+        //    }
+
+        //    return pb4x6;
+        //}
+
+        //private void tmrMoveRight_Tick(object sender, EventArgs e)
+        //{
+        //    _currentBox.MoveLabelRight();
+        //}
+
+        //private void tmrMoveLeft_Tick(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void btnRight_KeyPress(object sender, KeyPressEventArgs e)
+        //{
+
+        //}
+
+        //private void btnRight_Click(object sender, EventArgs e)
+        //{
+
+        //}
     }
+
 }
 
