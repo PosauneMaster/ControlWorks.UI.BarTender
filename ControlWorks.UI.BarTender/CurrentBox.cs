@@ -91,7 +91,7 @@ namespace ControlWorks.UI.BarTender
         public void RotateLabel()
         {
             Image flipImage = CurrentLabel.Image;
-            flipImage.RotateFlip(RotateFlipType.Rotate90FlipXY);
+            flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
             CurrentLabel.Image = flipImage;
         }
     }

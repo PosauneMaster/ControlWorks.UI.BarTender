@@ -13,6 +13,7 @@ namespace ControlWorks.UI.BarTender
 {
     public partial class ucLabelSettings : UserControl
     {
+        public event EventHandler<UserControlEventArgs> Message;
         private bool _isRotated = false;
 
         private readonly string _labelsizesmall = "4 x 4";
@@ -35,7 +36,11 @@ namespace ControlWorks.UI.BarTender
 
         private void ucLabelSettings_Load(object sender, EventArgs e)
         {
+            Initialize();
+        }
 
+        private void Initialize()
+        {
             _labelService = new LabelService();
             _labelService.LabelSizeChanged += _labelService_LabelSizeChanged;
             _labelService.LabelPositionChanged += _labelService_LabelPositionChanged;
@@ -61,7 +66,7 @@ namespace ControlWorks.UI.BarTender
 
         }
 
-    private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
+        private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
         {
             Debug.WriteLine($"Label Size selected = {e.Label.Size}");
 
@@ -84,21 +89,28 @@ namespace ControlWorks.UI.BarTender
 
         private void _labelService_LabelPositionChanged(object sender, LabelServiceEventArgs e)
         {
+            SetLabel(e.Label.Position);
+        }
+
+        private void SetLabel(LabelPositon position)
+        {
             btnRight.Enabled = false;
             btnLeft.Enabled = false;
 
             lblRightDistance.Visible = true;
             lblLeftDistance.Visible = true;
 
-            if (e.Label.Position == LabelPositon.Center)
+            if (position == LabelPositon.Center)
             {
                 pb4x4.Location = _smallLabelCenterLocation;
                 pb4x6.Location = _largeLabelCenterLocation;
+                pb4x6.Location = _largeLabelCenterLocation;
             }
-            else if (e.Label.Position == LabelPositon.Edge)
+            else if (position == LabelPositon.Edge)
             {
                 pb4x4.Location = _labelEdgeLocation;
-                pb4x6.Location = _labelEdgeLocation;
+                pb4x6.Location = new Point(380, 3);
+                pb6x4.Location = new Point(300, 3);
                 lblRightDistance.Visible = false;
                 lblLeftDistance.Visible = false;
 
@@ -110,12 +122,8 @@ namespace ControlWorks.UI.BarTender
                 pb6x4.Location = _rotatedLabelCenterLocation;
                 btnRight.Enabled = true;
                 btnLeft.Enabled = true;
-
             }
-
         }
-
-        private void SetLabel(LabelPositon labelPosition)
 
         private void SetCurrentBox()
         {
@@ -163,10 +171,7 @@ namespace ControlWorks.UI.BarTender
                     size = LabelSize.dimension4x6;
                 }
 
-                if (_labelService != null)
-                {
-                    _labelService.ChangeLabelSize(size);
-                }
+                _labelService?.ChangeLabelSize(size);
             }
         }
 
@@ -175,6 +180,10 @@ namespace ControlWorks.UI.BarTender
             if (pb4x4.Visible)
             {
                 return pb4x4;
+            }
+            if (pb4x6.Visible)
+            {
+                return pb4x6;
             }
 
             return pb4x6;
@@ -243,15 +252,57 @@ namespace ControlWorks.UI.BarTender
 
         private void btnRotate_Click(object sender, EventArgs e)
         {
+            if (_labelService.CurrentLabel.Size == LabelSize.dimension4x4)
+            {
+                pb4x4.Visible = true;
+                pb4x6.Visible = false;
+                pb6x4.Visible = false;
+                _currentBox.CurrentLabel = pb4x4;
+            }
+            else if (_labelService.CurrentLabel.Size == LabelSize.dimension4x6)
+            {
+                pb4x4.Visible = false;
+                pb4x6.Visible = false;
+                pb6x4.Visible = true;
+                _labelService.CurrentLabel.Size = LabelSize.dimension6x4;
+                _currentBox.CurrentLabel = pb6x4;
 
-            _labelService.CurrentLabel.Position Center  ControlWorks.UI.BarTender.LabelPositon
+            }
+            else
+            {
+                pb4x4.Visible = false;
+                pb4x6.Visible = true;
+                pb6x4.Visible = false;
+                _labelService.CurrentLabel.Size = LabelSize.dimension4x6;
+                _currentBox.CurrentLabel = pb4x6;
+            }
 
 
-    _isRotated = !_isRotated;
-            pb4x6.Visible = !_isRotated;
-            pb6x4.Visible = _isRotated;
-            _currentBox.RotateLabel();
+            Image flipImage = pb4x4.Image;
+            flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
+            pb4x4.Image = flipImage;
+
+            flipImage = pb4x6.Image;
+            flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
+            pb4x6.Image = flipImage;
+
+            flipImage = pb6x4.Image;
+            flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
+            pb6x4.Image = flipImage;
+
+    }
+
+    private void btnReset_Click(object sender, EventArgs e)
+        {
+            cboLabelSize.SelectedIndex = 1;
+            cboLabelPosition.SelectedIndex = 2;
+            Initialize();
+
         }
+    }
 
+    public class UserControlEventArgs : EventArgs
+    {
+        public string Message { get; set; }
     }
 }

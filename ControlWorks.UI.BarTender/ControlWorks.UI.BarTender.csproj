@@ -138,6 +138,7 @@
     <None Include="Resources\image001.png" />
     <None Include="Resources\arrow_Next_16xLG_color.png" />
     <None Include="Resources\arrow_Previous_16xLG_color.png" />
+    <None Include="Resources\112_UpArrowLong_Blue_24x24_72.png" />
     <Content Include="Webalys-Kameleon.pics-Conveyor-Belt.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

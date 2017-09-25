@@ -10,7 +10,8 @@ namespace ControlWorks.UI.BarTender
     public enum LabelSize
     {
         dimension4x4,
-        dimension4x6
+        dimension4x6,
+        dimension6x4
     };
 
     public enum LabelPositon
