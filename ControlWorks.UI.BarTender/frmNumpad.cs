@@ -72,9 +72,10 @@ namespace ControlWorks.UI.BarTender
                         }
                         break;
                     case "dot":
-                        if (!_value.Contains("Dot"))
+                        if (!_value.Contains("."))
                         {
                             _value += ".";
+                            _textBox.Text = _value;
                         }
                         break;
                     default:

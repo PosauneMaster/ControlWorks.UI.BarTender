@@ -87,6 +87,13 @@ namespace ControlWorks.UI.BarTender
                 OnLabelMoved();
             }
         }
+
+        public void RotateLabel()
+        {
+            Image flipImage = CurrentLabel.Image;
+            flipImage.RotateFlip(RotateFlipType.Rotate90FlipXY);
+            CurrentLabel.Image = flipImage;
+        }
     }
 
     public class CurrentBoxEventArgs : EventArgs

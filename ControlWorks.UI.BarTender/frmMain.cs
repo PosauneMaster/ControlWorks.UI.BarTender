@@ -217,6 +217,7 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+
         //private void cboLabelPosition_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    //var cbo = sender as ComboBox;

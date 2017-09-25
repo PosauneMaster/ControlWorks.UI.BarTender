@@ -79,7 +79,6 @@ namespace ControlWorks.UI.BarTender
 
             OnLabelSizeChanged(new LabelServiceEventArgs() { Label = nextLabel });
         }
-
     }
 
     public class Label

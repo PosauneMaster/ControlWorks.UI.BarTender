@@ -41,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pnlBox = new System.Windows.Forms.Panel();
+            this.pb6x4 = new System.Windows.Forms.PictureBox();
             this.lblRightDistance = new System.Windows.Forms.Label();
             this.lblLeftDistance = new System.Windows.Forms.Label();
             this.pb4x6 = new System.Windows.Forms.PictureBox();
@@ -51,6 +52,7 @@
             this.tmrMoveLeft = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.pnlBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb6x4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb4x6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb4x4)).BeginInit();
             this.SuspendLayout();
@@ -86,6 +88,7 @@
             this.btnRotate.Text = "Rotate";
             this.btnRotate.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnRotate.UseVisualStyleBackColor = true;
+            this.btnRotate.Click += new System.EventHandler(this.btnRotate_Click);
             // 
             // cboLabelPosition
             // 
@@ -96,6 +99,7 @@
             this.cboLabelPosition.Size = new System.Drawing.Size(150, 28);
             this.cboLabelPosition.TabIndex = 8;
             this.cboLabelPosition.SelectedIndexChanged += new System.EventHandler(this.cboLabelPosition_SelectedIndexChanged);
+            this.cboLabelPosition.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnCboMouseClick);
             // 
             // label5
             // 
@@ -115,6 +119,7 @@
             this.cboLabelSize.Size = new System.Drawing.Size(150, 28);
             this.cboLabelSize.TabIndex = 6;
             this.cboLabelSize.SelectedIndexChanged += new System.EventHandler(this.cboLabelSize_SelectedIndexChanged);
+            this.cboLabelSize.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnCboMouseClick);
             // 
             // label4
             // 
@@ -133,6 +138,7 @@
             this.txtWidth.Size = new System.Drawing.Size(100, 26);
             this.txtWidth.TabIndex = 4;
             this.txtWidth.Text = "12";
+            this.txtWidth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // label3
             // 
@@ -152,6 +158,7 @@
             this.txtHeight.Size = new System.Drawing.Size(100, 26);
             this.txtHeight.TabIndex = 2;
             this.txtHeight.Text = "12";
+            this.txtHeight.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // label2
             // 
@@ -180,10 +187,23 @@
             this.pnlBox.Controls.Add(this.lblLeftDistance);
             this.pnlBox.Controls.Add(this.pb4x6);
             this.pnlBox.Controls.Add(this.pb4x4);
+            this.pnlBox.Controls.Add(this.pb6x4);
             this.pnlBox.Location = new System.Drawing.Point(19, 87);
             this.pnlBox.Name = "pnlBox";
             this.pnlBox.Size = new System.Drawing.Size(454, 505);
             this.pnlBox.TabIndex = 3;
+            // 
+            // pb6x4
+            // 
+            this.pb6x4.BackColor = System.Drawing.Color.White;
+            this.pb6x4.Image = global::ControlWorks.UI.BarTender.Properties.Resources.image001;
+            this.pb6x4.Location = new System.Drawing.Point(135, 190);
+            this.pb6x4.Name = "pb6x4";
+            this.pb6x4.Size = new System.Drawing.Size(180, 120);
+            this.pb6x4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pb6x4.TabIndex = 4;
+            this.pb6x4.TabStop = false;
+            this.pb6x4.Visible = false;
             // 
             // lblRightDistance
             // 
@@ -284,6 +304,7 @@
             this.groupBox1.PerformLayout();
             this.pnlBox.ResumeLayout(false);
             this.pnlBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb6x4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb4x6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb4x4)).EndInit();
             this.ResumeLayout(false);
@@ -312,5 +333,6 @@
         private System.Windows.Forms.Button btnLeft;
         private System.Windows.Forms.Timer tmrMoveRight;
         private System.Windows.Forms.Timer tmrMoveLeft;
+        private System.Windows.Forms.PictureBox pb6x4;
     }
 }
