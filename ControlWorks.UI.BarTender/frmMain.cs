@@ -41,6 +41,24 @@ namespace ControlWorks.UI.BarTender
             panel4.Paint += Panel1_Paint;
             panel5.Paint += Panel1_Paint;
 
+            var id = 2528;
+            var timestamp = DateTime.Now;
+            var boxcount = 106;
+
+            for (int i = 1; i < 20; i++)
+            {
+                timestamp = timestamp.AddSeconds(-2000);
+                id = id - 1;
+
+                listBox1.Items.Add($"Job Id:\t\t20170814-{id}");
+                listBox1.Items.Add($"Template:\tExample Template {id}");
+                listBox1.Items.Add($"Start Time:\t{timestamp:yyyy-MM-dd HH:mm:ss}");
+                listBox1.Items.Add($"Box Count:\t{boxcount - i}");
+                listBox1.Items.Add($"Labels per Box:\t2");
+                listBox1.Items.Add("__________________________________________________");
+            }
+
+
 
 
 

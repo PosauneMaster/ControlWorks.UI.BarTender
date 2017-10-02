@@ -63,8 +63,8 @@ namespace ControlWorks.UI.BarTender
         {
             lblLeftDistance.Text = $"{_currentBox.LabelToLeftCurrentInches.ToString("N2")} inches";
             lblRightDistance.Text = $"{_currentBox.LabelToRightCurrentInches.ToString("N2")} inches";
-
         }
+
 
         private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
         {
@@ -84,6 +84,7 @@ namespace ControlWorks.UI.BarTender
             }
 
             SetCurrentBox();
+            SetLableDistance();
 
         }
 
@@ -131,27 +132,25 @@ namespace ControlWorks.UI.BarTender
             double boxWidth = Double.Parse(txtWidth.Text);
             _currentBox = new CurrentBox(boxHeight, boxWidth, GetCurrentPictureBox(), pnlBox);
             _currentBox.LabelMoved += _currentBox_LabelMoved;
+        }
 
-            lblLeftDistance.Text = $"{_currentBox.LabelToLeftCurrentInches} inches";
-            lblRightDistance.Text = $"{_currentBox.LabelToRightCurrentInches} inches";
-
+        private void SetLableDistance()
+        {
+            lblLeftDistance.Text = $@"{_currentBox.LabelToLeftCurrentInches} inches";
+            lblRightDistance.Text = $@"{_currentBox.LabelToRightCurrentInches} inches";
         }
 
 
         private void cboLabelPosition_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cbo = sender as ComboBox;
-            if (cbo != null)
-            {
-                LabelPositon position;
+            if (!(sender is ComboBox cbo)) return;
+            LabelPositon position;
 
-                if (Enum.TryParse<LabelPositon>(cbo.SelectedItem.ToString(), out position))
-                {
-                    if (_labelService != null)
-                    {
-                        _labelService.ChangeLabelPosition(position);
-                    }
-                }
+            if (!Enum.TryParse<LabelPositon>(cbo.SelectedItem.ToString(), out position)) return;
+            if (_labelService != null)
+            {
+                SetCurrentBox();
+                _labelService.ChangeLabelPosition(position);
             }
         }
 
@@ -186,7 +185,8 @@ namespace ControlWorks.UI.BarTender
                 return pb4x6;
             }
 
-            return pb4x6;
+
+            return pb6x4;
         }
 
         private void btnRight_MouseDown(object sender, MouseEventArgs e)
@@ -231,6 +231,7 @@ namespace ControlWorks.UI.BarTender
                 frm.FormClosed += (s, ea) =>
                 {
                     SetCurrentBox();
+                    SetLableDistance();
                 };
 
                 Point location = txt.PointToScreen(Point.Empty);
@@ -290,9 +291,11 @@ namespace ControlWorks.UI.BarTender
             flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
             pb6x4.Image = flipImage;
 
-    }
+            SetCurrentBox();
+            SetLableDistance();
+        }
 
-    private void btnReset_Click(object sender, EventArgs e)
+        private void btnReset_Click(object sender, EventArgs e)
         {
             cboLabelSize.SelectedIndex = 1;
             cboLabelPosition.SelectedIndex = 2;

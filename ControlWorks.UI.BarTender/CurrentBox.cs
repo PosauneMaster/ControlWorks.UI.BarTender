@@ -26,6 +26,7 @@ namespace ControlWorks.UI.BarTender
         public double FixedPanelLeftEdge { get; set; }
         public PictureBox CurrentLabel { get; set; }
         public Panel FixedPanel { get; set; }
+        public int LabelInchWidth { get; set; }
 
 
         public CurrentBox() { }
@@ -36,18 +37,29 @@ namespace ControlWorks.UI.BarTender
             CurrentLabel = label;
             FixedPanel = fixedPanel;
 
+            LabelInchWidth = 4;
+            if (label.Tag != null)
+            {
+                int w;
+                Int32.TryParse(label.Tag.ToString(), out w);
+                LabelInchWidth = w;
+            }
+            SetLabel();
+        }
 
-            LabelToRightStartInches = Width / 2 - 2;
-            LabelToRightCurrentInches = Width / 2 - 2;
+        private void SetLabel()
+        {
+            LabelToRightStartInches = Width / 2 - LabelInchWidth / 2;
+            LabelToRightCurrentInches = Width / 2 - LabelInchWidth / 2;
             LabelToRightStartPixels = FixedPanel.Right - CurrentLabel.Right;
             PixelsPerTenthInchRight = Math.Round(LabelToRightStartPixels / LabelToRightStartInches / 10, MidpointRounding.ToEven);
             FixedPanelRightEdge = FixedPanel.Right - FixedPanel.Left - PixelsPerTenthInchRight * 2;
 
 
-            LabelToLeftStartInches = Width / 2 - 2;
-            LabelToLeftCurrentInches = Width / 2 - 2;
+            LabelToLeftStartInches = Width / 2 -LabelInchWidth / 2;
+            LabelToLeftCurrentInches = Width / 2 - LabelInchWidth / 2;
             LabelToLeftStartPixels = FixedPanel.Right - CurrentLabel.Right;
-            PixelsPerTenthInchLeft = Math.Round(LabelToLeftStartPixels / LabelToLeftStartInches /10, MidpointRounding.ToEven);
+            PixelsPerTenthInchLeft = Math.Round(LabelToLeftStartPixels / LabelToLeftStartInches / 10, MidpointRounding.ToEven);
         }
 
         protected void OnLabelMoved()
@@ -88,11 +100,20 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
-        public void RotateLabel()
+        public void RotateLabel(double height, double width, PictureBox label, Panel fixedPanel)
         {
-            Image flipImage = CurrentLabel.Image;
-            flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
-            CurrentLabel.Image = flipImage;
+            //Image flipImage = CurrentLabel.Image;
+            //flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
+            //CurrentLabel.Image = flipImage;
+
+            Height = height;
+            Width = width;
+            CurrentLabel = label;
+            FixedPanel = fixedPanel;
+
+            SetLabel();
+
+            OnLabelMoved();
         }
     }
 
