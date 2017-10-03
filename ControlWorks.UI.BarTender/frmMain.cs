@@ -22,9 +22,6 @@ namespace ControlWorks.UI.BarTender
     public partial class frmMain : Form
     {
 
-
-
-
         public frmMain()
         {
             InitializeComponent();
@@ -236,86 +233,6 @@ namespace ControlWorks.UI.BarTender
         }
 
 
-        //private void cboLabelPosition_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //var cbo = sender as ComboBox;
-        //    //if (cbo != null)
-        //    //{
-        //    //    LabelPositon position;
-
-        //    //    if(Enum.TryParse<LabelPositon>(cbo.SelectedItem.ToString(), out position))
-        //    //    {
-        //    //        if (_labelService != null)
-        //    //        {
-        //    //            _labelService.ChangeLabelPosition(position);
-        //    //        }
-        //    //    }
-        //    //}
-        //}
-
-        //private void cboLabelSize_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    //var cbo = sender as ComboBox;
-
-        //    //if (cbo != null)
-        //    //{
-        //    //    LabelSize size;
-        //    //    if (cbo.SelectedItem.ToString() == _labelsizesmall)
-        //    //    {
-        //    //        size = LabelSize.dimension4x4;
-        //    //    }
-        //    //    else
-        //    //    {
-        //    //        size = LabelSize.dimension4x6;
-        //    //    }
-
-        //    //    if (_labelService != null)
-        //    //    {
-        //    //        _labelService.ChangeLabelSize(size);
-        //    //    }
-        //    //}
-        //}
-
-        //private void btnRight_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    tmrMoveRight.Start();
-        //}
-
-        //private void btnRight_KeyUp(object sender, KeyEventArgs e)
-        //{
-        //    tmrMoveRight.Stop();
-        //}
-
-
-        //private PictureBox GetCurrentPictureBox()
-        //{
-        //    if (pb4x4.Visible)
-        //    {
-        //        return pb4x4;
-        //    }
-
-        //    return pb4x6;
-        //}
-
-        //private void tmrMoveRight_Tick(object sender, EventArgs e)
-        //{
-        //    _currentBox.MoveLabelRight();
-        //}
-
-        //private void tmrMoveLeft_Tick(object sender, EventArgs e)
-        //{
-
-        //}
-
-        //private void btnRight_KeyPress(object sender, KeyPressEventArgs e)
-        //{
-
-        //}
-
-        //private void btnRight_Click(object sender, EventArgs e)
-        //{
-
-        //}
     }
 
 }

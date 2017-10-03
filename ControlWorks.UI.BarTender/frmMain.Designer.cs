@@ -36,7 +36,21 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLoadTemplate = new System.Windows.Forms.Button();
             this.lblTemplatePath = new System.Windows.Forms.Label();
@@ -56,6 +70,7 @@
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -96,7 +111,7 @@
             this.toolStripLabel2.Margin = new System.Windows.Forms.Padding(0, 1, -4, 2);
             this.toolStripLabel2.Name = "toolStripLabel2";
             this.toolStripLabel2.Padding = new System.Windows.Forms.Padding(0, 0, 4, 0);
-            this.toolStripLabel2.Size = new System.Drawing.Size(1100, 22);
+            this.toolStripLabel2.Size = new System.Drawing.Size(139, 22);
             this.toolStripLabel2.Text = "MACHINE CONTROL";
             this.toolStripLabel2.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             // 
@@ -135,6 +150,8 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.btnStop);
+            this.panel1.Controls.Add(this.btnStart);
             this.panel1.Controls.Add(this.groupBox3);
             this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
@@ -144,18 +161,155 @@
             this.panel1.Size = new System.Drawing.Size(929, 741);
             this.panel1.TabIndex = 0;
             // 
+            // btnStop
+            // 
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(753, 589);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(163, 70);
+            this.btnStop.TabIndex = 4;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = true;
+            // 
+            // btnStart
+            // 
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Location = new System.Drawing.Point(576, 589);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(163, 70);
+            this.btnStart.TabIndex = 3;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
+            // 
             // groupBox3
             // 
-            this.groupBox3.Location = new System.Drawing.Point(543, 255);
+            this.groupBox3.Controls.Add(this.label12);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label4);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.Location = new System.Drawing.Point(367, 194);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 100);
+            this.groupBox3.Size = new System.Drawing.Size(555, 295);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "groupBox3";
+            this.groupBox3.Text = "Job Details";
+            // 
+            // label12
+            // 
+            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label12.Location = new System.Drawing.Point(266, 192);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(224, 20);
+            this.label12.TabIndex = 11;
+            // 
+            // label11
+            // 
+            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label11.Location = new System.Drawing.Point(266, 156);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(224, 20);
+            this.label11.TabIndex = 10;
+            // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.Location = new System.Drawing.Point(266, 228);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(224, 20);
+            this.label10.TabIndex = 9;
+            // 
+            // label9
+            // 
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label9.Location = new System.Drawing.Point(266, 120);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(224, 20);
+            this.label9.TabIndex = 8;
+            // 
+            // label8
+            // 
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label8.Location = new System.Drawing.Point(266, 84);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(224, 20);
+            this.label8.TabIndex = 7;
+            // 
+            // label7
+            // 
+            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label7.Location = new System.Drawing.Point(266, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(224, 20);
+            this.label7.TabIndex = 6;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(64, 228);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(60, 20);
+            this.label6.TabIndex = 5;
+            this.label6.Text = "Status:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(64, 192);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(87, 20);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Box Count:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(64, 156);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(119, 20);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Labels Per Box:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(64, 120);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(116, 20);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Job Start Time:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(64, 84);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Job Id:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(64, 48);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(125, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Template Name:";
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.Color.White;
+            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
             this.groupBox2.Controls.Add(this.btnLoadTemplate);
             this.groupBox2.Controls.Add(this.lblTemplatePath);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -169,11 +323,13 @@
             // btnLoadTemplate
             // 
             this.btnLoadTemplate.BackColor = System.Drawing.SystemColors.Control;
+            this.btnLoadTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadTemplate.Image")));
             this.btnLoadTemplate.Location = new System.Drawing.Point(386, 104);
             this.btnLoadTemplate.Name = "btnLoadTemplate";
             this.btnLoadTemplate.Size = new System.Drawing.Size(163, 70);
             this.btnLoadTemplate.TabIndex = 1;
             this.btnLoadTemplate.Text = "Load Template";
+            this.btnLoadTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadTemplate.UseVisualStyleBackColor = false;
             // 
             // lblTemplatePath
@@ -302,6 +458,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
@@ -337,5 +495,19 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btnLoadTemplate;
         private System.Windows.Forms.Label lblTemplatePath;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnStop;
+        private System.Windows.Forms.Button btnStart;
     }
 }
