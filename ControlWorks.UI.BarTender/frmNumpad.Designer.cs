@@ -361,6 +361,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "frmNumpad";
             this.TopMost = true;
+            this.Load += new System.EventHandler(this.frmNumpad_Load);
             this.Click += new System.EventHandler(this.frmNumpad_Click);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);

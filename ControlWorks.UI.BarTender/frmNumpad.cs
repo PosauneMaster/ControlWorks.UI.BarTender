@@ -17,15 +17,21 @@ namespace ControlWorks.UI.BarTender
 
         public event EventHandler<NumpadButtonClickEventArgs> NumpadClick;
 
+        public decimal MaxValue { get; set; }
+
         public frmNumpad()
         {
             InitializeComponent();
+            MaxValue = Decimal.MaxValue;
+
         }
 
         public frmNumpad(TextBox txtBox)
         {
             InitializeComponent();
             _textBox = txtBox;
+            MaxValue = Decimal.MaxValue;
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -79,11 +85,27 @@ namespace ControlWorks.UI.BarTender
                         }
                         break;
                     default:
-                        _value += arg;
-                        _textBox.Text = _value;
+                        var exceeds = ExceedsMax(arg);
+
+                        if (!exceeds)
+                        {
+                            _value += arg;
+                            _textBox.Text = _value;
+                        }
                         break;
                 }
+
+                _textBox.Text = _value;
+
             }
+        }
+
+        private bool ExceedsMax(string arg)
+        {
+            decimal d1;
+            Decimal.TryParse(String.Concat(_value,arg), out d1);
+
+            return d1 > MaxValue;
         }
 
         private void OnNumpadClickHandler(string val)
@@ -92,8 +114,12 @@ namespace ControlWorks.UI.BarTender
 
             if (temp != null)
             {
-                NumpadClick(this, new NumpadButtonClickEventArgs { Value = val });
+                temp(this, new NumpadButtonClickEventArgs { Value = val });
             }
+        }
+
+        private void frmNumpad_Load(object sender, EventArgs e)
+        {
         }
     }
 

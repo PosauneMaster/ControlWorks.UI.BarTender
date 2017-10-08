@@ -29,6 +29,9 @@ namespace ControlWorks.UI.BarTender
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+
+            cboLabelsPerBox.SelectedIndex = 0;
+
             toolStrip1_Resize(this, new EventArgs());
             toolStripLabel2.BackColor = Color.Red;
             tabControl1.BringToFront();
@@ -220,6 +223,7 @@ namespace ControlWorks.UI.BarTender
             if (txt != null)
             {
                 var frm = new frmNumpad(txt);
+                frm.MaxValue = 100.00M;
 
                 Point location = txt.PointToScreen(Point.Empty);
 
@@ -232,7 +236,13 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
-
+        private void btnLoadTemplate_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                lblTemplatePath.Text = openFileDialog1.FileName;
+            }
+        }
     }
 
 }

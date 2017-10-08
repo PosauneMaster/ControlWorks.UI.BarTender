@@ -39,12 +39,14 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.cboLabelsPerBox = new System.Windows.Forms.ComboBox();
+            this.txtTemplateName = new System.Windows.Forms.TextBox();
+            this.txtJobId = new System.Windows.Forms.TextBox();
+            this.txtJobStartTime = new System.Windows.Forms.TextBox();
+            this.txtBoxCount = new System.Windows.Forms.TextBox();
+            this.txtStatus = new System.Windows.Forms.TextBox();
+            this.txtConveyorSpeed = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -60,12 +62,17 @@
             this.ucLabelSettings1 = new ControlWorks.UI.BarTender.ucLabelSettings();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnNewTemplate = new System.Windows.Forms.Button();
+            this.btnLoadExisting = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveRight = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveLeft = new System.Windows.Forms.Timer(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -75,6 +82,7 @@
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -163,34 +171,37 @@
             // 
             // btnStop
             // 
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.BackColor = System.Drawing.SystemColors.Control;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(753, 589);
+            this.btnStop.Location = new System.Drawing.Point(759, 644);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(163, 70);
             this.btnStop.TabIndex = 4;
             this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = true;
+            this.btnStop.UseVisualStyleBackColor = false;
             // 
             // btnStart
             // 
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStart.BackColor = System.Drawing.SystemColors.Control;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(576, 589);
+            this.btnStart.Location = new System.Drawing.Point(584, 644);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(163, 70);
             this.btnStart.TabIndex = 3;
             this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.label12);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.cboLabelsPerBox);
+            this.groupBox3.Controls.Add(this.txtTemplateName);
+            this.groupBox3.Controls.Add(this.txtJobId);
+            this.groupBox3.Controls.Add(this.txtJobStartTime);
+            this.groupBox3.Controls.Add(this.txtBoxCount);
+            this.groupBox3.Controls.Add(this.txtStatus);
+            this.groupBox3.Controls.Add(this.txtConveyorSpeed);
+            this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label5);
             this.groupBox3.Controls.Add(this.label4);
@@ -200,63 +211,95 @@
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox3.Location = new System.Drawing.Point(367, 194);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(555, 295);
+            this.groupBox3.Size = new System.Drawing.Size(555, 336);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Job Details";
             // 
-            // label12
+            // cboLabelsPerBox
             // 
-            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label12.Location = new System.Drawing.Point(266, 192);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(224, 20);
-            this.label12.TabIndex = 11;
+            this.cboLabelsPerBox.FormattingEnabled = true;
+            this.cboLabelsPerBox.Items.AddRange(new object[] {
+            "1",
+            "2"});
+            this.cboLabelsPerBox.Location = new System.Drawing.Point(232, 163);
+            this.cboLabelsPerBox.Name = "cboLabelsPerBox";
+            this.cboLabelsPerBox.Size = new System.Drawing.Size(224, 28);
+            this.cboLabelsPerBox.TabIndex = 19;
             // 
-            // label11
+            // txtTemplateName
             // 
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label11.Location = new System.Drawing.Point(266, 156);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(224, 20);
-            this.label11.TabIndex = 10;
+            this.txtTemplateName.BackColor = System.Drawing.Color.White;
+            this.txtTemplateName.Location = new System.Drawing.Point(232, 40);
+            this.txtTemplateName.Multiline = true;
+            this.txtTemplateName.Name = "txtTemplateName";
+            this.txtTemplateName.ReadOnly = true;
+            this.txtTemplateName.Size = new System.Drawing.Size(224, 28);
+            this.txtTemplateName.TabIndex = 18;
             // 
-            // label10
+            // txtJobId
             // 
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.Location = new System.Drawing.Point(266, 228);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(224, 20);
-            this.label10.TabIndex = 9;
+            this.txtJobId.BackColor = System.Drawing.Color.White;
+            this.txtJobId.Location = new System.Drawing.Point(232, 81);
+            this.txtJobId.Multiline = true;
+            this.txtJobId.Name = "txtJobId";
+            this.txtJobId.ReadOnly = true;
+            this.txtJobId.Size = new System.Drawing.Size(224, 28);
+            this.txtJobId.TabIndex = 17;
             // 
-            // label9
+            // txtJobStartTime
             // 
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label9.Location = new System.Drawing.Point(266, 120);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(224, 20);
-            this.label9.TabIndex = 8;
+            this.txtJobStartTime.BackColor = System.Drawing.Color.White;
+            this.txtJobStartTime.Location = new System.Drawing.Point(232, 122);
+            this.txtJobStartTime.Multiline = true;
+            this.txtJobStartTime.Name = "txtJobStartTime";
+            this.txtJobStartTime.ReadOnly = true;
+            this.txtJobStartTime.Size = new System.Drawing.Size(224, 28);
+            this.txtJobStartTime.TabIndex = 16;
             // 
-            // label8
+            // txtBoxCount
             // 
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label8.Location = new System.Drawing.Point(266, 84);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(224, 20);
-            this.label8.TabIndex = 7;
+            this.txtBoxCount.BackColor = System.Drawing.Color.White;
+            this.txtBoxCount.Enabled = false;
+            this.txtBoxCount.Location = new System.Drawing.Point(232, 204);
+            this.txtBoxCount.Multiline = true;
+            this.txtBoxCount.Name = "txtBoxCount";
+            this.txtBoxCount.ReadOnly = true;
+            this.txtBoxCount.Size = new System.Drawing.Size(224, 28);
+            this.txtBoxCount.TabIndex = 15;
             // 
-            // label7
+            // txtStatus
             // 
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label7.Location = new System.Drawing.Point(266, 48);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(224, 20);
-            this.label7.TabIndex = 6;
+            this.txtStatus.BackColor = System.Drawing.Color.White;
+            this.txtStatus.Location = new System.Drawing.Point(232, 286);
+            this.txtStatus.Multiline = true;
+            this.txtStatus.Name = "txtStatus";
+            this.txtStatus.ReadOnly = true;
+            this.txtStatus.Size = new System.Drawing.Size(224, 28);
+            this.txtStatus.TabIndex = 14;
+            // 
+            // txtConveyorSpeed
+            // 
+            this.txtConveyorSpeed.Location = new System.Drawing.Point(232, 245);
+            this.txtConveyorSpeed.Multiline = true;
+            this.txtConveyorSpeed.Name = "txtConveyorSpeed";
+            this.txtConveyorSpeed.Size = new System.Drawing.Size(224, 28);
+            this.txtConveyorSpeed.TabIndex = 13;
+            this.txtConveyorSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(64, 248);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(130, 20);
+            this.label14.TabIndex = 12;
+            this.label14.Text = "Conveyor Speed:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(64, 228);
+            this.label6.Location = new System.Drawing.Point(67, 289);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 20);
             this.label6.TabIndex = 5;
@@ -265,7 +308,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(64, 192);
+            this.label5.Location = new System.Drawing.Point(67, 207);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 20);
             this.label5.TabIndex = 4;
@@ -274,7 +317,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(64, 156);
+            this.label4.Location = new System.Drawing.Point(67, 166);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(119, 20);
             this.label4.TabIndex = 3;
@@ -283,7 +326,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(64, 120);
+            this.label3.Location = new System.Drawing.Point(64, 125);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(116, 20);
             this.label3.TabIndex = 2;
@@ -292,7 +335,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(64, 84);
+            this.label2.Location = new System.Drawing.Point(67, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 20);
             this.label2.TabIndex = 1;
@@ -301,7 +344,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(64, 48);
+            this.label1.Location = new System.Drawing.Point(67, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(125, 20);
             this.label1.TabIndex = 0;
@@ -309,7 +352,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.groupBox2.BackColor = System.Drawing.Color.Transparent;
             this.groupBox2.Controls.Add(this.btnLoadTemplate);
             this.groupBox2.Controls.Add(this.lblTemplatePath);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -331,14 +374,17 @@
             this.btnLoadTemplate.Text = "Load Template";
             this.btnLoadTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadTemplate.UseVisualStyleBackColor = false;
+            this.btnLoadTemplate.Click += new System.EventHandler(this.btnLoadTemplate_Click);
             // 
             // lblTemplatePath
             // 
+            this.lblTemplatePath.BackColor = System.Drawing.SystemColors.Control;
             this.lblTemplatePath.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblTemplatePath.Location = new System.Drawing.Point(6, 35);
             this.lblTemplatePath.Name = "lblTemplatePath";
             this.lblTemplatePath.Size = new System.Drawing.Size(543, 48);
             this.lblTemplatePath.TabIndex = 0;
+            this.lblTemplatePath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox1
             // 
@@ -393,11 +439,58 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.textBox1);
+            this.panel4.Controls.Add(this.label13);
+            this.panel4.Controls.Add(this.btnNewTemplate);
+            this.panel4.Controls.Add(this.btnLoadExisting);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(935, 747);
             this.panel4.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(211, 159);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(318, 27);
+            this.textBox1.TabIndex = 3;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(61, 159);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(125, 20);
+            this.label13.TabIndex = 2;
+            this.label13.Text = "Template Name:";
+            // 
+            // btnNewTemplate
+            // 
+            this.btnNewTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnNewTemplate.Image")));
+            this.btnNewTemplate.Location = new System.Drawing.Point(211, 25);
+            this.btnNewTemplate.Name = "btnNewTemplate";
+            this.btnNewTemplate.Size = new System.Drawing.Size(163, 70);
+            this.btnNewTemplate.TabIndex = 1;
+            this.btnNewTemplate.Text = "New Template";
+            this.btnNewTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnNewTemplate.UseVisualStyleBackColor = true;
+            // 
+            // btnLoadExisting
+            // 
+            this.btnLoadExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoadExisting.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadExisting.Image")));
+            this.btnLoadExisting.Location = new System.Drawing.Point(30, 25);
+            this.btnLoadExisting.Name = "btnLoadExisting";
+            this.btnLoadExisting.Size = new System.Drawing.Size(163, 70);
+            this.btnLoadExisting.TabIndex = 0;
+            this.btnLoadExisting.Text = "Load Template";
+            this.btnLoadExisting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLoadExisting.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
@@ -438,6 +531,10 @@
             // 
             this.tmrMoveRight.Interval = 1000;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -464,6 +561,8 @@
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -501,13 +600,20 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnNewTemplate;
+        private System.Windows.Forms.Button btnLoadExisting;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox txtConveyorSpeed;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox cboLabelsPerBox;
+        private System.Windows.Forms.TextBox txtTemplateName;
+        private System.Windows.Forms.TextBox txtJobId;
+        private System.Windows.Forms.TextBox txtJobStartTime;
+        private System.Windows.Forms.TextBox txtBoxCount;
+        private System.Windows.Forms.TextBox txtStatus;
     }
 }

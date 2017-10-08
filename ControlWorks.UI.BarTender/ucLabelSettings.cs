@@ -41,9 +41,14 @@ namespace ControlWorks.UI.BarTender
 
         private void Initialize()
         {
+            txtHeight.Text = "12";
+            txtWidth.Text = "12";
+
             _labelService = new LabelService();
             _labelService.LabelSizeChanged += _labelService_LabelSizeChanged;
             _labelService.LabelPositionChanged += _labelService_LabelPositionChanged;
+
+            cboLabelSize.Items.Clear();
 
             cboLabelSize.Items.Add(_labelsizesmall);
             cboLabelSize.Items.Add(_labelsizelarge);

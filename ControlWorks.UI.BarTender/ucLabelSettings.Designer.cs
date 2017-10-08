@@ -72,7 +72,7 @@
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Location = new System.Drawing.Point(497, 87);
+            this.groupBox1.Location = new System.Drawing.Point(479, 87);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(317, 505);
             this.groupBox1.TabIndex = 2;
@@ -295,7 +295,7 @@
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(694, 618);
+            this.btnReset.Location = new System.Drawing.Point(676, 618);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(120, 50);
             this.btnReset.TabIndex = 6;
@@ -313,7 +313,7 @@
             this.Controls.Add(this.pnlBox);
             this.Controls.Add(this.groupBox1);
             this.Name = "ucLabelSettings";
-            this.Size = new System.Drawing.Size(889, 715);
+            this.Size = new System.Drawing.Size(841, 715);
             this.Load += new System.EventHandler(this.ucLabelSettings_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
