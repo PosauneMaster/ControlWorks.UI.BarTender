@@ -37,6 +37,7 @@ namespace ControlWorks.UI.BarTender
         private void ucLabelSettings_Load(object sender, EventArgs e)
         {
             Initialize();
+
         }
 
         private void Initialize()
@@ -62,6 +63,7 @@ namespace ControlWorks.UI.BarTender
             cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
             cboLabelPosition.SelectedIndex = 2;
 
+            cboLabelsPerBox.SelectedIndex = 0;
         }
 
         private void _currentBox_LabelMoved(object sender, CurrentBoxEventArgs e)
@@ -306,6 +308,31 @@ namespace ControlWorks.UI.BarTender
             cboLabelPosition.SelectedIndex = 2;
             Initialize();
 
+        }
+
+        private void btnSaveTemplate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void OnComboboxClicked(object sender, EventArgs e)
+        {
+            var cbo = sender as ComboBox;
+
+            if (cbo != null)
+            {
+                cbo.DroppedDown = true;
+            }
+        }
+
+        private void btnChooseLabel_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = @"Select a label image to open...";
+            openFileDialog1.Filter = @"Image Files|*.jpg;*.jpeg;*.png;";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Load(openFileDialog1.FileName);
+            }
         }
     }
 

@@ -57,85 +57,7 @@ namespace ControlWorks.UI.BarTender
                 listBox1.Items.Add($"Labels per Box:\t2");
                 listBox1.Items.Add("__________________________________________________");
             }
-
-
-
-
-
-
-            //_labelService = new LabelService();
-            //_labelService.LabelSizeChanged += _labelService_LabelSizeChanged;
-            //_labelService.LabelPositionChanged += _labelService_LabelPositionChanged;
-
-            //SetCurrentBox();
-
         }
-
-
-        private void PnlBox_Paint(object sender, PaintEventArgs e)
-        {
-            using (Pen pen = new Pen(Color.Black))
-            {
-                try
-                {
-                    //Point pLeft = new Point(0, pnlBox.Height / 2);
-                    //Point pRight = new Point(pb4x4.Left, pnlBox.Height / 2);
-
-                    //Point pLeft2 = new Point(pb4x4.Right, pnlBox.Height / 2);
-                    //Point pRight2 = new Point(pnlBox.Right, pnlBox.Height / 2);
-
-                    //e.Graphics.DrawLine(pen, pLeft, pRight);
-                    //e.Graphics.DrawLine(pen, pLeft2, pRight2);
-
-                }
-                catch (Exception ex) { }
-            }
-        }
-
-        //private void _labelService_LabelPositionChanged(object sender, LabelServiceEventArgs e)
-        //{
-        //    if (e.Label.Position == LabelPositon.Center)
-        //    {
-        //        pb4x4.Location = _smallLabelCenterLocation;
-        //        pb4x6.Location = _largeLabelCenterLocation;
-        //    }
-        //    else if(e.Label.Position == LabelPositon.Edge)
-        //    {
-        //        pb4x4.Location = _labelEdgeLocation;
-        //        pb4x6.Location = _labelEdgeLocation;
-        //    }
-        //    else
-        //    {
-        //        pb4x4.Location = _smallLabelCenterLocation;
-        //        pb4x6.Location = _largeLabelCenterLocation;
-        //    }
-        //}
-
-        //private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
-        //{
-        //    Debug.WriteLine($"Label Size selected = {e.Label.Size}");
-
-        //    if (e.Label.Size == LabelSize.dimension4x4)
-        //    {
-        //        pb4x4.Visible = true;
-        //        pb4x6.Visible = false;
-        //    }
-        //    else
-        //    {
-        //        pb4x4.Visible = false;
-        //        pb4x6.Visible = true;
-        //    }
-
-        //    SetCurrentBox();
-
-        //}
-
-        //private void SetCurrentBox()
-        //{
-        //    double boxHeight = Double.Parse(txtHeight.Text);
-        //    double boxWidth = Double.Parse(txtWidth.Text);
-        //    _currentBox = new CurrentBox(boxHeight, boxWidth, GetCurrentPictureBox(), pnlBox);
-        //}
 
         private void Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -240,7 +162,7 @@ namespace ControlWorks.UI.BarTender
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                lblTemplatePath.Text = openFileDialog1.FileName;
+                txtTemplatePath.Text = openFileDialog1.FileName;
             }
         }
     }

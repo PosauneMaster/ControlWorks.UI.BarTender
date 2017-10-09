@@ -12,7 +12,8 @@ namespace ControlWorks.UI.BarTender
 {
     public partial class frmNumpad : Form
     {
-        private TextBox _textBox;
+        private readonly TextBox _textBox;
+        private readonly string _startValue;
         private string _value = String.Empty;
 
         public event EventHandler<NumpadButtonClickEventArgs> NumpadClick;
@@ -30,6 +31,7 @@ namespace ControlWorks.UI.BarTender
         {
             InitializeComponent();
             _textBox = txtBox;
+            _startValue = _textBox.Text;
             MaxValue = Decimal.MaxValue;
 
         }
@@ -64,8 +66,14 @@ namespace ControlWorks.UI.BarTender
                 switch (arg)
                 {
                     case "Enter":
-                        this.Close();
-                        break;
+
+                        if (!IsValid(_value))
+                        {
+                            _textBox.Text = _startValue;
+                        }
+
+                        Close();
+                        return;
                     case "Clear":
                         _value = String.Empty;
                         _textBox.Text = String.Empty;
@@ -98,6 +106,12 @@ namespace ControlWorks.UI.BarTender
                 _textBox.Text = _value;
 
             }
+        }
+
+        private bool IsValid(string val)
+        {
+            decimal d;
+            return Decimal.TryParse(val, out d);
         }
 
         private bool ExceedsMax(string arg)

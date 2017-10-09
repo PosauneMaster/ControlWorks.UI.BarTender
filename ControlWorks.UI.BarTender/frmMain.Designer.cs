@@ -55,17 +55,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnLoadTemplate = new System.Windows.Forms.Button();
-            this.lblTemplatePath = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ucLabelSettings1 = new ControlWorks.UI.BarTender.ucLabelSettings();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.btnNewTemplate = new System.Windows.Forms.Button();
-            this.btnLoadExisting = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -73,6 +68,7 @@
             this.tmrMoveRight = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveLeft = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.txtTemplatePath = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -82,7 +78,6 @@
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -92,7 +87,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 780);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1204, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1264, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -104,7 +99,7 @@
             this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1204, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1264, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.Resize += new System.EventHandler(this.toolStrip1_Resize);
@@ -138,7 +133,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1192, 755);
+            this.tabControl1.Size = new System.Drawing.Size(1252, 755);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 3;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
@@ -150,7 +145,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(935, 747);
+            this.tabPage1.Size = new System.Drawing.Size(995, 747);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "MACHINE CONTROL";
             // 
@@ -166,7 +161,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(929, 741);
+            this.panel1.Size = new System.Drawing.Size(989, 741);
             this.panel1.TabIndex = 0;
             // 
             // btnStop
@@ -353,8 +348,8 @@
             // groupBox2
             // 
             this.groupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox2.Controls.Add(this.txtTemplatePath);
             this.groupBox2.Controls.Add(this.btnLoadTemplate);
-            this.groupBox2.Controls.Add(this.lblTemplatePath);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(367, 3);
             this.groupBox2.Name = "groupBox2";
@@ -375,16 +370,6 @@
             this.btnLoadTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLoadTemplate.UseVisualStyleBackColor = false;
             this.btnLoadTemplate.Click += new System.EventHandler(this.btnLoadTemplate_Click);
-            // 
-            // lblTemplatePath
-            // 
-            this.lblTemplatePath.BackColor = System.Drawing.SystemColors.Control;
-            this.lblTemplatePath.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblTemplatePath.Location = new System.Drawing.Point(6, 35);
-            this.lblTemplatePath.Name = "lblTemplatePath";
-            this.lblTemplatePath.Size = new System.Drawing.Size(543, 48);
-            this.lblTemplatePath.TabIndex = 0;
-            this.lblTemplatePath.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // groupBox1
             // 
@@ -413,17 +398,20 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(935, 747);
+            this.tabPage2.Size = new System.Drawing.Size(995, 747);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "LABEL SETTINGS";
             this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage2.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
             // ucLabelSettings1
             // 
+            this.ucLabelSettings1.BackColor = System.Drawing.Color.Transparent;
+            this.ucLabelSettings1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.ucLabelSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucLabelSettings1.Location = new System.Drawing.Point(3, 3);
             this.ucLabelSettings1.Name = "ucLabelSettings1";
-            this.ucLabelSettings1.Size = new System.Drawing.Size(929, 741);
+            this.ucLabelSettings1.Size = new System.Drawing.Size(989, 741);
             this.ucLabelSettings1.TabIndex = 0;
             // 
             // tabPage4
@@ -431,7 +419,7 @@
             this.tabPage4.Controls.Add(this.panel4);
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(935, 747);
+            this.tabPage4.Size = new System.Drawing.Size(995, 747);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "TEMPLATE SETUP";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -439,65 +427,19 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel4.Controls.Add(this.textBox1);
-            this.panel4.Controls.Add(this.label13);
-            this.panel4.Controls.Add(this.btnNewTemplate);
-            this.panel4.Controls.Add(this.btnLoadExisting);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(935, 747);
+            this.panel4.Size = new System.Drawing.Size(995, 747);
             this.panel4.TabIndex = 0;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(211, 159);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(318, 27);
-            this.textBox1.TabIndex = 3;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(61, 159);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(125, 20);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Template Name:";
-            // 
-            // btnNewTemplate
-            // 
-            this.btnNewTemplate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnNewTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnNewTemplate.Image")));
-            this.btnNewTemplate.Location = new System.Drawing.Point(211, 25);
-            this.btnNewTemplate.Name = "btnNewTemplate";
-            this.btnNewTemplate.Size = new System.Drawing.Size(163, 70);
-            this.btnNewTemplate.TabIndex = 1;
-            this.btnNewTemplate.Text = "New Template";
-            this.btnNewTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnNewTemplate.UseVisualStyleBackColor = true;
-            // 
-            // btnLoadExisting
-            // 
-            this.btnLoadExisting.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoadExisting.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadExisting.Image")));
-            this.btnLoadExisting.Location = new System.Drawing.Point(30, 25);
-            this.btnLoadExisting.Name = "btnLoadExisting";
-            this.btnLoadExisting.Size = new System.Drawing.Size(163, 70);
-            this.btnLoadExisting.TabIndex = 0;
-            this.btnLoadExisting.Text = "Load Template";
-            this.btnLoadExisting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLoadExisting.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
             this.tabPage3.Controls.Add(this.panel5);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(935, 747);
+            this.tabPage3.Size = new System.Drawing.Size(995, 747);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "SETUP";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -508,7 +450,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(935, 747);
+            this.panel5.Size = new System.Drawing.Size(995, 747);
             this.panel5.TabIndex = 0;
             // 
             // panel2
@@ -518,7 +460,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 0, 12, 0);
-            this.panel2.Size = new System.Drawing.Size(1204, 755);
+            this.panel2.Size = new System.Drawing.Size(1264, 755);
             this.panel2.TabIndex = 4;
             // 
             // timer1
@@ -535,11 +477,22 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // txtTemplatePath
+            // 
+            this.txtTemplatePath.BackColor = System.Drawing.Color.White;
+            this.txtTemplatePath.Location = new System.Drawing.Point(6, 35);
+            this.txtTemplatePath.Multiline = true;
+            this.txtTemplatePath.Name = "txtTemplatePath";
+            this.txtTemplatePath.ReadOnly = true;
+            this.txtTemplatePath.Size = new System.Drawing.Size(543, 48);
+            this.txtTemplatePath.TabIndex = 2;
+            this.txtTemplatePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1204, 802);
+            this.ClientSize = new System.Drawing.Size(1264, 802);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
@@ -558,11 +511,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -593,7 +545,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button btnLoadTemplate;
-        private System.Windows.Forms.Label lblTemplatePath;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -603,10 +554,6 @@
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Button btnNewTemplate;
-        private System.Windows.Forms.Button btnLoadExisting;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtConveyorSpeed;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.ComboBox cboLabelsPerBox;
@@ -615,5 +562,6 @@
         private System.Windows.Forms.TextBox txtJobStartTime;
         private System.Windows.Forms.TextBox txtBoxCount;
         private System.Windows.Forms.TextBox txtStatus;
+        private System.Windows.Forms.TextBox txtTemplatePath;
     }
 }
