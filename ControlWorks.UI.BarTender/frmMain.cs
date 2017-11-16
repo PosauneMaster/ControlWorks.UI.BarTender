@@ -1,27 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
+﻿using log4net;
+using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using ControlWorks.ConfigurationProvider;
 
 //string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
 //string keyboardPath = Path.Combine(progFiles, "TabTip.exe");
 //var keyboardProc = Process.Start(keyboardPath);
 
 
-
 namespace ControlWorks.UI.BarTender
 {
     public partial class frmMain : Form
     {
-
+        private ILog _log = LogManager.GetLogger("FileLogger");
         public frmMain()
         {
             InitializeComponent();
@@ -29,7 +22,11 @@ namespace ControlWorks.UI.BarTender
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = Settings.BartenderTemplatesBaseDirectory;
+            openFileDialog1.FileName = String.Empty;
 
+
+            _log.Info("Loading Main Form");
             cboLabelsPerBox.SelectedIndex = 0;
 
             toolStrip1_Resize(this, new EventArgs());
@@ -56,6 +53,7 @@ namespace ControlWorks.UI.BarTender
                 listBox1.Items.Add($"Box Count:\t{boxcount - i}");
                 listBox1.Items.Add($"Labels per Box:\t2");
                 listBox1.Items.Add("__________________________________________________");
+
             }
         }
 
