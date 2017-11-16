@@ -154,15 +154,15 @@
     <Content Include="Webalys-Kameleon.pics-Conveyor-Belt.ico" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="log4net">
-      <Version>2.0.8</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ControlWorks.ConfigurationProvider\ControlWorks.ConfigurationProvider.csproj">
       <Project>{cdeb7bfb-f832-4aac-aa28-4e4d2aba52c1}</Project>
       <Name>ControlWorks.ConfigurationProvider</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="log4net">
+      <Version>2.0.8</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
