@@ -54,6 +54,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtTemplatePath = new System.Windows.Forms.TextBox();
             this.btnLoadTemplate = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
@@ -68,7 +69,6 @@
             this.tmrMoveRight = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveLeft = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.txtTemplatePath = new System.Windows.Forms.TextBox();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -358,6 +358,17 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Template Details";
             // 
+            // txtTemplatePath
+            // 
+            this.txtTemplatePath.BackColor = System.Drawing.Color.White;
+            this.txtTemplatePath.Location = new System.Drawing.Point(6, 35);
+            this.txtTemplatePath.Multiline = true;
+            this.txtTemplatePath.Name = "txtTemplatePath";
+            this.txtTemplatePath.ReadOnly = true;
+            this.txtTemplatePath.Size = new System.Drawing.Size(543, 48);
+            this.txtTemplatePath.TabIndex = 2;
+            this.txtTemplatePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // btnLoadTemplate
             // 
             this.btnLoadTemplate.BackColor = System.Drawing.SystemColors.Control;
@@ -400,7 +411,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(995, 747);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "LABEL SETTINGS";
+            this.tabPage2.Text = "TEMPLATE SETUP";
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Paint += new System.Windows.Forms.PaintEventHandler(this.Panel1_Paint);
             // 
@@ -421,7 +432,7 @@
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(995, 747);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "TEMPLATE SETUP";
+            this.tabPage4.Text = "LABEL SETUP";
             this.tabPage4.UseVisualStyleBackColor = true;
             // 
             // panel4
@@ -441,7 +452,7 @@
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(995, 747);
             this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "SETUP";
+            this.tabPage3.Text = "CONFIGURATION";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
             // panel5
@@ -476,17 +487,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // txtTemplatePath
-            // 
-            this.txtTemplatePath.BackColor = System.Drawing.Color.White;
-            this.txtTemplatePath.Location = new System.Drawing.Point(6, 35);
-            this.txtTemplatePath.Multiline = true;
-            this.txtTemplatePath.Name = "txtTemplatePath";
-            this.txtTemplatePath.ReadOnly = true;
-            this.txtTemplatePath.Size = new System.Drawing.Size(543, 48);
-            this.txtTemplatePath.TabIndex = 2;
-            this.txtTemplatePath.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmMain
             // 

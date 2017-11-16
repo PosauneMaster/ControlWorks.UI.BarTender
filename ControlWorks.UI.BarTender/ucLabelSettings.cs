@@ -58,7 +58,7 @@ namespace ControlWorks.UI.BarTender
             _smallLabelCenterLocation = pb4x4.Location;
             _largeLabelCenterLocation = pb4x6.Location;
             _rotatedLabelCenterLocation = pb6x4.Location;
-            _labelEdgeLocation = new Point(327, 3);
+            _labelEdgeLocation = new Point(310, 3);
 
             cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
             cboLabelPosition.SelectedIndex = 2;
@@ -117,8 +117,8 @@ namespace ControlWorks.UI.BarTender
             else if (position == LabelPositon.Edge)
             {
                 pb4x4.Location = _labelEdgeLocation;
-                pb4x6.Location = new Point(380, 3);
-                pb6x4.Location = new Point(300, 3);
+                pb4x6.Location = new Point(310, 3);
+                pb6x4.Location = new Point(230, 3);
                 lblRightDistance.Visible = false;
                 lblLeftDistance.Visible = false;
 
