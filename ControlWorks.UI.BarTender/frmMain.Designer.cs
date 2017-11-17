@@ -69,6 +69,11 @@
             this.tmrMoveRight = new System.Windows.Forms.Timer(this.components);
             this.tmrMoveLeft = new System.Windows.Forms.Timer(this.components);
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.lblPviServiceStatus = new System.Windows.Forms.Label();
+            this.lblPviServiceName = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.toolStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -79,15 +84,16 @@
             this.tabPage2.SuspendLayout();
             this.tabPage4.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 780);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 683);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1264, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1366, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -99,7 +105,7 @@
             this.toolStripLabel2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1264, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(1366, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.Resize += new System.EventHandler(this.toolStrip1_Resize);
@@ -133,7 +139,7 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1252, 755);
+            this.tabControl1.Size = new System.Drawing.Size(1354, 658);
             this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 3;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
@@ -145,7 +151,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 4);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(995, 747);
+            this.tabPage1.Size = new System.Drawing.Size(1097, 650);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "MACHINE CONTROL";
             // 
@@ -161,14 +167,14 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(989, 741);
+            this.panel1.Size = new System.Drawing.Size(1091, 644);
             this.panel1.TabIndex = 0;
             // 
             // btnStop
             // 
             this.btnStop.BackColor = System.Drawing.SystemColors.Control;
             this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(759, 644);
+            this.btnStop.Location = new System.Drawing.Point(921, 545);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(163, 70);
             this.btnStop.TabIndex = 4;
@@ -180,7 +186,7 @@
             this.btnStart.BackColor = System.Drawing.SystemColors.Control;
             this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(584, 644);
+            this.btnStart.Location = new System.Drawing.Point(752, 545);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(163, 70);
             this.btnStart.TabIndex = 3;
@@ -388,7 +394,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(358, 731);
+            this.groupBox1.Size = new System.Drawing.Size(358, 527);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Job History";
@@ -400,7 +406,7 @@
             this.listBox1.ItemHeight = 20;
             this.listBox1.Location = new System.Drawing.Point(3, 22);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(352, 706);
+            this.listBox1.Size = new System.Drawing.Size(352, 502);
             this.listBox1.TabIndex = 0;
             // 
             // tabPage2
@@ -409,7 +415,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(995, 747);
+            this.tabPage2.Size = new System.Drawing.Size(1097, 650);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "TEMPLATE SETUP";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -422,7 +428,7 @@
             this.ucLabelSettings1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ucLabelSettings1.Location = new System.Drawing.Point(3, 3);
             this.ucLabelSettings1.Name = "ucLabelSettings1";
-            this.ucLabelSettings1.Size = new System.Drawing.Size(989, 741);
+            this.ucLabelSettings1.Size = new System.Drawing.Size(1091, 644);
             this.ucLabelSettings1.TabIndex = 0;
             // 
             // tabPage4
@@ -430,7 +436,7 @@
             this.tabPage4.Controls.Add(this.panel4);
             this.tabPage4.Location = new System.Drawing.Point(4, 4);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(995, 747);
+            this.tabPage4.Size = new System.Drawing.Size(1097, 650);
             this.tabPage4.TabIndex = 3;
             this.tabPage4.Text = "LABEL SETUP";
             this.tabPage4.UseVisualStyleBackColor = true;
@@ -442,7 +448,7 @@
             this.panel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(995, 747);
+            this.panel4.Size = new System.Drawing.Size(1097, 650);
             this.panel4.TabIndex = 0;
             // 
             // tabPage3
@@ -450,7 +456,7 @@
             this.tabPage3.Controls.Add(this.panel5);
             this.tabPage3.Location = new System.Drawing.Point(4, 4);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(995, 747);
+            this.tabPage3.Size = new System.Drawing.Size(1097, 650);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "CONFIGURATION";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -458,10 +464,15 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.button1);
+            this.panel5.Controls.Add(this.label10);
+            this.panel5.Controls.Add(this.label9);
+            this.panel5.Controls.Add(this.lblPviServiceName);
+            this.panel5.Controls.Add(this.lblPviServiceStatus);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel5.Location = new System.Drawing.Point(0, 0);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(995, 747);
+            this.panel5.Size = new System.Drawing.Size(1097, 650);
             this.panel5.TabIndex = 0;
             // 
             // panel2
@@ -471,7 +482,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 25);
             this.panel2.Name = "panel2";
             this.panel2.Padding = new System.Windows.Forms.Padding(0, 0, 12, 0);
-            this.panel2.Size = new System.Drawing.Size(1264, 755);
+            this.panel2.Size = new System.Drawing.Size(1366, 658);
             this.panel2.TabIndex = 4;
             // 
             // timer1
@@ -486,22 +497,70 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "Bartender Files (*.btw)|*.btw|All files (*.*)|*.*";
+            // 
+            // lblPviServiceStatus
+            // 
+            this.lblPviServiceStatus.AutoSize = true;
+            this.lblPviServiceStatus.Location = new System.Drawing.Point(301, 146);
+            this.lblPviServiceStatus.Name = "lblPviServiceStatus";
+            this.lblPviServiceStatus.Size = new System.Drawing.Size(41, 13);
+            this.lblPviServiceStatus.TabIndex = 0;
+            this.lblPviServiceStatus.Text = "label7";
+            // 
+            // lblPviServiceName
+            // 
+            this.lblPviServiceName.AutoSize = true;
+            this.lblPviServiceName.Location = new System.Drawing.Point(301, 124);
+            this.lblPviServiceName.Name = "lblPviServiceName";
+            this.lblPviServiceName.Size = new System.Drawing.Size(41, 13);
+            this.lblPviServiceName.TabIndex = 1;
+            this.lblPviServiceName.Text = "label8";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(161, 124);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(114, 13);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "PVI Service Name:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(161, 146);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(114, 13);
+            this.label10.TabIndex = 3;
+            this.label10.Text = "PVI Service Status";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(196, 246);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 4;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 802);
+            this.ClientSize = new System.Drawing.Size(1366, 705);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximumSize = new System.Drawing.Size(1382, 744);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BarTender Label Control System ";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -516,6 +575,8 @@
             this.tabPage2.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -563,5 +624,10 @@
         private System.Windows.Forms.TextBox txtBoxCount;
         private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.TextBox txtTemplatePath;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblPviServiceName;
+        private System.Windows.Forms.Label lblPviServiceStatus;
     }
 }

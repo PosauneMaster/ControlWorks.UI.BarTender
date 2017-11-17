@@ -14,7 +14,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -38,9 +38,6 @@
     <ApplicationIcon>Webalys-Kameleon.pics-Conveyor-Belt.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BR.AN.PviServices">
-      <HintPath>..\bin\BR.AN.PviServices.dll</HintPath>
-    </Reference>
     <Reference Include="Seagull.BarTender.Print, Version=11.0.5.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\bin\Seagull.BarTender.Print.dll</HintPath>
@@ -80,6 +77,7 @@
     <Compile Include="LabelService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PviController.cs" />
     <Compile Include="ucLabelSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -154,9 +152,17 @@
     <Content Include="Webalys-Kameleon.pics-Conveyor-Belt.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ControlWorks.Bartender.Service\ControlWorks.Bartender.Service.csproj">
+      <Project>{581E3E1C-EA7D-4A4C-AE9C-0BD97254EF54}</Project>
+      <Name>ControlWorks.Bartender.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ControlWorks.ConfigurationProvider\ControlWorks.ConfigurationProvider.csproj">
       <Project>{cdeb7bfb-f832-4aac-aa28-4e4d2aba52c1}</Project>
       <Name>ControlWorks.ConfigurationProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ControlWorks.Pvi.Service\ControlWorks.Pvi.Service.csproj">
+      <Project>{7c87c643-d73b-4e3b-882c-22fb3902feff}</Project>
+      <Name>ControlWorks.Pvi.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

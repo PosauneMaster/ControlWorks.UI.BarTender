@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
+using ControlWorks.ConfigurationProvider;
+using ControlWorks.Bartender.Service;
+using Seagull.BarTender.Print;
 
 namespace ControlWorks.UI.BarTender
 {
@@ -36,6 +39,8 @@ namespace ControlWorks.UI.BarTender
 
         private void ucLabelSettings_Load(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = Settings.BartenderTemplatesBaseDirectory;
+
             Initialize();
 
         }
@@ -327,11 +332,18 @@ namespace ControlWorks.UI.BarTender
 
         private void btnChooseLabel_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Title = @"Select a label image to open...";
-            openFileDialog1.Filter = @"Image Files|*.jpg;*.jpeg;*.png;";
+            var printers = new Printers();
+
+            openFileDialog1.Title = @"Select a label to open...";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Load(openFileDialog1.FileName);
+                pictureBox1.Image = null;
+
+                var service = new BartenderService();
+                service.GetPreviewImage(openFileDialog1.FileName, printers.Default.PrinterName, pictureBox1.Width, pictureBox1.Height);
+
+                pictureBox1.Load(@"D:\ControlWorks\BarTender\PreviewPath\PrintPreview1.jpg");
+
             }
         }
     }

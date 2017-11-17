@@ -10,6 +10,8 @@ namespace ControlWorks.ConfigurationProvider
     public static class Settings
     {
         public static string BartenderTemplatesBaseDirectory => ConfigurationManager.AppSettings["BartenderTemplatesBaseDirectory"];
+        public static string PreviewPath => ConfigurationManager.AppSettings["PreviewPath"];
+        public static string WindowsState => ConfigurationManager.AppSettings["WindowsState"];
 
     }
 }

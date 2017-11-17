@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace ControlWorks.Pvi.Service
 {
-    public class Class1
+
+    internal class CpuManager
     {
+        private ILog _log = LogManager.GetLogger("FileLogger");
+
     }
 }

@@ -14,19 +14,39 @@ namespace ControlWorks.UI.BarTender
 {
     public partial class frmMain : Form
     {
+        private PviController _pvicontroller;
+
         private ILog _log = LogManager.GetLogger("FileLogger");
         public frmMain()
         {
             InitializeComponent();
         }
 
+        private void SetWindowState()
+        {
+            switch(Settings.WindowsState)
+            {
+                case "Maximized":
+                    WindowState = FormWindowState.Maximized;
+                    break;
+                case "Minimized":
+                    WindowState = FormWindowState.Minimized;
+                    break;
+                default:
+                    WindowState = FormWindowState.Normal;
+                    break;
+            }
+        }
+
         private void frmMain_Load(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = Settings.BartenderTemplatesBaseDirectory;
-            openFileDialog1.FileName = String.Empty;
+            _pvicontroller = new PviController();
+            _pvicontroller.Start();
 
 
             _log.Info("Loading Main Form");
+            SetWindowState();
+            _log.Info($"Setting WindowsState to {WindowState}");
             cboLabelsPerBox.SelectedIndex = 0;
 
             toolStrip1_Resize(this, new EventArgs());
@@ -162,6 +182,12 @@ namespace ControlWorks.UI.BarTender
             {
                 txtTemplatePath.Text = openFileDialog1.FileName;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            lblPviServiceName.Text = _pvicontroller.GetServiceName();
+            lblPviServiceStatus.Text = $"{_pvicontroller.IsServiceConnected()}";
         }
     }
 
