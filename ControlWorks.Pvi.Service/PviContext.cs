@@ -27,6 +27,10 @@ namespace ControlWorks.Pvi.Service
         private void PviManager_ServiceConnected(object sender, PviEventArgs e)
         {
             PviService = sender as BR.AN.PviServices.Service;
+
+            var cpuService = new CpuManager(PviService);
+            cpuService.CreateCpu("Cpu1", "192.168.0.101");
+
         }
     }
 }
