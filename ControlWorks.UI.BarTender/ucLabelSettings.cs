@@ -11,6 +11,7 @@ using System.Diagnostics;
 using ControlWorks.ConfigurationProvider;
 using ControlWorks.Bartender.Service;
 using Seagull.BarTender.Print;
+using System.IO;
 
 namespace ControlWorks.UI.BarTender
 {
@@ -312,12 +313,46 @@ namespace ControlWorks.UI.BarTender
             cboLabelSize.SelectedIndex = 1;
             cboLabelPosition.SelectedIndex = 2;
             Initialize();
-
         }
 
         private void btnSaveTemplate_Click(object sender, EventArgs e)
         {
+            var template = new TemplateSettings();
+            template.TemplateName = txtTemplateName.Text;
+            template.LablesPerBox = cboLabelsPerBox.Text;
+            template.ConveyorSpeed = txtConveyorSpeed.Text;
+            template.BoxHeight = txtHeight.Text;
+            template.BoxWidth = txtWidth.Text;
+            template.LabelSize = cboLabelSize.Text;
+            template.LabelPositon = cboLabelPosition.Text;
+            template.LeftOffset = lblLeftDistance.Text;
+            template.RightOffset = lblRightDistance.Text;
+            template.LabelLocation = pictureBox1.ImageLocation;
 
+            var directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestTemplates");
+
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
+            var filename = Path.Combine(directory, template.TemplateName);
+
+            var templatefilename = filename;
+
+            var index = 0;
+            while (File.Exists(templatefilename))
+            {
+                index++;
+
+                if (index > 100000) break;
+
+                var f = $"{template.TemplateName.Replace(".xml", String.Empty)}({index}).xml";
+                templatefilename = Path.Combine(directory, f);
+
+            }
+
+            File.WriteAllText(templatefilename, template.ToXml());
         }
 
         private void OnComboboxClicked(object sender, EventArgs e)
@@ -332,17 +367,53 @@ namespace ControlWorks.UI.BarTender
 
         private void btnChooseLabel_Click(object sender, EventArgs e)
         {
-            var printers = new Printers();
 
             openFileDialog1.Title = @"Select a label to open...";
+            openFileDialog1.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestImages");
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Image = null;
+                pictureBox1.Load(openFileDialog1.FileName);
+            }
 
-                var service = new BartenderService();
-                service.GetPreviewImage(openFileDialog1.FileName, printers.Default.PrinterName, pictureBox1.Width, pictureBox1.Height);
+            //var printers = new Printers();
 
-                pictureBox1.Load(@"D:\ControlWorks\BarTender\PreviewPath\PrintPreview1.jpg");
+            //openFileDialog1.Title = @"Select a label to open...";
+            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    pictureBox1.Image = null;
+
+            //    var service = new BartenderService();
+            //    service.GetPreviewImage(openFileDialog1.FileName, printers.Default.PrinterName, pictureBox1.Width, pictureBox1.Height);
+
+            //    pictureBox1.Load(@"D:\ControlWorks\BarTender\PreviewPath\PrintPreview1.jpg");
+
+            //}
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            txtTemplateName.Text = $"{DateTime.Now:yyyyMMddHHmmss}.xml";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                var xml = File.ReadAllText(openFileDialog1.FileName);
+                var template = TemplateSettings.CreateFromXml(xml);
+
+                txtTemplateName.Text = template.TemplateName;
+                cboLabelsPerBox.Text = template.LablesPerBox;
+                txtConveyorSpeed.Text = template.ConveyorSpeed;
+                txtHeight.Text = template.BoxHeight;
+                txtWidth.Text = template.BoxWidth;
+                cboLabelSize.Text = template.LabelSize;
+                cboLabelPosition.Text = template.LabelPositon;
+                lblLeftDistance.Text = template.LeftOffset;
+                lblRightDistance.Text = template.RightOffset;
+                pictureBox1.Load(template.LabelLocation);
+
+                SetCurrentBox();
 
             }
         }
