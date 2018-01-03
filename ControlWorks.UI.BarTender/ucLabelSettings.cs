@@ -48,6 +48,9 @@ namespace ControlWorks.UI.BarTender
 
         private void Initialize()
         {
+            txtConveyorSpeed.Text = String.Empty;
+            txtTemplateName.Text = String.Empty;
+
             txtHeight.Text = "12";
             txtWidth.Text = "12";
 
@@ -291,7 +294,6 @@ namespace ControlWorks.UI.BarTender
                 _currentBox.CurrentLabel = pb4x6;
             }
 
-
             Image flipImage = pb4x4.Image;
             flipImage.RotateFlip(RotateFlipType.Rotate270FlipXY);
             pb4x4.Image = flipImage;
@@ -310,26 +312,51 @@ namespace ControlWorks.UI.BarTender
 
         private void btnReset_Click(object sender, EventArgs e)
         {
+            Reset();
+        }
+
+        private void Reset()
+        {
             cboLabelSize.SelectedIndex = 1;
             cboLabelPosition.SelectedIndex = 2;
+            pictureBox1.Image = null;
             Initialize();
+            SetCurrentBox();
         }
 
         private void btnSaveTemplate_Click(object sender, EventArgs e)
         {
-            var template = new TemplateSettings();
-            template.TemplateName = txtTemplateName.Text;
-            template.LablesPerBox = cboLabelsPerBox.Text;
-            template.ConveyorSpeed = txtConveyorSpeed.Text;
-            template.BoxHeight = txtHeight.Text;
-            template.BoxWidth = txtWidth.Text;
-            template.LabelSize = cboLabelSize.Text;
-            template.LabelPositon = cboLabelPosition.Text;
-            template.LeftOffset = lblLeftDistance.Text;
-            template.RightOffset = lblRightDistance.Text;
-            template.LabelLocation = pictureBox1.ImageLocation;
+            var template = new TemplateSettings()
+            {
+                TemplateName = txtTemplateName.Text,
+                LablesPerBox = cboLabelsPerBox.Text,
+                ConveyorSpeed = txtConveyorSpeed.Text,
+                BoxHeight = txtHeight.Text,
+                BoxWidth = txtWidth.Text,
+                LabelSize = cboLabelSize.Text,
+                LabelPositon = cboLabelPosition.Text,
+                LeftOffset = lblLeftDistance.Text,
+                RightOffset = lblRightDistance.Text,
+                LabelLocation = pictureBox1.ImageLocation
+            };
 
-            var directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestTemplates");
+            template.CurrentBox = new BoxSettings()
+            {
+                LabelToRightStartInches = Math.Round(_currentBox.LabelToRightStartInches, 2, MidpointRounding.ToEven),
+                LabelToRightStartPixels = Math.Round(_currentBox.LabelToRightStartPixels, 2, MidpointRounding.ToEven),
+                LabelToRightCurrentInches = Math.Round(_currentBox.LabelToRightCurrentInches, 2, MidpointRounding.ToEven),
+                PixelsPerTenthInchRight = Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
+                LabelToLeftStartInches = Math.Round(_currentBox.LabelToLeftStartInches, 2, MidpointRounding.ToEven),
+                LabelToLeftStartPixels = Math.Round(_currentBox.LabelToLeftCurrentInches, 2, MidpointRounding.ToEven),
+                LabelToLeftCurrentInches = Math.Round(_currentBox.LabelToLeftCurrentInches, 2, MidpointRounding.ToEven),
+                PixelsPerTenthInchLeft = Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
+                FixedPanelRightEdge = Math.Round(_currentBox.FixedPanelRightEdge, 2, MidpointRounding.ToEven),
+                FixedPanelLeftEdge = Math.Round(_currentBox.FixedPanelLeftEdge, 2, MidpointRounding.ToEven),
+                LablePosition = _currentBox.CurrentLabel.Location
+                
+            };
+
+            var directory = @"D:\ControlWorks\BarTender\Settings";
 
             if (!Directory.Exists(directory))
             {
@@ -392,6 +419,7 @@ namespace ControlWorks.UI.BarTender
 
         private void button1_Click(object sender, EventArgs e)
         {
+            Reset();
             txtTemplateName.Text = $"{DateTime.Now:yyyyMMddHHmmss}.xml";
         }
 
@@ -411,10 +439,27 @@ namespace ControlWorks.UI.BarTender
                 cboLabelPosition.Text = template.LabelPositon;
                 lblLeftDistance.Text = template.LeftOffset;
                 lblRightDistance.Text = template.RightOffset;
-                pictureBox1.Load(template.LabelLocation);
+
+                if (!String.IsNullOrEmpty(template.LabelLocation))
+                {
+                    pictureBox1.Load(template.LabelLocation);
+                }
+
 
                 SetCurrentBox();
 
+                var boxSettings = template.CurrentBox;
+
+                _currentBox.LabelToRightStartInches = boxSettings.LabelToRightStartInches;
+                _currentBox.LabelToRightStartPixels = boxSettings.LabelToRightStartPixels;
+                _currentBox.PixelsPerTenthInchLeft = boxSettings.PixelsPerTenthInchRight;
+                _currentBox.LabelToLeftStartInches = boxSettings.LabelToLeftStartInches;
+                _currentBox.LabelToLeftCurrentInches = boxSettings.LabelToLeftStartPixels;
+                _currentBox.PixelsPerTenthInchLeft = boxSettings.PixelsPerTenthInchLeft;
+                _currentBox.FixedPanelRightEdge = boxSettings.FixedPanelRightEdge;
+                _currentBox.FixedPanelLeftEdge = boxSettings.FixedPanelLeftEdge;
+
+                _currentBox.MoveLabel(boxSettings.LablePosition, boxSettings.LabelToLeftCurrentInches, boxSettings.LabelToRightCurrentInches);
             }
         }
     }

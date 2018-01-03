@@ -20,6 +20,7 @@ namespace ControlWorks.UI.BarTender
         public string LeftOffset { get; set; }
         public string RightOffset { get; set; }
         public string LabelLocation { get; set; }
+        public BoxSettings CurrentBox { get; set; }
 
         public string ToXml()
         {

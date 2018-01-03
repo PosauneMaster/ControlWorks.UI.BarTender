@@ -49,16 +49,15 @@ namespace ControlWorks.UI.BarTender
 
         private void SetLabel()
         {
-            LabelToRightStartInches = Width / 2 - LabelInchWidth / 2;
-            LabelToRightCurrentInches = Width / 2 - LabelInchWidth / 2;
-            LabelToRightStartPixels = FixedPanel.Right - CurrentLabel.Right;
+            LabelToRightStartInches = Math.Round(Width / 2 - LabelInchWidth / 2, 2, MidpointRounding.ToEven);
+            LabelToRightCurrentInches = Math.Round(Width / 2 - LabelInchWidth / 2, 2, MidpointRounding.ToEven);
+            LabelToRightStartPixels = Math.Round((double)FixedPanel.Right - (double)CurrentLabel.Right ,2, MidpointRounding.ToEven);
             PixelsPerTenthInchRight = Math.Round(LabelToRightStartPixels / LabelToRightStartInches / 10, MidpointRounding.ToEven);
-            FixedPanelRightEdge = FixedPanel.Right - FixedPanel.Left - PixelsPerTenthInchRight * 2;
+            FixedPanelRightEdge = Math.Round((double)FixedPanel.Right - (double)FixedPanel.Left - PixelsPerTenthInchRight * 2, 2, MidpointRounding.ToEven);
 
-
-            LabelToLeftStartInches = Width / 2 -LabelInchWidth / 2;
-            LabelToLeftCurrentInches = Width / 2 - LabelInchWidth / 2;
-            LabelToLeftStartPixels = FixedPanel.Right - CurrentLabel.Right;
+            LabelToLeftStartInches = Math.Round(Width / 2 - LabelInchWidth / 2, 2, MidpointRounding.ToEven);
+            LabelToLeftCurrentInches = Math.Round(Width / 2 - LabelInchWidth / 2, 2, MidpointRounding.ToEven);
+            LabelToLeftStartPixels = Math.Round((double)FixedPanel.Right - (double)CurrentLabel.Right, 2, MidpointRounding.ToEven);
             PixelsPerTenthInchLeft = Math.Round(LabelToLeftStartPixels / LabelToLeftStartInches / 10, MidpointRounding.ToEven);
         }
 
@@ -95,6 +94,18 @@ namespace ControlWorks.UI.BarTender
                 CurrentLabel.Location = location;
                 LabelToRightCurrentInches += 0.1D;
                 LabelToLeftCurrentInches -= 0.1D;
+
+                OnLabelMoved();
+            }
+        }
+
+        public void MoveLabel(Point location, double left, double right)
+        {
+            if (CurrentLabel.Left > FixedPanelLeftEdge)
+            {
+                CurrentLabel.Location = location;
+                LabelToRightCurrentInches = right;
+                LabelToLeftCurrentInches = left;
 
                 OnLabelMoved();
             }

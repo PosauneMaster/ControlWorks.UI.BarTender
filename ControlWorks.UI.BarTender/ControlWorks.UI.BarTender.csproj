@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoxSettings.cs" />
     <Compile Include="CurrentBox.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
