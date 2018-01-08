@@ -25,6 +25,8 @@ namespace ControlWorks.UI.BarTender
         public double FixedPanelRightEdge { get; set; }
         public double FixedPanelLeftEdge { get; set; }
         public PictureBox CurrentLabel { get; set; }
+        public LabelSize LabelSize { get; set; }
+        public int CurrentLabelRotation { get; set; }
         public Panel FixedPanel { get; set; }
         public int LabelInchWidth { get; set; }
 

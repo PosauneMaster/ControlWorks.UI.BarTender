@@ -21,5 +21,8 @@ namespace ControlWorks.UI.BarTender
         public double FixedPanelLeftEdge { get; set; }
         public int LabelInchWidth { get; set; }
         public Point LablePosition { get; set; }
+        public LabelSize LabelSize { get; set; }
+        public int CurrentLabelRotation { get; set; }
+
     }
 }

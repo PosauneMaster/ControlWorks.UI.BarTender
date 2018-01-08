@@ -43,13 +43,13 @@ namespace ControlWorks.UI.BarTender
             openFileDialog1.InitialDirectory = Settings.BartenderTemplatesBaseDirectory;
 
             Initialize();
+            Reset();
 
         }
 
         private void Initialize()
         {
             txtConveyorSpeed.Text = String.Empty;
-            txtTemplateName.Text = String.Empty;
 
             txtHeight.Text = "12";
             txtWidth.Text = "12";
@@ -146,7 +146,18 @@ namespace ControlWorks.UI.BarTender
         {
             double boxHeight = Double.Parse(txtHeight.Text);
             double boxWidth = Double.Parse(txtWidth.Text);
+
+            LabelSize labelSize = LabelSize.dimension4x4;
+            int labelRotation = 0;
+
+            if (_currentBox != null)
+            {
+                labelSize = _currentBox.LabelSize;
+                labelRotation = _currentBox.CurrentLabelRotation;
+            }
             _currentBox = new CurrentBox(boxHeight, boxWidth, GetCurrentPictureBox(), pnlBox);
+            _currentBox.LabelSize = labelSize;
+            _currentBox.CurrentLabelRotation = labelRotation;
             _currentBox.LabelMoved += _currentBox_LabelMoved;
         }
 
@@ -184,6 +195,11 @@ namespace ControlWorks.UI.BarTender
                 else
                 {
                     size = LabelSize.dimension4x6;
+                }
+
+                if (_currentBox != null)
+                {
+                    _currentBox.LabelSize = size;
                 }
 
                 _labelService?.ChangeLabelSize(size);
@@ -269,27 +285,31 @@ namespace ControlWorks.UI.BarTender
 
         private void btnRotate_Click(object sender, EventArgs e)
         {
-            if (_labelService.CurrentLabel.Size == LabelSize.dimension4x4)
+            _currentBox.CurrentLabelRotation = (_currentBox.CurrentLabelRotation + 1) % 4;
+            SetRotation(_labelService.CurrentLabel.Size);
+        }
+
+        private void SetRotation(LabelSize size)
+        {
+            pb4x4.Visible = false;
+            pb4x6.Visible = false;
+            pb6x4.Visible = false;
+
+
+            if (size == LabelSize.dimension4x4)
             {
                 pb4x4.Visible = true;
-                pb4x6.Visible = false;
-                pb6x4.Visible = false;
                 _currentBox.CurrentLabel = pb4x4;
             }
-            else if (_labelService.CurrentLabel.Size == LabelSize.dimension4x6)
+            else if (size == LabelSize.dimension4x6)
             {
-                pb4x4.Visible = false;
-                pb4x6.Visible = false;
                 pb6x4.Visible = true;
                 _labelService.CurrentLabel.Size = LabelSize.dimension6x4;
                 _currentBox.CurrentLabel = pb6x4;
-
             }
             else
             {
-                pb4x4.Visible = false;
                 pb4x6.Visible = true;
-                pb6x4.Visible = false;
                 _labelService.CurrentLabel.Size = LabelSize.dimension4x6;
                 _currentBox.CurrentLabel = pb4x6;
             }
@@ -317,6 +337,12 @@ namespace ControlWorks.UI.BarTender
 
         private void Reset()
         {
+            this.pb4x6.Image = Properties.Resources._112_UpArrowLong_Blue_24x24_72;
+            this.pb4x4.Image = Properties.Resources._112_UpArrowLong_Blue_24x24_72;
+            this.pb6x4.Image = Properties.Resources._112_UpArrowLong_Blue_24x24_72;
+
+            txtTemplateName.Text = $"{DateTime.Now:yyyyMMddHHmmss}.xml";
+            _currentBox.CurrentLabel = pb4x4;
             cboLabelSize.SelectedIndex = 1;
             cboLabelPosition.SelectedIndex = 2;
             pictureBox1.Image = null;
@@ -352,9 +378,11 @@ namespace ControlWorks.UI.BarTender
                 PixelsPerTenthInchLeft = Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
                 FixedPanelRightEdge = Math.Round(_currentBox.FixedPanelRightEdge, 2, MidpointRounding.ToEven),
                 FixedPanelLeftEdge = Math.Round(_currentBox.FixedPanelLeftEdge, 2, MidpointRounding.ToEven),
-                LablePosition = _currentBox.CurrentLabel.Location
-                
-            };
+                LablePosition = _currentBox.CurrentLabel.Location,
+                LabelSize = _currentBox.LabelSize,
+                CurrentLabelRotation =_currentBox.CurrentLabelRotation
+
+    };
 
             var directory = @"D:\ControlWorks\BarTender\Settings";
 
@@ -394,8 +422,10 @@ namespace ControlWorks.UI.BarTender
 
         private void btnChooseLabel_Click(object sender, EventArgs e)
         {
+            openFileDialog1.Filter = "Bartender Files(*.btw)| *.btw | All files(*.*) | *.*";
 
             openFileDialog1.Title = @"Select a label to open...";
+
             openFileDialog1.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestImages");
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -420,11 +450,12 @@ namespace ControlWorks.UI.BarTender
         private void button1_Click(object sender, EventArgs e)
         {
             Reset();
-            txtTemplateName.Text = $"{DateTime.Now:yyyyMMddHHmmss}.xml";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+
+            openFileDialog1.Filter = "Template Files(*.xml)| *.xml | All files(*.*) | *.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var xml = File.ReadAllText(openFileDialog1.FileName);
@@ -445,7 +476,6 @@ namespace ControlWorks.UI.BarTender
                     pictureBox1.Load(template.LabelLocation);
                 }
 
-
                 SetCurrentBox();
 
                 var boxSettings = template.CurrentBox;
@@ -460,6 +490,11 @@ namespace ControlWorks.UI.BarTender
                 _currentBox.FixedPanelLeftEdge = boxSettings.FixedPanelLeftEdge;
 
                 _currentBox.MoveLabel(boxSettings.LablePosition, boxSettings.LabelToLeftCurrentInches, boxSettings.LabelToRightCurrentInches);
+
+                for (int i = 0; i < template.CurrentBox.CurrentLabelRotation; i++)
+                {
+                    SetRotation(_currentBox.LabelSize);
+                }
             }
         }
     }
