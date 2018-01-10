@@ -18,6 +18,7 @@ namespace ControlWorks.UI.BarTender
 
         private ucMachineControl _machineControl;
         private ucLabelSettings _labelSettings;
+        private ucConfiguration _appConfiguration;
 
         private ILog _log = LogManager.GetLogger("FileLogger");
         public frmMain()
@@ -53,12 +54,17 @@ namespace ControlWorks.UI.BarTender
 
             _machineControl = new ucMachineControl();
             _labelSettings = new ucLabelSettings();
+            _appConfiguration = new ucConfiguration();
+
 
             pnlMachineControl.Controls.Add(_machineControl);
             pnlLabelSettings.Controls.Add(_labelSettings);
+            pnlConfiguration.Controls.Add(_appConfiguration);
             pnlLabelSettings.Visible = false;
+            pnlConfiguration.Visible = false;
 
             _machineControl.Log("Application Start");
+
         }
 
 
@@ -113,12 +119,23 @@ namespace ControlWorks.UI.BarTender
         {
             pnlLabelSettings.Visible = false;
             pnlMachineControl.Visible = true;
+            pnlConfiguration.Visible = false;
+
         }
 
         private void btnLabelSetup_Click(object sender, EventArgs e)
         {
             pnlLabelSettings.Visible = true;
             pnlMachineControl.Visible = false;
+            pnlConfiguration.Visible = false;
+
+        }
+
+        private void btnConfiguration_Click(object sender, EventArgs e)
+        {
+            pnlLabelSettings.Visible = false;
+            pnlMachineControl.Visible = false;
+            pnlConfiguration.Visible = true;
         }
     }
 

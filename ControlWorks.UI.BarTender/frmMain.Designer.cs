@@ -43,9 +43,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pnlMachineControl = new System.Windows.Forms.Panel();
             this.pnlLabelSettings = new System.Windows.Forms.Panel();
+            this.pnlConfiguration = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.pnlMachineControl.SuspendLayout();
+            this.pnlLabelSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -132,12 +133,14 @@
             this.btnConfiguration.TabIndex = 4;
             this.btnConfiguration.Text = "Configuration";
             this.btnConfiguration.UseVisualStyleBackColor = false;
+            this.btnConfiguration.Click += new System.EventHandler(this.btnConfiguration_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.panel1.Controls.Add(this.pnlMachineControl);
             this.panel1.Controls.Add(this.pnlLabelSettings);
+            this.panel1.Controls.Add(this.pnlConfiguration);
             this.panel1.Controls.Add(this.btnMachineControl);
             this.panel1.Controls.Add(this.btnConfiguration);
             this.panel1.Controls.Add(this.btnLabelSetup);
@@ -150,7 +153,7 @@
             // pnlMachineControl
             // 
             this.pnlMachineControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMachineControl.Location = new System.Drawing.Point(0, 0);
+            this.pnlMachineControl.Location = new System.Drawing.Point(1154, 0);
             this.pnlMachineControl.Name = "pnlMachineControl";
             this.pnlMachineControl.Size = new System.Drawing.Size(1154, 658);
             this.pnlMachineControl.TabIndex = 5;
@@ -162,6 +165,14 @@
             this.pnlLabelSettings.Name = "pnlLabelSettings";
             this.pnlLabelSettings.Size = new System.Drawing.Size(1154, 658);
             this.pnlLabelSettings.TabIndex = 0;
+            // 
+            // pnlConfiguration
+            // 
+            this.pnlConfiguration.Dock = System.Windows.Forms.DockStyle.Left;
+            this.pnlConfiguration.Location = new System.Drawing.Point(0, 0);
+            this.pnlConfiguration.Name = "pnlConfiguration";
+            this.pnlConfiguration.Size = new System.Drawing.Size(1154, 658);
+            this.pnlConfiguration.TabIndex = 0;
             // 
             // frmMain
             // 
@@ -182,7 +193,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.pnlMachineControl.ResumeLayout(false);
+            this.pnlLabelSettings.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,5 +214,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel pnlMachineControl;
         private System.Windows.Forms.Panel pnlLabelSettings;
+        private System.Windows.Forms.Panel pnlConfiguration;
     }
 }
