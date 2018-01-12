@@ -33,6 +33,7 @@
             this.txtBtFilesLocation = new System.Windows.Forms.TextBox();
             this.btnTemplateFiles = new System.Windows.Forms.Button();
             this.txtTemplateFilesLocation = new System.Windows.Forms.TextBox();
+            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBTFilesLocation
@@ -69,10 +70,21 @@
             this.txtTemplateFilesLocation.Size = new System.Drawing.Size(606, 20);
             this.txtTemplateFilesLocation.TabIndex = 3;
             // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(739, 393);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(144, 51);
+            this.btnExit.TabIndex = 4;
+            this.btnExit.Text = "Exit Application";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
             // ucConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.txtTemplateFilesLocation);
             this.Controls.Add(this.btnTemplateFiles);
             this.Controls.Add(this.txtBtFilesLocation);
@@ -92,5 +104,6 @@
         private System.Windows.Forms.TextBox txtBtFilesLocation;
         private System.Windows.Forms.Button btnTemplateFiles;
         private System.Windows.Forms.TextBox txtTemplateFilesLocation;
+        private System.Windows.Forms.Button btnExit;
     }
 }

@@ -30,15 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucMachineControl));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lbLog = new System.Windows.Forms.ListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.txtTemplatePath = new System.Windows.Forms.TextBox();
-            this.btnLoadTemplate = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.cboLabelsPerBox = new System.Windows.Forms.ComboBox();
             this.txtTemplateName = new System.Windows.Forms.TextBox();
             this.txtJobId = new System.Windows.Forms.TextBox();
@@ -53,14 +47,20 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnStart = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnLoadTemplate = new System.Windows.Forms.Button();
+            this.txtTemplatePath = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbLog = new System.Windows.Forms.ListBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox4.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -75,81 +75,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(969, 644);
             this.panel1.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.pictureBox1);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(360, 315);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Label Preview";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.lbLog);
-            this.groupBox2.Location = new System.Drawing.Point(3, 324);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(360, 306);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Log";
-            // 
-            // lbLog
-            // 
-            this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLog.FormattingEnabled = true;
-            this.lbLog.ItemHeight = 16;
-            this.lbLog.Location = new System.Drawing.Point(3, 22);
-            this.lbLog.Name = "lbLog";
-            this.lbLog.Size = new System.Drawing.Size(354, 281);
-            this.lbLog.TabIndex = 0;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.btnLoadTemplate);
-            this.groupBox3.Controls.Add(this.txtTemplatePath);
-            this.groupBox3.Location = new System.Drawing.Point(369, 3);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(584, 196);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Template Details";
-            // 
-            // txtTemplatePath
-            // 
-            this.txtTemplatePath.Location = new System.Drawing.Point(6, 36);
-            this.txtTemplatePath.Name = "txtTemplatePath";
-            this.txtTemplatePath.Size = new System.Drawing.Size(550, 26);
-            this.txtTemplatePath.TabIndex = 0;
-            // 
-            // btnLoadTemplate
-            // 
-            this.btnLoadTemplate.BackColor = System.Drawing.SystemColors.Control;
-            this.btnLoadTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadTemplate.Image")));
-            this.btnLoadTemplate.Location = new System.Drawing.Point(393, 89);
-            this.btnLoadTemplate.Name = "btnLoadTemplate";
-            this.btnLoadTemplate.Size = new System.Drawing.Size(163, 70);
-            this.btnLoadTemplate.TabIndex = 2;
-            this.btnLoadTemplate.Text = "Load Template";
-            this.btnLoadTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnLoadTemplate.UseVisualStyleBackColor = false;
-            this.btnLoadTemplate.Click += new System.EventHandler(this.btnLoadTemplate_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 22);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(354, 290);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // groupBox4
             // 
@@ -175,6 +100,31 @@
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "JobDetails";
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.SystemColors.Control;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(393, 202);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(163, 70);
+            this.btnStop.TabIndex = 35;
+            this.btnStop.Text = "Stop";
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // btnStart
+            // 
+            this.btnStart.BackColor = System.Drawing.SystemColors.Control;
+            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.Location = new System.Drawing.Point(393, 79);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(163, 70);
+            this.btnStart.TabIndex = 34;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // cboLabelsPerBox
             // 
@@ -235,7 +185,7 @@
             this.txtStatus.Multiline = true;
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(180, 28);
+            this.txtStatus.Size = new System.Drawing.Size(370, 113);
             this.txtStatus.TabIndex = 28;
             // 
             // txtConveyorSpeed
@@ -309,28 +259,80 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Template Name:";
             // 
-            // btnStart
+            // groupBox3
             // 
-            this.btnStart.BackColor = System.Drawing.SystemColors.Control;
-            this.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(393, 79);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(163, 70);
-            this.btnStart.TabIndex = 34;
-            this.btnStart.Text = "Start";
-            this.btnStart.UseVisualStyleBackColor = false;
+            this.groupBox3.Controls.Add(this.btnLoadTemplate);
+            this.groupBox3.Controls.Add(this.txtTemplatePath);
+            this.groupBox3.Location = new System.Drawing.Point(369, 3);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(584, 196);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Template Details";
             // 
-            // btnStop
+            // btnLoadTemplate
             // 
-            this.btnStop.BackColor = System.Drawing.SystemColors.Control;
-            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStop.Location = new System.Drawing.Point(393, 202);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(163, 70);
-            this.btnStop.TabIndex = 35;
-            this.btnStop.Text = "Stop";
-            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnLoadTemplate.BackColor = System.Drawing.SystemColors.Control;
+            this.btnLoadTemplate.Image = ((System.Drawing.Image)(resources.GetObject("btnLoadTemplate.Image")));
+            this.btnLoadTemplate.Location = new System.Drawing.Point(393, 89);
+            this.btnLoadTemplate.Name = "btnLoadTemplate";
+            this.btnLoadTemplate.Size = new System.Drawing.Size(163, 70);
+            this.btnLoadTemplate.TabIndex = 2;
+            this.btnLoadTemplate.Text = "Load Template";
+            this.btnLoadTemplate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnLoadTemplate.UseVisualStyleBackColor = false;
+            this.btnLoadTemplate.Click += new System.EventHandler(this.btnLoadTemplate_Click);
+            // 
+            // txtTemplatePath
+            // 
+            this.txtTemplatePath.Location = new System.Drawing.Point(6, 36);
+            this.txtTemplatePath.Name = "txtTemplatePath";
+            this.txtTemplatePath.Size = new System.Drawing.Size(550, 26);
+            this.txtTemplatePath.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.lbLog);
+            this.groupBox2.Location = new System.Drawing.Point(3, 324);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(360, 306);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Log";
+            // 
+            // lbLog
+            // 
+            this.lbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLog.FormattingEnabled = true;
+            this.lbLog.ItemHeight = 16;
+            this.lbLog.Location = new System.Drawing.Point(3, 22);
+            this.lbLog.Name = "lbLog";
+            this.lbLog.Size = new System.Drawing.Size(354, 281);
+            this.lbLog.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.pictureBox1);
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(360, 315);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Label Preview";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(3, 22);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(354, 290);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // ucMachineControl
             // 
@@ -339,14 +341,15 @@
             this.Controls.Add(this.panel1);
             this.Name = "ucMachineControl";
             this.Size = new System.Drawing.Size(969, 644);
+            this.Load += new System.EventHandler(this.ucMachineControl_Load);
             this.panel1.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Diagnostics;
+﻿using ControlWorks.Bartender.Service;
 using ControlWorks.ConfigurationProvider;
-using ControlWorks.Bartender.Service;
+using log4net;
 using Seagull.BarTender.Print;
+using System;
+using System.Diagnostics;
+using System.Drawing;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ControlWorks.UI.BarTender
 {
     public partial class ucLabelSettings : UserControl
     {
+        private static readonly ILog _log = LogManager.GetLogger("FileLogger");
+
+        //private Engine engine = null; // The BarTender Print Engine
+        //private LabelFormatDocument format = null; // The currently open Format
+        private const string appName = "Label Print";
+
         public event EventHandler<UserControlEventArgs> Message;
         private bool _isRotated = false;
 
@@ -80,7 +81,6 @@ namespace ControlWorks.UI.BarTender
             lblLeftDistance.Text = $"{_currentBox.LabelToLeftCurrentInches.ToString("N2")} inches";
             lblRightDistance.Text = $"{_currentBox.LabelToRightCurrentInches.ToString("N2")} inches";
         }
-
 
         private void _labelService_LabelSizeChanged(object sender, LabelServiceEventArgs e)
         {
@@ -429,20 +429,20 @@ namespace ControlWorks.UI.BarTender
             openFileDialog1.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestImages");
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.Load(openFileDialog1.FileName);
+                var printers = new Printers();
+                var service = new BartenderService();
+                service.GetPreviewImage(openFileDialog1.FileName, printers.Default.PrinterName, pictureBox1.Width, pictureBox1.Height);
+                pictureBox1.Load(@"D:\ControlWorks\BarTender\PreviewPath\PrintPreview1.jpg");
+
             }
 
-            //var printers = new Printers();
 
             //openFileDialog1.Title = @"Select a label to open...";
             //if (openFileDialog1.ShowDialog() == DialogResult.OK)
             //{
             //    pictureBox1.Image = null;
 
-            //    var service = new BartenderService();
-            //    service.GetPreviewImage(openFileDialog1.FileName, printers.Default.PrinterName, pictureBox1.Width, pictureBox1.Height);
 
-            //    pictureBox1.Load(@"D:\ControlWorks\BarTender\PreviewPath\PrintPreview1.jpg");
 
             //}
         }
@@ -496,6 +496,47 @@ namespace ControlWorks.UI.BarTender
                     SetRotation(_currentBox.LabelSize);
                 }
             }
+        }
+
+        private void btnTestPrint_Click(object sender, EventArgs e)
+        {
+            //_log.Info("Printing a test label");
+            //lock (engine)
+            //{
+            //    var printers = new Printers();
+
+            //    bool success = true;
+
+            //    if (format.PrintSetup.SupportsIdenticalCopies)
+            //    {
+            //        format.PrintSetup.IdenticalCopiesOfLabel = 1;
+            //    }
+
+            //    if (success)
+            //    {
+            //        Cursor.Current = Cursors.WaitCursor;
+
+            //        format.PrintSetup.PrinterName = printers.Default.PrinterName;
+
+            //        Messages messages;
+            //        int waitForCompletionTimeout = 10000; // 10 seconds
+            //        Result result = format.Print(appName, waitForCompletionTimeout, out messages);
+            //        string messageString = "\n\nMessages:";
+
+            //        foreach (Seagull.BarTender.Print.Message message in messages)
+            //        {
+            //            messageString += "\n\n" + message.Text;
+            //        }
+
+            //        if (result == Result.Failure)
+            //        {
+            //            _log.Info($"Print Failure { messages }");
+            //            MessageBox.Show(this, "Print Failed" + messageString, appName);
+            //        }
+            //        else
+            //            MessageBox.Show(this, "Label was successfully sent to printer." + messageString, appName);
+            //    }
+            //}
         }
     }
 

@@ -40,5 +40,10 @@ namespace ControlWorks.UI.BarTender
                 Properties.Settings.Default.Save();
             }
         }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

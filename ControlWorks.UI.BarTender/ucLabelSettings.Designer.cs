@@ -65,6 +65,7 @@
             this.btnSaveTemplate = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnTestPrint = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlBox.SuspendLayout();
@@ -77,6 +78,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.btnTestPrint);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.btnChooseLabel);
             this.groupBox1.Controls.Add(this.cboLabelsPerBox);
@@ -482,6 +484,17 @@
             // 
             this.openFileDialog1.Filter = "Bartender Files (*.btw)|*.btw|All files (*.*)|*.*";
             // 
+            // btnTestPrint
+            // 
+            this.btnTestPrint.BackColor = System.Drawing.SystemColors.Control;
+            this.btnTestPrint.Location = new System.Drawing.Point(26, 463);
+            this.btnTestPrint.Name = "btnTestPrint";
+            this.btnTestPrint.Size = new System.Drawing.Size(120, 50);
+            this.btnTestPrint.TabIndex = 33;
+            this.btnTestPrint.Text = "Print Test";
+            this.btnTestPrint.UseVisualStyleBackColor = false;
+            this.btnTestPrint.Click += new System.EventHandler(this.btnTestPrint_Click);
+            // 
             // ucLabelSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -546,5 +559,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnChooseLabel;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Button btnTestPrint;
     }
 }

@@ -14,8 +14,6 @@ namespace ControlWorks.UI.BarTender
 {
     public partial class frmMain : Form
     {
-        private PviController _pvicontroller;
-
         private ucMachineControl _machineControl;
         private ucLabelSettings _labelSettings;
         private ucConfiguration _appConfiguration;
@@ -44,8 +42,6 @@ namespace ControlWorks.UI.BarTender
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            _pvicontroller = new PviController();
-            _pvicontroller.Start();
 
 
             _log.Info("Loading Main Form");

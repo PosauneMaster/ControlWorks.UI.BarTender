@@ -9,6 +9,8 @@ namespace ControlWorks.Pvi.Service
     {
         private ILog _log = LogManager.GetLogger("FileLogger");
 
+        public event EventHandler<CpuConnectEventArgs> CpuConnect;
+
         public BR.AN.PviServices.Service PviService { get; set; }
         public CpuManager CpuService { get; private set; }
 
@@ -29,8 +31,23 @@ namespace ControlWorks.Pvi.Service
             PviService = sender as BR.AN.PviServices.Service;
 
             var cpuService = new CpuManager(PviService);
+            cpuService.CpuConnect += CpuService_CpuConnect;
             cpuService.CreateCpu("Cpu1", "192.168.0.101");
 
+        }
+
+        protected void OnCpuConnect(CpuConnectEventArgs a)
+        {
+            var temp = CpuConnect;
+            if (temp != null)
+            {
+                temp(this, a);
+            }
+        }
+
+        private void CpuService_CpuConnect(object sender, CpuConnectEventArgs e)
+        {
+            OnCpuConnect(e);
         }
     }
 }

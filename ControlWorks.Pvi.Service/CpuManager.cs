@@ -1,10 +1,7 @@
-﻿using BR.AN.PviServices;
-using log4net;
+﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BR.AN.PviServices;
+using log4net;
 
 namespace ControlWorks.Pvi.Service
 {
@@ -14,7 +11,7 @@ namespace ControlWorks.Pvi.Service
         private readonly ILog _log = LogManager.GetLogger("FileLogger");
         private readonly byte _sourceStationId = 100;
         private BR.AN.PviServices.Service _service;
-
+        public event EventHandler<CpuConnectEventArgs> CpuConnect;
 
         public CpuManager(BR.AN.PviServices.Service service)
         {
@@ -73,7 +70,15 @@ namespace ControlWorks.Pvi.Service
             }
         }
 
-        private void cpu_Connected(object sender, PviEventArgs e)
+        private void OnCpuConnect(VariableManager manager)
+        {
+            var temp = CpuConnect;
+            if (temp != null)
+            {
+                temp(this, new CpuConnectEventArgs() { VariableManager = manager });
+            }
+        }
+    private void cpu_Connected(object sender, PviEventArgs e)
         {
             Cpu cpu = sender as Cpu;
 
@@ -82,7 +87,7 @@ namespace ControlWorks.Pvi.Service
                 _log.Info($"CpuManager.cpu_Connected Name={cpu.Name}");
 
                 var variableManager = new VariableManager(cpu);
-
+                OnCpuConnect(variableManager);
             }
         }
 
@@ -111,5 +116,11 @@ namespace ControlWorks.Pvi.Service
                 cpu.Disconnected -= cpu_Disconnected;
             }
         }
+      
+    }
+
+    public class CpuConnectEventArgs : EventArgs
+    {
+        public VariableManager VariableManager { get; set; } 
     }
 }

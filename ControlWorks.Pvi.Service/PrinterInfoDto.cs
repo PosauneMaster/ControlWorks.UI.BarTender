@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ControlWorks.Pvi.Service
+{
+    public class PrinterInfoDto : InternalBase
+    {
+        public int StartConveyor { get; set; }
+        public int StopConveyor { get; set; }
+        public int ResetConveyor { get; set; }
+        public int PrinterOnOff { get; set; }
+        public double SideLabelPosition { get; set; }
+        public int InfeedSpeed { get; set; }
+        public int PrinterConveyorSpeed { get; set; }
+        public string StatusText { get; set; }
+        public int LabelApplyFormat { get; set; }
+        public int NumberOfBoxes { get; set; }
+        public int NumberOfFrontLabels { get; set; }
+        public int NumberOfSideLabels { get; set; }
+        public int TotalLabelsApplied { get; set; }
+        public int ResetNumberOfBoxes { get; set; }
+        public int ResetNumberOfFrontLabels { get; set; }
+        public int ResetNumberOfSideLabels { get; set; }
+        public int ResetTotalLabelsApplied { get; set; }
+        public int ConyorsRunning { get; set; }
+        public int PrinterOnOk { get; set; }
+
+    }
+
+    public class InternalBase
+    {
+        public void SetProperty(string name, string value)
+        {
+            PropertyDescriptorCollection props = TypeDescriptor.GetProperties(this);
+            PropertyDescriptor prop = props[name];
+
+            if (prop.Converter.IsValid(value))
+            {
+                prop.SetValue(this, prop.Converter.ConvertFromInvariantString(value));
+            }
+        }
+    }
+
+}
