@@ -38,6 +38,7 @@
             // 
             // btnBTFilesLocation
             // 
+            this.btnBTFilesLocation.BackColor = System.Drawing.Color.Silver;
             this.btnBTFilesLocation.Location = new System.Drawing.Point(35, 81);
             this.btnBTFilesLocation.Name = "btnBTFilesLocation";
             this.btnBTFilesLocation.Size = new System.Drawing.Size(167, 23);
@@ -55,6 +56,7 @@
             // 
             // btnTemplateFiles
             // 
+            this.btnTemplateFiles.BackColor = System.Drawing.Color.Silver;
             this.btnTemplateFiles.Location = new System.Drawing.Point(35, 139);
             this.btnTemplateFiles.Name = "btnTemplateFiles";
             this.btnTemplateFiles.Size = new System.Drawing.Size(167, 23);
@@ -72,12 +74,13 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(739, 393);
+            this.btnExit.BackColor = System.Drawing.Color.Silver;
+            this.btnExit.Location = new System.Drawing.Point(774, 574);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(144, 51);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit Application";
-            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // ucConfiguration

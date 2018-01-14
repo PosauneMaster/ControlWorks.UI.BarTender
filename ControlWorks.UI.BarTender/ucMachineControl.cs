@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControlWorks.Pvi.Service;
+using System.IO;
 
 namespace ControlWorks.UI.BarTender
 {
@@ -15,6 +16,8 @@ namespace ControlWorks.UI.BarTender
     {
         private Color _defaultBackColor;
         private Color _defaultForeColor;
+        private TemplateSettings _currentTemplate;
+
 
         private PviController _pvicontroller;
         public ucMachineControl()
@@ -27,12 +30,12 @@ namespace ControlWorks.UI.BarTender
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtTemplatePath.Text = openFileDialog1.FileName;
-            }
-        }
 
-        public void Log(string message)
-        {
-            lbLog.Items.Add($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} - {message}");
+                var xml = File.ReadAllText(openFileDialog1.FileName);
+
+                _currentTemplate = TemplateSettings.CreateFromXml(xml);
+
+            }
         }
 
         private void ucMachineControl_Load(object sender, EventArgs e)
@@ -64,9 +67,16 @@ namespace ControlWorks.UI.BarTender
             }
             else
             {
-                var start = dto.StartConveyor;
-                var stop = dto.StopConveyor;
+                var start = dto.StartConveyor.HasValue ? dto.StartConveyor.Value.ToString() : String.Empty;
+                var stop = dto.StopConveyor.HasValue ? dto.StopConveyor.Value.ToString() : String.Empty;
                 txtStatus.Text = dto.StatusText;
+                txtInfeedSpeed.Text = dto.InfeedSpeed.HasValue ? dto.InfeedSpeed.Value.ToString() : String.Empty;
+                txtPrinterSpeed.Text = dto.PrinterConveyorSpeed.HasValue ? dto.PrinterConveyorSpeed.Value.ToString() : String.Empty;
+                txtBoxCount.Text = dto.NumberOfBoxes.HasValue ? dto.NumberOfBoxes.Value.ToString() : String.Empty;
+                txtFrontLabels.Text = dto.NumberOfFrontLabels.HasValue ? dto.NumberOfFrontLabels.Value.ToString() : String.Empty;
+                txtSideLabels.Text = dto.NumberOfSideLabels.HasValue ? dto.NumberOfSideLabels.Value.ToString() : String.Empty;
+                txtTotalLabels.Text = dto.TotalLabelsApplied.HasValue ? dto.TotalLabelsApplied.Value.ToString() : String.Empty;
+
             }
 
         }

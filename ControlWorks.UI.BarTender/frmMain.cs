@@ -59,8 +59,6 @@ namespace ControlWorks.UI.BarTender
             pnlLabelSettings.Visible = false;
             pnlConfiguration.Visible = false;
 
-            _machineControl.Log("Application Start");
-
         }
 
 
