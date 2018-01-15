@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
@@ -44,19 +45,28 @@
             this.pnlMachineControl = new System.Windows.Forms.Panel();
             this.pnlLabelSettings = new System.Windows.Forms.Panel();
             this.pnlConfiguration = new System.Windows.Forms.Panel();
+            this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
-            this.pnlLabelSettings.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 683);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 679);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1366, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1366, 26);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(67, 21);
+            this.lblStatus.Text = "STATUS";
             // 
             // toolStrip1
             // 
@@ -147,23 +157,23 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1366, 658);
+            this.panel1.Size = new System.Drawing.Size(1366, 654);
             this.panel1.TabIndex = 5;
             // 
             // pnlMachineControl
             // 
             this.pnlMachineControl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlMachineControl.Location = new System.Drawing.Point(1154, 0);
+            this.pnlMachineControl.Location = new System.Drawing.Point(2308, 0);
             this.pnlMachineControl.Name = "pnlMachineControl";
-            this.pnlMachineControl.Size = new System.Drawing.Size(1154, 658);
+            this.pnlMachineControl.Size = new System.Drawing.Size(1154, 654);
             this.pnlMachineControl.TabIndex = 5;
             // 
             // pnlLabelSettings
             // 
             this.pnlLabelSettings.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnlLabelSettings.Location = new System.Drawing.Point(0, 0);
+            this.pnlLabelSettings.Location = new System.Drawing.Point(1154, 0);
             this.pnlLabelSettings.Name = "pnlLabelSettings";
-            this.pnlLabelSettings.Size = new System.Drawing.Size(1154, 658);
+            this.pnlLabelSettings.Size = new System.Drawing.Size(1154, 654);
             this.pnlLabelSettings.TabIndex = 0;
             // 
             // pnlConfiguration
@@ -171,7 +181,7 @@
             this.pnlConfiguration.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlConfiguration.Location = new System.Drawing.Point(0, 0);
             this.pnlConfiguration.Name = "pnlConfiguration";
-            this.pnlConfiguration.Size = new System.Drawing.Size(1154, 658);
+            this.pnlConfiguration.Size = new System.Drawing.Size(1154, 654);
             this.pnlConfiguration.TabIndex = 0;
             // 
             // frmMain
@@ -190,10 +200,11 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BarTender Label Control System ";
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.pnlLabelSettings.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,5 +226,6 @@
         private System.Windows.Forms.Panel pnlMachineControl;
         private System.Windows.Forms.Panel pnlLabelSettings;
         private System.Windows.Forms.Panel pnlConfiguration;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }

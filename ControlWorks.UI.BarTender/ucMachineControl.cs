@@ -12,11 +12,25 @@ using System.IO;
 
 namespace ControlWorks.UI.BarTender
 {
-    public partial class ucMachineControl : UserControl
+    public partial class ucMachineControl : UserControl, INotifyPropertyChanged
     {
+        private string _status;
+        public string Status
+        {
+            get
+            {
+                return _status;
+            }
+            set
+            {
+                _status = value;
+                OnPropertyChanged("Status");
+            }
+        }
         private Color _defaultBackColor;
         private Color _defaultForeColor;
         private TemplateSettings _currentTemplate;
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
         private PviController _pvicontroller;
@@ -35,6 +49,16 @@ namespace ControlWorks.UI.BarTender
 
                 _currentTemplate = TemplateSettings.CreateFromXml(xml);
 
+                var service = new BartenderService();
+                var previewImagePath = service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
+
+                pictureBox1.ImageLocation = String.Empty;
+
+                var path = service.GetMessage(previewImagePath);
+                if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                {
+                    pictureBox1.ImageLocation = path;
+                }
             }
         }
 
@@ -70,6 +94,7 @@ namespace ControlWorks.UI.BarTender
                 var start = dto.StartConveyor.HasValue ? dto.StartConveyor.Value.ToString() : String.Empty;
                 var stop = dto.StopConveyor.HasValue ? dto.StopConveyor.Value.ToString() : String.Empty;
                 txtStatus.Text = dto.StatusText;
+                Status = dto.StatusText;
                 txtInfeedSpeed.Text = dto.InfeedSpeed.HasValue ? dto.InfeedSpeed.Value.ToString() : String.Empty;
                 txtPrinterSpeed.Text = dto.PrinterConveyorSpeed.HasValue ? dto.PrinterConveyorSpeed.Value.ToString() : String.Empty;
                 txtBoxCount.Text = dto.NumberOfBoxes.HasValue ? dto.NumberOfBoxes.Value.ToString() : String.Empty;
@@ -77,6 +102,14 @@ namespace ControlWorks.UI.BarTender
                 txtSideLabels.Text = dto.NumberOfSideLabels.HasValue ? dto.NumberOfSideLabels.Value.ToString() : String.Empty;
                 txtTotalLabels.Text = dto.TotalLabelsApplied.HasValue ? dto.TotalLabelsApplied.Value.ToString() : String.Empty;
 
+                if (dto.RefreshLabel.HasValue && _currentTemplate != null)
+                {
+                    if (dto.RefreshLabel.Value)
+                    {
+                        var service = new BartenderService();
+                        service.PrintFile(_currentTemplate.LabelLocation).ConfigureAwait(false);
+                    }
+                }
             }
 
         }
@@ -96,5 +129,12 @@ namespace ControlWorks.UI.BarTender
             btnStart.ForeColor = _defaultForeColor;
 
         }
+
+        protected virtual void OnPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+        }
+
     }
 }

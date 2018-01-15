@@ -9,25 +9,26 @@ namespace ControlWorks.Pvi.Service
 {
     public class PrinterInfoDto : InternalBase
     {
-        public int? StartConveyor { get; set; }
-        public int? StopConveyor { get; set; }
-        public int? ResetConveyor { get; set; }
-        public int? PrinterOnOff { get; set; }
+        public bool? StartConveyor { get; set; }
+        public bool? StopConveyor { get; set; }
+        public bool? ResetConveyor { get; set; }
+        public bool? PrinterOnOff { get; set; }
         public double? SideLabelPosition { get; set; }
         public int? InfeedSpeed { get; set; }
         public int? PrinterConveyorSpeed { get; set; }
         public string StatusText { get; set; }
-        public int? LabelApplyFormat { get; set; }
-        public int? NumberOfBoxes { get; set; }
-        public int? NumberOfFrontLabels { get; set; }
-        public int? NumberOfSideLabels { get; set; }
-        public int? TotalLabelsApplied { get; set; }
-        public int? ResetNumberOfBoxes { get; set; }
-        public int? ResetNumberOfFrontLabels { get; set; }
-        public int? ResetNumberOfSideLabels { get; set; }
-        public int? ResetTotalLabelsApplied { get; set; }
-        public int? ConyorsRunning { get; set; }
-        public int? PrinterOnOk { get; set; }
+        public bool? LabelApplyFormat { get; set; }
+        public bool? NumberOfBoxes { get; set; }
+        public bool? NumberOfFrontLabels { get; set; }
+        public bool? NumberOfSideLabels { get; set; }
+        public bool? TotalLabelsApplied { get; set; }
+        public bool? ResetNumberOfBoxes { get; set; }
+        public bool? ResetNumberOfFrontLabels { get; set; }
+        public bool? ResetNumberOfSideLabels { get; set; }
+        public bool? ResetTotalLabelsApplied { get; set; }
+        public bool? ConyorsRunning { get; set; }
+        public bool? PrinterOnOk { get; set; }
+        public bool? RefreshLabel { get; set; }
 
     }
 

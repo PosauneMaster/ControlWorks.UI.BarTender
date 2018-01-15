@@ -52,6 +52,8 @@ namespace ControlWorks.UI.BarTender
             _labelSettings = new ucLabelSettings();
             _appConfiguration = new ucConfiguration();
 
+            _machineControl.PropertyChanged += _machineControl_PropertyChanged;
+
 
             pnlMachineControl.Controls.Add(_machineControl);
             pnlLabelSettings.Controls.Add(_labelSettings);
@@ -61,6 +63,13 @@ namespace ControlWorks.UI.BarTender
 
         }
 
+        private void _machineControl_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Status")
+            {
+                lblStatus.Text = _machineControl.Status;
+            }
+        }
 
         private void toolStrip1_Resize(object sender, EventArgs e)
         {

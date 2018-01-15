@@ -69,6 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BartenderService.cs" />
     <Compile Include="BoxSettings.cs" />
     <Compile Include="ControlExtensions.cs" />
     <Compile Include="CurrentBox.cs" />

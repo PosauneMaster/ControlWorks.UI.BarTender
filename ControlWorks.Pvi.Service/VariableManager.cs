@@ -50,6 +50,8 @@ namespace ControlWorks.Pvi.Service
             CreateVariable(_cpu, "PVI.Command[1]"); //Stop Conveyor
             CreateVariable(_cpu, "PVI.Command[2]"); //Reset Conveyor
             CreateVariable(_cpu, "PVI.Command[3]"); //Printer ON/OFF
+            CreateVariable(_cpu, "PVI.Command[4]"); //RefreshLabel
+
 
             CreateVariable(_cpu, "PVI.Counter[0]"); //Number of Boxes
             CreateVariable(_cpu, "PVI.Counter[1]"); //Number of Front Labels
@@ -105,6 +107,8 @@ namespace ControlWorks.Pvi.Service
             }
         }
 
+
+
     private void Variable_ValueChanged(object sender, BR.AN.PviServices.VariableEventArgs e)
         {
             Variable v = sender as Variable;
@@ -131,10 +135,16 @@ namespace ControlWorks.Pvi.Service
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfFrontLabels), Variables["PVI.Command[1]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfSideLabels), Variables["PVI.Command[2]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetTotalLabelsApplied), Variables["PVI.Command[3]"].Value);
+                printerInfo.SetProperty(nameof(printerInfo.RefreshLabel), Variables["PVI.Command[4]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ConyorsRunning), Variables["PVI.Status[0]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.PrinterOnOk), Variables["PVI.Status[1]"].Value);
 
                 OnVariableChanged(printerInfo);
+
+                if (v.Name == "PVI.Command[4]")
+                {
+                    SetVariable(v.Name, 0);
+                }
             }
         }
     }

@@ -367,7 +367,7 @@ namespace ControlWorks.UI.BarTender
                 LabelPositon = cboLabelPosition.Text,
                 LeftOffset = lblLeftDistance.Text,
                 RightOffset = lblRightDistance.Text,
-                LabelLocation = pictureBox1.ImageLocation
+                LabelLocation = _selectedLabelPath
             };
 
             template.CurrentBox = new BoxSettings()
@@ -388,7 +388,7 @@ namespace ControlWorks.UI.BarTender
 
     };
 
-            var directory = @"D:\ControlWorks\BarTender\Settings";
+            var directory = Properties.Settings.Default.TemplateFilesLocation;
 
             if (!Directory.Exists(directory))
             {
@@ -424,23 +424,6 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
-        private async Task<string> GetPreviewFile(string filename)
-        {
-            var url =
-                $@"http://localhost:9001/api/Print/GetPreview/{pictureBox1.Width}/{pictureBox1.Height}/{filename}";
-            var client = new HttpClient();
-            HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
-
-            var r = response.Content.ReadAsStringAsync();
-
-            return r.Result;
-        }
-
-        private string GetMessage(string message)
-        {
-            dynamic d = JsonConvert.DeserializeObject<JObject>(message);
-            return d.Message;
-        }
 
         private void btnChooseLabel_Click(object sender, EventArgs e)
         {
@@ -449,16 +432,25 @@ namespace ControlWorks.UI.BarTender
             openFileDialog1.InitialDirectory = Properties.Settings.Default.BartenderFilesLocation;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                var b = sender as Button;
+                if (b != null)
+                {
+                    b.Enabled = false;
+                }
                 pictureBox1.ImageLocation = String.Empty;
                 _selectedLabelPath = openFileDialog1.FileName;
-                var result = GetPreviewFile(openFileDialog1.FileName);
+                var service = new BartenderService();
+                var previewImagePath = service.GetPreviewFile(openFileDialog1.FileName, pictureBox1.Width, pictureBox1.Height).Result;               
 
-                var previewImagePath = GetPreviewFile(openFileDialog1.FileName).Result;
-
-                var path = GetMessage(previewImagePath);
+                var path = service.GetMessage(previewImagePath);
                 if (!String.IsNullOrEmpty(path) && File.Exists(path))
                 {
                     pictureBox1.ImageLocation = path;
+                }
+
+                if (b != null)
+                {
+                    b.Enabled = true;
                 }
             }
         }
@@ -514,32 +506,24 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
-
-        private async Task<string> PrintFile(string filename)
-        {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri("http://localhost:9001"); ///api/Print/Print/{filename}";
-                var content = new FormUrlEncodedContent(new[]
-                {
-                    new KeyValuePair<string, string>("", filename)
-                });
-                var result = await client.PostAsync("api/Print/SendPrint", content).ConfigureAwait(false);
-
-                var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                return resultContent;
-
-            }
-
-        }
-
-
         private void btnTestPrint_Click(object sender, EventArgs e)
         {
             if (!String.IsNullOrEmpty(_selectedLabelPath))
             {
-                var result = PrintFile(_selectedLabelPath);
+                var b = sender as Button;
+                if (b != null)
+                {
+                    b.Enabled = false;
+                }
+
+                var service = new BartenderService();
+                service.PrintFile(_selectedLabelPath).ConfigureAwait(false);
+
+                if (b != null)
+                {
+                    b.Enabled = true;
+                }
+
             }
         }
     }
