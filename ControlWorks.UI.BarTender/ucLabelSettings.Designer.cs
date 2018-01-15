@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucLabelSettings));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnTestPrint = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnChooseLabel = new System.Windows.Forms.Button();
             this.cboLabelsPerBox = new System.Windows.Forms.ComboBox();
@@ -65,7 +66,6 @@
             this.btnSaveTemplate = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btnTestPrint = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlBox.SuspendLayout();
@@ -103,6 +103,17 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
+            // 
+            // btnTestPrint
+            // 
+            this.btnTestPrint.BackColor = System.Drawing.SystemColors.Control;
+            this.btnTestPrint.Location = new System.Drawing.Point(22, 463);
+            this.btnTestPrint.Name = "btnTestPrint";
+            this.btnTestPrint.Size = new System.Drawing.Size(120, 50);
+            this.btnTestPrint.TabIndex = 33;
+            this.btnTestPrint.Text = "Print Test";
+            this.btnTestPrint.UseVisualStyleBackColor = false;
+            this.btnTestPrint.Click += new System.EventHandler(this.btnTestPrint_Click);
             // 
             // pictureBox1
             // 
@@ -483,17 +494,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.Filter = "Bartender Files (*.btw)|*.btw|All files (*.*)|*.*";
-            // 
-            // btnTestPrint
-            // 
-            this.btnTestPrint.BackColor = System.Drawing.SystemColors.Control;
-            this.btnTestPrint.Location = new System.Drawing.Point(26, 463);
-            this.btnTestPrint.Name = "btnTestPrint";
-            this.btnTestPrint.Size = new System.Drawing.Size(120, 50);
-            this.btnTestPrint.TabIndex = 33;
-            this.btnTestPrint.Text = "Print Test";
-            this.btnTestPrint.UseVisualStyleBackColor = false;
-            this.btnTestPrint.Click += new System.EventHandler(this.btnTestPrint_Click);
             // 
             // ucLabelSettings
             // 

@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="BartenderFilesLocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">D:\ControlWorks\BarTender\Documents</Value>
+      <Value Profile="(Default)">C:\Data\ControlWorks\BarTender\Documents</Value>
     </Setting>
     <Setting Name="TemplateFilesLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\ControlWorks\BarTender\Settings</Value>

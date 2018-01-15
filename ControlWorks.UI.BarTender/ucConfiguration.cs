@@ -27,8 +27,9 @@ namespace ControlWorks.UI.BarTender
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                Properties.Settings.Default.BartenderFilesLocation = txtBtFilesLocation.Text;
+                Properties.Settings.Default.BartenderFilesLocation = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.Save();
+                txtBtFilesLocation.Text = Properties.Settings.Default.BartenderFilesLocation;
             }
         }
 
@@ -36,8 +37,9 @@ namespace ControlWorks.UI.BarTender
         {
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
-                Properties.Settings.Default.TemplateFilesLocation = txtTemplateFilesLocation.Text;
+                Properties.Settings.Default.TemplateFilesLocation = folderBrowserDialog1.SelectedPath;
                 Properties.Settings.Default.Save();
+                txtTemplateFilesLocation.Text = Properties.Settings.Default.TemplateFilesLocation;
             }
         }
 

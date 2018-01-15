@@ -39,10 +39,7 @@ namespace ControlWorks.Pvi.Service
         protected void OnCpuConnect(CpuConnectEventArgs a)
         {
             var temp = CpuConnect;
-            if (temp != null)
-            {
-                temp(this, a);
-            }
+            temp?.Invoke(this, a);
         }
 
         private void CpuService_CpuConnect(object sender, CpuConnectEventArgs e)

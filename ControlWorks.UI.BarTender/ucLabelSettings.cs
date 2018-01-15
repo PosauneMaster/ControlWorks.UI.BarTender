@@ -1,12 +1,15 @@
-﻿using ControlWorks.Bartender.Service;
-using ControlWorks.ConfigurationProvider;
+﻿using ControlWorks.ConfigurationProvider;
 using log4net;
-using Seagull.BarTender.Print;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ControlWorks.UI.BarTender
 {
@@ -16,7 +19,6 @@ namespace ControlWorks.UI.BarTender
 
         //private Engine engine = null; // The BarTender Print Engine
         //private LabelFormatDocument format = null; // The currently open Format
-        private const string appName = "Label Print";
 
         public event EventHandler<UserControlEventArgs> Message;
         private bool _isRotated = false;
@@ -32,6 +34,8 @@ namespace ControlWorks.UI.BarTender
         private LabelService _labelService;
 
         private CurrentBox _currentBox;
+
+        private string _selectedLabelPath = null;
 
 
         public ucLabelSettings()
@@ -420,31 +424,43 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+        private async Task<string> GetPreviewFile(string filename)
+        {
+            var url =
+                $@"http://localhost:9001/api/Print/GetPreview/{pictureBox1.Width}/{pictureBox1.Height}/{filename}";
+            var client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
+
+            var r = response.Content.ReadAsStringAsync();
+
+            return r.Result;
+        }
+
+        private string GetMessage(string message)
+        {
+            dynamic d = JsonConvert.DeserializeObject<JObject>(message);
+            return d.Message;
+        }
+
         private void btnChooseLabel_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "Bartender Files(*.btw)| *.btw | All files(*.*) | *.*";
-
             openFileDialog1.Title = @"Select a label to open...";
 
-            openFileDialog1.InitialDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestImages");
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.BartenderFilesLocation;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                var printers = new Printers();
-                var service = new BartenderService();
-                service.GetPreviewImage(openFileDialog1.FileName, printers.Default.PrinterName, pictureBox1.Width, pictureBox1.Height);
-                pictureBox1.Load(@"D:\ControlWorks\BarTender\PreviewPath\PrintPreview1.jpg");
+                pictureBox1.ImageLocation = String.Empty;
+                _selectedLabelPath = openFileDialog1.FileName;
+                var result = GetPreviewFile(openFileDialog1.FileName);
 
+                var previewImagePath = GetPreviewFile(openFileDialog1.FileName).Result;
+
+                var path = GetMessage(previewImagePath);
+                if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                {
+                    pictureBox1.ImageLocation = path;
+                }
             }
-
-
-            //openFileDialog1.Title = @"Select a label to open...";
-            //if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    pictureBox1.Image = null;
-
-
-
-            //}
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -498,45 +514,33 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+
+        private async Task<string> PrintFile(string filename)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:9001"); ///api/Print/Print/{filename}";
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("", filename)
+                });
+                var result = await client.PostAsync("api/Print/SendPrint", content).ConfigureAwait(false);
+
+                var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                return resultContent;
+
+            }
+
+        }
+
+
         private void btnTestPrint_Click(object sender, EventArgs e)
         {
-            //_log.Info("Printing a test label");
-            //lock (engine)
-            //{
-            //    var printers = new Printers();
-
-            //    bool success = true;
-
-            //    if (format.PrintSetup.SupportsIdenticalCopies)
-            //    {
-            //        format.PrintSetup.IdenticalCopiesOfLabel = 1;
-            //    }
-
-            //    if (success)
-            //    {
-            //        Cursor.Current = Cursors.WaitCursor;
-
-            //        format.PrintSetup.PrinterName = printers.Default.PrinterName;
-
-            //        Messages messages;
-            //        int waitForCompletionTimeout = 10000; // 10 seconds
-            //        Result result = format.Print(appName, waitForCompletionTimeout, out messages);
-            //        string messageString = "\n\nMessages:";
-
-            //        foreach (Seagull.BarTender.Print.Message message in messages)
-            //        {
-            //            messageString += "\n\n" + message.Text;
-            //        }
-
-            //        if (result == Result.Failure)
-            //        {
-            //            _log.Info($"Print Failure { messages }");
-            //            MessageBox.Show(this, "Print Failed" + messageString, appName);
-            //        }
-            //        else
-            //            MessageBox.Show(this, "Label was successfully sent to printer." + messageString, appName);
-            //    }
-            //}
+            if (!String.IsNullOrEmpty(_selectedLabelPath))
+            {
+                var result = PrintFile(_selectedLabelPath);
+            }
         }
     }
 

@@ -27,10 +27,7 @@ namespace ControlWorks.UI.BarTender
         private void _application_VariablesChanged(object sender, VariableEventArgs e)
         {
             var temp = VariablesChanged;
-            if (temp != null)
-            {
-                temp(this, e);
-            }
+            temp?.Invoke(this, e);
         }
 
         public string GetServiceName()

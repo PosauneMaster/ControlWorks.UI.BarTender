@@ -15,7 +15,7 @@ namespace ControlWorks.Pvi.Service
 
     public class PviApplication : IPivApplication
     {
-        private ILog _log = LogManager.GetLogger("FileLogger");
+        private readonly ILog _log = LogManager.GetLogger("FileLogger");
 
         public event EventHandler<VariableEventArgs> VariablesChanged;
 
@@ -54,10 +54,7 @@ namespace ControlWorks.Pvi.Service
         private void _variableManager_VariablesChanged(object sender, VariableEventArgs e)
         {
             var temp = VariablesChanged;
-            if (temp != null)
-            {
-                temp(this, e);
-            }
+            temp?.Invoke(this, e);
         }
 
         public string GetServiceName()
