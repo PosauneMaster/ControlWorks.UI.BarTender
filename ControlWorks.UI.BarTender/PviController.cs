@@ -20,8 +20,8 @@ namespace ControlWorks.UI.BarTender
 
         public void Start()
         {
-            _application.Connect();
-            _application.VariablesChanged += _application_VariablesChanged;
+            //_application.Connect();
+            //_application.VariablesChanged += _application_VariablesChanged;
         }
 
         private void _application_VariablesChanged(object sender, VariableEventArgs e)

@@ -8,5 +8,11 @@
     <Setting Name="TemplateFilesLocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">D:\ControlWorks\BarTender\Settings</Value>
     </Setting>
+    <Setting Name="DefaultBoxHeight" Type="System.String" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
+    <Setting Name="DefaultBoxWidth" Type="System.String" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

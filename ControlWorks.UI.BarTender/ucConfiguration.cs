@@ -47,5 +47,29 @@ namespace ControlWorks.UI.BarTender
         {
             Application.Exit();
         }
+
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (sender is TextBox txt)
+            {
+                var frm = new frmNumpad(txt);
+                frm.SetLocation(txt.Right, txt.Top);
+
+                frm.FormClosed += (s, ea) =>
+                {
+                    Properties.Settings.Default.DefaultBoxHeight = txtDefaultBoxHeight.Text;
+                    Properties.Settings.Default.DefaultBoxWidth = txtDefaultBoxWidth.Text;
+                    Properties.Settings.Default.Save();
+                };
+
+                frm.Show();
+            }
+        }
+
+        private void ucConfiguration_VisibleChanged(object sender, EventArgs e)
+        {
+            txtDefaultBoxHeight.Text = Properties.Settings.Default.DefaultBoxHeight;
+            txtDefaultBoxWidth.Text = Properties.Settings.Default.DefaultBoxWidth;
+        }
     }
 }
