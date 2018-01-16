@@ -11,8 +11,9 @@ namespace ControlWorks.UI.BarTender
     public class TemplateSettings
     {
         public string TemplateName { get; set; }
-        public string LablesPerBox { get; set; }
-        public string ConveyorSpeed { get; set; }
+        public string LabelPlacement { get; set; }
+        public string InfeedSpeed { get; set; }
+        public string PrinterSpeed { get; set; }
         public string BoxHeight {get; set;}
         public string BoxWidth { get; set; }
         public string LabelSize { get; set; }

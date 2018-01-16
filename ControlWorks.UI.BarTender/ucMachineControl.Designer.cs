@@ -42,8 +42,6 @@
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.cboLabelsPerBox = new System.Windows.Forms.ComboBox();
-            this.txtTemplateName = new System.Windows.Forms.TextBox();
-            this.txtJobId = new System.Windows.Forms.TextBox();
             this.txtJobStartTime = new System.Windows.Forms.TextBox();
             this.txtBoxCount = new System.Windows.Forms.TextBox();
             this.txtInfeedSpeed = new System.Windows.Forms.TextBox();
@@ -51,20 +49,15 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnLoadTemplate = new System.Windows.Forms.Button();
             this.txtTemplatePath = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtStatus = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -73,7 +66,6 @@
             // 
             this.panel1.Controls.Add(this.groupBox4);
             this.panel1.Controls.Add(this.groupBox3);
-            this.panel1.Controls.Add(this.groupBox2);
             this.panel1.Controls.Add(this.groupBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -95,8 +87,6 @@
             this.groupBox4.Controls.Add(this.btnStop);
             this.groupBox4.Controls.Add(this.btnStart);
             this.groupBox4.Controls.Add(this.cboLabelsPerBox);
-            this.groupBox4.Controls.Add(this.txtTemplateName);
-            this.groupBox4.Controls.Add(this.txtJobId);
             this.groupBox4.Controls.Add(this.txtJobStartTime);
             this.groupBox4.Controls.Add(this.txtBoxCount);
             this.groupBox4.Controls.Add(this.txtInfeedSpeed);
@@ -104,11 +94,9 @@
             this.groupBox4.Controls.Add(this.label5);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Controls.Add(this.label2);
-            this.groupBox4.Controls.Add(this.label1);
-            this.groupBox4.Location = new System.Drawing.Point(369, 218);
+            this.groupBox4.Location = new System.Drawing.Point(369, 189);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(584, 409);
+            this.groupBox4.Size = new System.Drawing.Size(584, 438);
             this.groupBox4.TabIndex = 3;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "JobDetails";
@@ -180,6 +168,7 @@
             this.txtPrinterSpeed.Name = "txtPrinterSpeed";
             this.txtPrinterSpeed.Size = new System.Drawing.Size(180, 28);
             this.txtPrinterSpeed.TabIndex = 37;
+            this.txtPrinterSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // label6
             // 
@@ -224,26 +213,6 @@
             this.cboLabelsPerBox.Size = new System.Drawing.Size(180, 28);
             this.cboLabelsPerBox.TabIndex = 33;
             // 
-            // txtTemplateName
-            // 
-            this.txtTemplateName.BackColor = System.Drawing.Color.White;
-            this.txtTemplateName.Location = new System.Drawing.Point(193, 31);
-            this.txtTemplateName.Multiline = true;
-            this.txtTemplateName.Name = "txtTemplateName";
-            this.txtTemplateName.ReadOnly = true;
-            this.txtTemplateName.Size = new System.Drawing.Size(180, 28);
-            this.txtTemplateName.TabIndex = 32;
-            // 
-            // txtJobId
-            // 
-            this.txtJobId.BackColor = System.Drawing.Color.White;
-            this.txtJobId.Location = new System.Drawing.Point(193, 69);
-            this.txtJobId.Multiline = true;
-            this.txtJobId.Name = "txtJobId";
-            this.txtJobId.ReadOnly = true;
-            this.txtJobId.Size = new System.Drawing.Size(180, 28);
-            this.txtJobId.TabIndex = 31;
-            // 
             // txtJobStartTime
             // 
             this.txtJobStartTime.BackColor = System.Drawing.Color.White;
@@ -272,6 +241,7 @@
             this.txtInfeedSpeed.Name = "txtInfeedSpeed";
             this.txtInfeedSpeed.Size = new System.Drawing.Size(180, 28);
             this.txtInfeedSpeed.TabIndex = 27;
+            this.txtInfeedSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // label14
             // 
@@ -309,31 +279,13 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "Job Start Time:";
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 72);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 20);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "Job Id:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 34);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 20);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Template Name:";
-            // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.btnLoadTemplate);
             this.groupBox3.Controls.Add(this.txtTemplatePath);
             this.groupBox3.Location = new System.Drawing.Point(369, 3);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(584, 196);
+            this.groupBox3.Size = new System.Drawing.Size(584, 180);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Template Details";
@@ -357,27 +309,6 @@
             this.txtTemplatePath.Name = "txtTemplatePath";
             this.txtTemplatePath.Size = new System.Drawing.Size(550, 26);
             this.txtTemplatePath.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.txtStatus);
-            this.groupBox2.Location = new System.Drawing.Point(3, 324);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(360, 306);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Status";
-            // 
-            // txtStatus
-            // 
-            this.txtStatus.BackColor = System.Drawing.Color.White;
-            this.txtStatus.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtStatus.Location = new System.Drawing.Point(3, 22);
-            this.txtStatus.Multiline = true;
-            this.txtStatus.Name = "txtStatus";
-            this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(354, 281);
-            this.txtStatus.TabIndex = 28;
             // 
             // groupBox1
             // 
@@ -415,8 +346,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -426,7 +355,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -435,18 +363,13 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.ComboBox cboLabelsPerBox;
-        private System.Windows.Forms.TextBox txtTemplateName;
-        private System.Windows.Forms.TextBox txtJobId;
         private System.Windows.Forms.TextBox txtJobStartTime;
         private System.Windows.Forms.TextBox txtBoxCount;
-        private System.Windows.Forms.TextBox txtStatus;
         private System.Windows.Forms.TextBox txtInfeedSpeed;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.TextBox txtPrinterSpeed;

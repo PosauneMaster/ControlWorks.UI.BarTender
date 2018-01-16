@@ -54,7 +54,7 @@ namespace ControlWorks.UI.BarTender
 
         private void Initialize()
         {
-            txtConveyorSpeed.Text = String.Empty;
+            txtInfeedSpeed.Text = String.Empty;
 
             txtHeight.Text = "12";
             txtWidth.Text = "12";
@@ -77,7 +77,6 @@ namespace ControlWorks.UI.BarTender
             cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
             cboLabelPosition.SelectedIndex = 2;
 
-            cboLabelsPerBox.SelectedIndex = 0;
         }
 
         private void _currentBox_LabelMoved(object sender, CurrentBoxEventArgs e)
@@ -259,23 +258,16 @@ namespace ControlWorks.UI.BarTender
 
         private void OnMouseUp(object sender, MouseEventArgs e)
         {
-            TextBox txt = sender as TextBox;
-
-            if (txt != null)
+            if (sender is TextBox txt)
             {
                 var frm = new frmNumpad(txt);
+                frm.SetLocation(txt.Right, txt.Top);
+
                 frm.FormClosed += (s, ea) =>
                 {
                     SetCurrentBox();
                     SetLableDistance();
                 };
-
-                Point location = txt.PointToScreen(Point.Empty);
-
-                var x = location.X - frm.Width / 2;
-                var y = location.Y + 30;
-
-                frm.Location = new Point(x, y);
 
                 frm.Show();
             }
@@ -359,14 +351,15 @@ namespace ControlWorks.UI.BarTender
             var template = new TemplateSettings()
             {
                 TemplateName = txtTemplateName.Text,
-                LablesPerBox = cboLabelsPerBox.Text,
-                ConveyorSpeed = txtConveyorSpeed.Text,
+                LabelPlacement = cboLabelPlacement.Text,
+                InfeedSpeed = txtInfeedSpeed.Text,
+                PrinterSpeed = txtPrinterSpeed.Text,
                 BoxHeight = txtHeight.Text,
                 BoxWidth = txtWidth.Text,
                 LabelSize = cboLabelSize.Text,
                 LabelPositon = cboLabelPosition.Text,
-                LeftOffset = lblLeftDistance.Text,
-                RightOffset = lblRightDistance.Text,
+                LeftOffset = lblLeftDistance.Text.Replace(" inches", String.Empty),
+                RightOffset = lblRightDistance.Text.Replace(" inches", String.Empty),
                 LabelLocation = _selectedLabelPath
             };
 
@@ -388,30 +381,42 @@ namespace ControlWorks.UI.BarTender
 
     };
 
-            var directory = Properties.Settings.Default.TemplateFilesLocation;
+            SaveTemplate(template);
+        }
 
-            if (!Directory.Exists(directory))
+        private void SaveTemplate(TemplateSettings template)
+        {
+            try
             {
-                Directory.CreateDirectory(directory);
+                var directory = Properties.Settings.Default.TemplateFilesLocation;
+
+                if (!Directory.Exists(directory))
+                {
+                    Directory.CreateDirectory(directory);
+                }
+
+                var filename = Path.Combine(directory, template.TemplateName);
+
+                var templatefilename = filename;
+
+                var index = 0;
+                while (File.Exists(templatefilename))
+                {
+                    index++;
+
+                    if (index > 100000) break;
+
+                    var f = $"{template.TemplateName.Replace(".xml", String.Empty)}({index}).xml";
+                    templatefilename = Path.Combine(directory, f);
+                }
+
+                File.WriteAllText(templatefilename, template.ToXml());
             }
-
-            var filename = Path.Combine(directory, template.TemplateName);
-
-            var templatefilename = filename;
-
-            var index = 0;
-            while (File.Exists(templatefilename))
+            catch (Exception e)
             {
-                index++;
-
-                if (index > 100000) break;
-
-                var f = $"{template.TemplateName.Replace(".xml", String.Empty)}({index}).xml";
-                templatefilename = Path.Combine(directory, f);
-
+                _log.Error(e.Message, e);
+                MessageBox.Show("Error trying to save file.", "Save Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            File.WriteAllText(templatefilename, template.ToXml());
         }
 
         private void OnComboboxClicked(object sender, EventArgs e)
@@ -433,24 +438,38 @@ namespace ControlWorks.UI.BarTender
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var b = sender as Button;
-                if (b != null)
-                {
-                    b.Enabled = false;
-                }
-                pictureBox1.ImageLocation = String.Empty;
-                _selectedLabelPath = openFileDialog1.FileName;
-                var service = new BartenderService();
-                var previewImagePath = service.GetPreviewFile(openFileDialog1.FileName, pictureBox1.Width, pictureBox1.Height).Result;               
 
-                var path = service.GetMessage(previewImagePath);
-                if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                try
                 {
-                    pictureBox1.ImageLocation = path;
-                }
+                    if (b != null)
+                    {
+                        b.Enabled = false;
+                    }
 
-                if (b != null)
+                    pictureBox1.ImageLocation = String.Empty;
+                    _selectedLabelPath = openFileDialog1.FileName;
+                    var service = new BartenderService();
+                    var previewImagePath = service
+                        .GetPreviewFile(openFileDialog1.FileName, pictureBox1.Width, pictureBox1.Height).Result;
+
+                    var path = service.GetMessage(previewImagePath);
+                    if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                    {
+                        pictureBox1.ImageLocation = path;
+                    }
+
+                }
+                catch (Exception ex)
                 {
-                    b.Enabled = true;
+                    _log.Error(ex.Message, ex);
+                    MessageBox.Show("Error trying to preview file.", "Preview Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                finally
+                {
+                    if (b != null)
+                    {
+                        b.Enabled = true;
+                    }
                 }
             }
         }
@@ -462,16 +481,17 @@ namespace ControlWorks.UI.BarTender
 
         private void button2_Click(object sender, EventArgs e)
         {
-
-            openFileDialog1.Filter = "Template Files(*.xml)| *.xml | All files(*.*) | *.*";
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.TemplateFilesLocation;
+            openFileDialog1.Filter = "Template Files (*.xml) | *.xml | All files(*.*) | *.*";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var xml = File.ReadAllText(openFileDialog1.FileName);
                 var template = TemplateSettings.CreateFromXml(xml);
 
                 txtTemplateName.Text = template.TemplateName;
-                cboLabelsPerBox.Text = template.LablesPerBox;
-                txtConveyorSpeed.Text = template.ConveyorSpeed;
+                txtInfeedSpeed.Text = template.InfeedSpeed;
+                txtPrinterSpeed.Text = template.PrinterSpeed;
+                cboLabelPlacement.Text = template.LabelPlacement;
                 txtHeight.Text = template.BoxHeight;
                 txtWidth.Text = template.BoxWidth;
                 cboLabelSize.Text = template.LabelSize;
@@ -524,6 +544,21 @@ namespace ControlWorks.UI.BarTender
                     b.Enabled = true;
                 }
 
+            }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (sender is ComboBox cb)
+            {
+                if (cb.Text == "Front and Side")
+                {
+                    txtLabelsPerBox.Text = "2";
+                }
+                else
+                {
+                    txtLabelsPerBox.Text = "1";
+                }
             }
         }
     }

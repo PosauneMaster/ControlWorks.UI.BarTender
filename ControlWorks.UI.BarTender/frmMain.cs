@@ -100,12 +100,11 @@ namespace ControlWorks.UI.BarTender
 
         private void OnMouseUp(object sender, MouseEventArgs e)
         {
-            TextBox txt = sender as TextBox;
-
-            if (txt != null)
+            if (sender is TextBox txt)
             {
-                var frm = new frmNumpad(txt);
-                frm.MaxValue = 100.00M;
+                var frm = new frmNumpad(txt) {MaxValue = 100.00M};
+                frm.SetLocation(txt.Right, txt.Top);
+
 
                 Point location = txt.PointToScreen(Point.Empty);
 

@@ -1,26 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ControlWorks.Pvi.Service;
+using log4net;
+using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ControlWorks.Pvi.Service;
 using System.IO;
+using System.Windows.Forms;
 
 namespace ControlWorks.UI.BarTender
 {
     public partial class ucMachineControl : UserControl, INotifyPropertyChanged
     {
+
+        private static readonly ILog _log = LogManager.GetLogger("FileLogger");
+
         private string _status;
         public string Status
         {
-            get
-            {
-                return _status;
-            }
+            get => _status;
             set
             {
                 _status = value;
@@ -43,21 +39,29 @@ namespace ControlWorks.UI.BarTender
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                txtTemplatePath.Text = openFileDialog1.FileName;
-
-                var xml = File.ReadAllText(openFileDialog1.FileName);
-
-                _currentTemplate = TemplateSettings.CreateFromXml(xml);
-
-                var service = new BartenderService();
-                var previewImagePath = service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
-
-                pictureBox1.ImageLocation = String.Empty;
-
-                var path = service.GetMessage(previewImagePath);
-                if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                try
                 {
-                    pictureBox1.ImageLocation = path;
+                    txtTemplatePath.Text = openFileDialog1.FileName;
+
+                    var xml = File.ReadAllText(openFileDialog1.FileName);
+
+                    _currentTemplate = TemplateSettings.CreateFromXml(xml);
+
+                    var service = new BartenderService();
+                    var previewImagePath = service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
+
+                    pictureBox1.ImageLocation = String.Empty;
+
+                    var path = service.GetMessage(previewImagePath);
+                    if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                    {
+                        pictureBox1.ImageLocation = path;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex.Message, ex);
+                    MessageBox.Show("Error trying to preview file.", "Preview Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -91,16 +95,13 @@ namespace ControlWorks.UI.BarTender
             }
             else
             {
-                var start = dto.StartConveyor.HasValue ? dto.StartConveyor.Value.ToString() : String.Empty;
-                var stop = dto.StopConveyor.HasValue ? dto.StopConveyor.Value.ToString() : String.Empty;
-                txtStatus.Text = dto.StatusText;
                 Status = dto.StatusText;
-                txtInfeedSpeed.Text = dto.InfeedSpeed.HasValue ? dto.InfeedSpeed.Value.ToString() : String.Empty;
-                txtPrinterSpeed.Text = dto.PrinterConveyorSpeed.HasValue ? dto.PrinterConveyorSpeed.Value.ToString() : String.Empty;
-                txtBoxCount.Text = dto.NumberOfBoxes.HasValue ? dto.NumberOfBoxes.Value.ToString() : String.Empty;
-                txtFrontLabels.Text = dto.NumberOfFrontLabels.HasValue ? dto.NumberOfFrontLabels.Value.ToString() : String.Empty;
-                txtSideLabels.Text = dto.NumberOfSideLabels.HasValue ? dto.NumberOfSideLabels.Value.ToString() : String.Empty;
-                txtTotalLabels.Text = dto.TotalLabelsApplied.HasValue ? dto.TotalLabelsApplied.Value.ToString() : String.Empty;
+                txtInfeedSpeed.Text = dto.InfeedSpeed?.ToString() ?? String.Empty;
+                txtPrinterSpeed.Text = dto.PrinterConveyorSpeed?.ToString() ?? String.Empty;
+                txtBoxCount.Text = dto.NumberOfBoxes?.ToString() ?? String.Empty;
+                txtFrontLabels.Text = dto.NumberOfFrontLabels?.ToString() ?? String.Empty;
+                txtSideLabels.Text = dto.NumberOfSideLabels?.ToString() ?? String.Empty;
+                txtTotalLabels.Text = dto.TotalLabelsApplied?.ToString() ?? String.Empty;
 
                 if (dto.RefreshLabel.HasValue && _currentTemplate != null)
                 {
@@ -132,9 +133,20 @@ namespace ControlWorks.UI.BarTender
 
         protected virtual void OnPropertyChanged(string property)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
         }
+
+        private void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (sender is TextBox txt)
+            {
+                var frm = new frmNumpad(txt);
+                frm.SetLocation(txt.Right, txt.Top);
+                frm.Show();
+            }
+        }
+
+
 
     }
 }

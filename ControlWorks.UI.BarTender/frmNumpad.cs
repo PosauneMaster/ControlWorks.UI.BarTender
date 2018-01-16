@@ -36,6 +36,11 @@ namespace ControlWorks.UI.BarTender
 
         }
 
+        public void SetLocation(int x, int y)
+        {
+            this.Location = new Point(x,y);
+        }
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
@@ -53,8 +58,7 @@ namespace ControlWorks.UI.BarTender
 
         private void OnButtonClick(object sender, EventArgs e)
         {
-            var button = sender as Button;
-            if (button != null)
+            if (sender is Button button)
             {
                 var arg = String.Empty;
 

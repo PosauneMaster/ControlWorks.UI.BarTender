@@ -14,7 +14,6 @@ namespace ControlWorks.UI.BarTender
         Task<string> PrintFile(string filename);
         Task<string> GetPreviewFile(string filename, int width, int height);
         string GetMessage(string message);
-
     }
 
     public class BartenderService : IBartenderService
@@ -26,7 +25,10 @@ namespace ControlWorks.UI.BarTender
                 client.BaseAddress = new Uri("http://localhost:9001"); ///api/Print/Print/{filename}";
                 var content = new FormUrlEncodedContent(new[]
                 {
-                    new KeyValuePair<string, string>("", filename)
+                    new KeyValuePair<string, string>("Filename", filename),
+                    new KeyValuePair<string, string>("Orientation", "11"),
+                    new KeyValuePair<string, string>("NumberOfLables", "12")
+
                 });
                 var result = await client.PostAsync("api/Print/SendPrint", content).ConfigureAwait(false);
 
