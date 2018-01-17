@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using log4net;
 
 namespace ControlWorks.UI.BarTender
 {
@@ -20,6 +21,8 @@ namespace ControlWorks.UI.BarTender
 
     public class BartenderService : IBartenderService
     {
+        private readonly ILog _log = LogManager.GetLogger("FileLogger");
+
         public event EventHandler<PreviewFileEventArgs> PreviewFileRetrieved;
 
         private void OnPreviewFileRetrieved(string filename)
@@ -30,9 +33,10 @@ namespace ControlWorks.UI.BarTender
 
         public async Task<string> PrintFile(string filename, string orientation, string numberOfLabels)
         {
+            const string methodname = "api/Print/SendPrint";
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:9001"); ///api/Print/Print/{filename}";
+                client.BaseAddress = new Uri("http://localhost:9001"); //api/Print/Print/{filename}";
                 var content = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("Filename", filename),
@@ -40,12 +44,23 @@ namespace ControlWorks.UI.BarTender
                     new KeyValuePair<string, string>("NumberOfLables", numberOfLabels)
 
                 });
-                var result = await client.PostAsync("api/Print/SendPrint", content).ConfigureAwait(false);
 
-                var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+                try
+                {
+                    var result = await client.PostAsync(methodname, content).ConfigureAwait(false);
 
-                return resultContent;
+                    var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
 
+                    return resultContent;
+                }
+                catch (Exception ex)
+                {
+                    _log.Error($"BartenderService - Operation = PrintFile");
+                    _log.Error($"url={client.BaseAddress}; methodname={methodname}");
+                    _log.Error(ex.Message, ex);
+                }
+
+                return null;
             }
         }
 
@@ -55,12 +70,22 @@ namespace ControlWorks.UI.BarTender
                 $@"http://localhost:9001/api/Print/GetPreview/{width}/{height}/{filename}";
             using (var client = new HttpClient())
             {
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
+                    var r = response.Content.ReadAsStringAsync();
+                    OnPreviewFileRetrieved(GetMessage(r.Result));
 
-                HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
-                var r = response.Content.ReadAsStringAsync();
-                OnPreviewFileRetrieved(GetMessage(r.Result));
+                    return r.Result;
+                }
+                catch (Exception ex)
+                {
+                    _log.Error($"BartenderService - Operation = GetPreviewFile");
+                    _log.Error($"url={url}");
+                    _log.Error(ex.Message, ex);
+                }
 
-                return r.Result;
+                return null;
 
             }
         }

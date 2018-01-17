@@ -145,21 +145,29 @@ namespace ControlWorks.UI.BarTender
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            if (_serviceRunning) return;
+            try
+            {
+                if (_serviceRunning) return;
 
-            _serviceRunning = true;
+                _serviceRunning = true;
 
-            SetControlsEnabledTo(false);
-            _pvicontroller.SetVariables(GetVariables());
+                SetControlsEnabledTo(false);
+                _pvicontroller.SetVariables(GetVariables());
 
-            this.btnStart.BackColor = Color.Green;
-            this.btnStart.ForeColor = Color.White;
+                this.btnStart.BackColor = Color.Green;
+                this.btnStart.ForeColor = Color.White;
 
-            txtJobStartTime.Text = DateTime.Now.ToString("MM/dd/yyyy   HH:mm:ss");
+                txtJobStartTime.Text = DateTime.Now.ToString("MM/dd/yyyy   HH:mm:ss");
 
-            _jobRunStopwatch.Reset();
-            _jobRunStopwatch.Start();
-            tmrJobRun.Start();
+                _jobRunStopwatch.Reset();
+                _jobRunStopwatch.Start();
+                tmrJobRun.Start();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error Starting Job");
+                _log.Error(ex.Message, ex);
+            }
         }
 
         private PrinterInfoDto GetVariables()
@@ -198,19 +206,26 @@ namespace ControlWorks.UI.BarTender
         }
 
 
-
         private void btnStop_Click(object sender, EventArgs e)
         {
-            if (!_serviceRunning) return;
+            try
+            {
+                if (!_serviceRunning) return;
 
-            _serviceRunning = false;
-            SetControlsEnabledTo(true);
+                _serviceRunning = false;
+                SetControlsEnabledTo(true);
 
-            _pvicontroller.SetVariables(GetVariables());
-            btnStart.BackColor = _defaultBackColor;
-            btnStart.ForeColor = _defaultForeColor;
+                _pvicontroller.SetVariables(GetVariables());
+                btnStart.BackColor = _defaultBackColor;
+                btnStart.ForeColor = _defaultForeColor;
 
-            _jobRunStopwatch.Stop();
+                _jobRunStopwatch.Stop();
+            }
+            catch (Exception ex)
+            {
+                _log.Error("Error stopping job");
+                _log.Error(ex.Message, ex);
+            }
 
         }
 
