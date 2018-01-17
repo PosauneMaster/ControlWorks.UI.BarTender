@@ -421,9 +421,7 @@ namespace ControlWorks.UI.BarTender
 
         private void OnComboboxClicked(object sender, EventArgs e)
         {
-            var cbo = sender as ComboBox;
-
-            if (cbo != null)
+            if (sender is ComboBox cbo)
             {
                 cbo.DroppedDown = true;
             }
@@ -537,7 +535,7 @@ namespace ControlWorks.UI.BarTender
                 }
 
                 var service = new BartenderService();
-                service.PrintFile(_selectedLabelPath).ConfigureAwait(false);
+                service.PrintFile(_selectedLabelPath, "1", "1").ConfigureAwait(false);
 
                 if (b != null)
                 {

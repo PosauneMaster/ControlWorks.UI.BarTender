@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ControlWorks.UI.BarTender
@@ -19,6 +20,8 @@ namespace ControlWorks.UI.BarTender
         private readonly string _labelsizelarge = "4 x 6";
 
         private bool _serviceRunning = false;
+        private BartenderService _service;
+        private string _currentFile;
 
 
         private string _status;
@@ -109,8 +112,8 @@ namespace ControlWorks.UI.BarTender
         {
             if (InvokeRequired)
             {
-                Action<PrinterInfoDto> a = new Action<PrinterInfoDto>(HandleVariableUpdate);
-                Invoke(a);
+                Action<PrinterInfoDto> a = HandleVariableUpdate;
+                Invoke(a, dto);
             }
             else
             {
@@ -126,8 +129,11 @@ namespace ControlWorks.UI.BarTender
                 {
                     if (dto.RefreshLabel.Value)
                     {
-                        var service = new BartenderService();
-                        service.PrintFile(_currentTemplate.LabelLocation).ConfigureAwait(false);
+                        var service = GetService();
+
+                        var orientation = GetOrientation();
+                        var numberOfLabels = txtLabelsPerBox.Text;
+                        Task.Run(() => service.PrintFile(_currentFile, orientation, numberOfLabels));
                     }
                 }
             }
@@ -260,6 +266,83 @@ namespace ControlWorks.UI.BarTender
             cboLabelPosition.Enabled = enabled;
             cboLabelSize.Enabled = enabled;
             cboOrientation.Enabled = enabled;
+        }
+
+        private void btnChooseLabel_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.BartenderFilesLocation;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                _currentFile = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = String.Empty;
+
+                var service = new BartenderService();
+                service.PreviewFileRetrieved += Service_PreviewFileRetrieved;
+
+                Task.Run(() => service.GetPreviewFile(_currentFile, pictureBox1.Width, pictureBox1.Height));
+            }
+        }
+
+        private void Service_PreviewFileRetrieved(object sender, PreviewFileEventArgs e)
+        {
+            SetPicture(e.Filename);
+        }
+
+        private void SetPicture(string filename)
+        {
+            if (InvokeRequired)
+            {
+                Action<string> a = SetPicture;
+                Invoke(a, filename);
+            }
+            else
+            {
+
+                if (!String.IsNullOrEmpty(filename) && File.Exists(filename))
+                {
+                    pictureBox1.ImageLocation = filename;
+                }
+            }
+        }
+
+        private void btnTestPrint_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrEmpty(_currentFile))
+            {
+                var orientation = GetOrientation();
+
+                var service = GetService();
+                Task.Run(() => service.PrintFile(_currentFile, orientation, "1"));
+            }
+        }
+
+        private BartenderService GetService()
+        {
+            return _service ?? (_service = new BartenderService());
+        }
+
+        private string GetOrientation()
+        {
+            if (cboOrientation.SelectedIndex == 0)
+            {
+                return "0";
+            }
+            if (cboOrientation.SelectedIndex == 1)
+            {
+                return "1";
+            }
+            if (cboOrientation.SelectedIndex == 2)
+            {
+                return "2";
+            }
+            if (cboOrientation.SelectedIndex == 3)
+            {
+                return "3";
+            }
+
+            return "0";
+
         }
     }
 }

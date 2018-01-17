@@ -134,7 +134,7 @@ namespace ControlWorks.Pvi.Service
             if (dto.StopConveyor.HasValue)
             {
                 Variables["PVI.Command[1]"].Value.Assign(dto.StopConveyor.Value);
-                Variables["PVI.Command1]"].WriteValue();
+                Variables["PVI.Command[1]"].WriteValue();
             }
         }
 

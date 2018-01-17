@@ -6,19 +6,29 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ControlWorks.UI.BarTender
 {
     public interface IBartenderService
     {
-        Task<string> PrintFile(string filename);
+        Task<string> PrintFile(string filename, string orientation, string numberOfLabels);
         Task<string> GetPreviewFile(string filename, int width, int height);
         string GetMessage(string message);
+        
     }
 
     public class BartenderService : IBartenderService
     {
-        public async Task<string> PrintFile(string filename)
+        public event EventHandler<PreviewFileEventArgs> PreviewFileRetrieved;
+
+        private void OnPreviewFileRetrieved(string filename)
+        {
+            var temp = PreviewFileRetrieved;
+            temp?.Invoke(this, new PreviewFileEventArgs(){Filename = filename});
+        }
+
+        public async Task<string> PrintFile(string filename, string orientation, string numberOfLabels)
         {
             using (var client = new HttpClient())
             {
@@ -26,8 +36,8 @@ namespace ControlWorks.UI.BarTender
                 var content = new FormUrlEncodedContent(new[]
                 {
                     new KeyValuePair<string, string>("Filename", filename),
-                    new KeyValuePair<string, string>("Orientation", "11"),
-                    new KeyValuePair<string, string>("NumberOfLables", "12")
+                    new KeyValuePair<string, string>("Orientation", orientation),
+                    new KeyValuePair<string, string>("NumberOfLables", numberOfLabels)
 
                 });
                 var result = await client.PostAsync("api/Print/SendPrint", content).ConfigureAwait(false);
@@ -45,11 +55,13 @@ namespace ControlWorks.UI.BarTender
                 $@"http://localhost:9001/api/Print/GetPreview/{width}/{height}/{filename}";
             using (var client = new HttpClient())
             {
-                HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
 
+                HttpResponseMessage response = await client.GetAsync(url).ConfigureAwait(false);
                 var r = response.Content.ReadAsStringAsync();
+                OnPreviewFileRetrieved(GetMessage(r.Result));
 
                 return r.Result;
+
             }
         }
 
@@ -59,5 +71,10 @@ namespace ControlWorks.UI.BarTender
             return d.Message;
         }
 
+    }
+
+    public class PreviewFileEventArgs : EventArgs
+    {
+        public string Filename { get; set; }
     }
 }

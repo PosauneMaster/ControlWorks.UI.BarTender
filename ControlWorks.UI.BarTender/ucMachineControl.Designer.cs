@@ -193,6 +193,7 @@
             this.btnTestPrint.TabIndex = 35;
             this.btnTestPrint.Text = "Print Test";
             this.btnTestPrint.UseVisualStyleBackColor = false;
+            this.btnTestPrint.Click += new System.EventHandler(this.btnTestPrint_Click);
             // 
             // label9
             // 
@@ -213,6 +214,7 @@
             this.btnChooseLabel.TabIndex = 34;
             this.btnChooseLabel.Text = "Choose Label";
             this.btnChooseLabel.UseVisualStyleBackColor = false;
+            this.btnChooseLabel.Click += new System.EventHandler(this.btnChooseLabel_Click);
             // 
             // groupBox4
             // 
@@ -529,6 +531,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(3, 22);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(354, 290);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
@@ -599,6 +602,7 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
