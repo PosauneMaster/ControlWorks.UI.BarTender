@@ -63,10 +63,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
-            this.cboLabelsPerBox = new System.Windows.Forms.ComboBox();
             this.txtInfeedSpeed = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnLoadTemplate = new System.Windows.Forms.Button();
             this.txtTemplatePath = new System.Windows.Forms.TextBox();
@@ -239,10 +237,8 @@
             this.groupBox4.Controls.Add(this.label6);
             this.groupBox4.Controls.Add(this.btnStop);
             this.groupBox4.Controls.Add(this.btnStart);
-            this.groupBox4.Controls.Add(this.cboLabelsPerBox);
             this.groupBox4.Controls.Add(this.txtInfeedSpeed);
             this.groupBox4.Controls.Add(this.label14);
-            this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Location = new System.Drawing.Point(369, 189);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(584, 452);
@@ -410,7 +406,7 @@
             "Landscape",
             "Portrait 180",
             "Landscape 180"});
-            this.cboOrientation.Location = new System.Drawing.Point(39, 275);
+            this.cboOrientation.Location = new System.Drawing.Point(39, 55);
             this.cboOrientation.Name = "cboOrientation";
             this.cboOrientation.Size = new System.Drawing.Size(180, 28);
             this.cboOrientation.TabIndex = 39;
@@ -419,7 +415,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(36, 258);
+            this.label2.Location = new System.Drawing.Point(36, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(112, 16);
             this.label2.TabIndex = 38;
@@ -467,17 +463,6 @@
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
-            // cboLabelsPerBox
-            // 
-            this.cboLabelsPerBox.FormattingEnabled = true;
-            this.cboLabelsPerBox.Items.AddRange(new object[] {
-            "1",
-            "2"});
-            this.cboLabelsPerBox.Location = new System.Drawing.Point(39, 55);
-            this.cboLabelsPerBox.Name = "cboLabelsPerBox";
-            this.cboLabelsPerBox.Size = new System.Drawing.Size(180, 28);
-            this.cboLabelsPerBox.TabIndex = 33;
-            // 
             // txtInfeedSpeed
             // 
             this.txtInfeedSpeed.Location = new System.Drawing.Point(39, 110);
@@ -496,16 +481,6 @@
             this.label14.Size = new System.Drawing.Size(92, 16);
             this.label14.TabIndex = 26;
             this.label14.Text = "Infeed Speed:";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(36, 36);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(102, 16);
-            this.label4.TabIndex = 23;
-            this.label4.Text = "Labels Per Box:";
             // 
             // groupBox3
             // 
@@ -639,13 +614,11 @@
         private System.Windows.Forms.Button btnLoadTemplate;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.ComboBox cboLabelsPerBox;
         private System.Windows.Forms.TextBox txtJobStartTime;
         private System.Windows.Forms.TextBox txtBoxCount;
         private System.Windows.Forms.TextBox txtInfeedSpeed;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnStop;

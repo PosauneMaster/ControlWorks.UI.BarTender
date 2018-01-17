@@ -141,7 +141,7 @@ namespace ControlWorks.UI.BarTender
             _serviceRunning = true;
 
             SetControlsEnabledTo(false);
-            //_pvicontroller.SetVariable("PVI.Command[0]", 1);
+            _pvicontroller.SetVariables(GetVariables());
 
             this.btnStart.BackColor = Color.Green;
             this.btnStart.ForeColor = Color.White;
@@ -153,6 +153,43 @@ namespace ControlWorks.UI.BarTender
             tmrJobRun.Start();
         }
 
+        private PrinterInfoDto GetVariables()
+        {
+            var dto = new PrinterInfoDto {LabelApplyFormat = cboLabelPlacement.SelectedIndex};
+
+            if (_serviceRunning)
+            {
+                dto.StartConveyor = true;
+                dto.StopConveyor = null;
+            }
+            else
+            {
+                dto.StartConveyor = null;
+                dto.StopConveyor = true;
+            }
+
+            dto.StartConveyor = _serviceRunning;
+
+            if (Double.TryParse(txtLeftOffset.Text, out var offset))
+            {
+                dto.SideLabelPosition = offset;
+            }
+
+            if (Double.TryParse(txtInfeedSpeed.Text, out var infeed))
+            {
+                dto.InfeedSpeed = (int) infeed;
+            }
+
+            if (Double.TryParse(txtPrinterSpeed.Text, out var print))
+            {
+                dto.PrinterConveyorSpeed = (int)print;
+            }
+
+            return dto;
+        }
+
+
+
         private void btnStop_Click(object sender, EventArgs e)
         {
             if (!_serviceRunning) return;
@@ -160,7 +197,7 @@ namespace ControlWorks.UI.BarTender
             _serviceRunning = false;
             SetControlsEnabledTo(true);
 
-            //_pvicontroller.SetVariable("PVI.Command[1]", 1);
+            _pvicontroller.SetVariables(GetVariables());
             btnStart.BackColor = _defaultBackColor;
             btnStart.ForeColor = _defaultForeColor;
 
@@ -223,7 +260,6 @@ namespace ControlWorks.UI.BarTender
             cboLabelPosition.Enabled = enabled;
             cboLabelSize.Enabled = enabled;
             cboOrientation.Enabled = enabled;
-            cboLabelsPerBox.Enabled = enabled;
         }
     }
 }

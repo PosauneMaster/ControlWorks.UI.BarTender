@@ -44,5 +44,10 @@ namespace ControlWorks.UI.BarTender
         {
             _application.SetVariable(name, val);
         }
+
+        public void SetVariables(PrinterInfoDto dto)
+        {
+            _application.SetVariables(dto);
+        }
     }
 }

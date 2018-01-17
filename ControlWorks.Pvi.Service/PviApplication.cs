@@ -42,6 +42,11 @@ namespace ControlWorks.Pvi.Service
             _variableManager.SetVariable(name, val);
         }
 
+        public void SetVariables(PrinterInfoDto dto)
+        {
+            _variableManager.SetVariables(dto);
+        }
+
         private void _context_CpuConnect(object sender, CpuConnectEventArgs e)
         {
             if (e.VariableManager != null)

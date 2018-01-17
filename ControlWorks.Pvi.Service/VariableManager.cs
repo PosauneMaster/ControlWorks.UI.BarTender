@@ -98,18 +98,47 @@ namespace ControlWorks.Pvi.Service
         {
         }
 
-        protected void OnVariableChanged(PrinterInfoDto dto)
+        private void OnVariableChanged(PrinterInfoDto dto)
         {
             var temp = VariablesChanged;
-            if (temp != null)
+            temp?.Invoke(this, new VariableEventArgs() { PrinterInfo = dto });
+        }
+
+        public void SetVariables(PrinterInfoDto dto)
+        {
+            if (dto.LabelApplyFormat.HasValue)
             {
-                temp(this, new VariableEventArgs() { PrinterInfo = dto });
+                Variables["PVI.LabelApplyFormat"].Value.Assign(dto.LabelApplyFormat.Value);
+                Variables["PVI.LabelApplyFormat"].WriteValue();
+            }
+            if (dto.SideLabelPosition.HasValue)
+            {
+                Variables["PVI.SideLabelPosition"].Value.Assign(dto.SideLabelPosition.Value);
+                Variables["PVI.SideLabelPosition"].WriteValue();
+            }
+            if (dto.InfeedSpeed.HasValue)
+            {
+                Variables["PVI.Speed[0]"].Value.Assign(dto.InfeedSpeed.Value);
+                Variables["PVI.Speed[0]"].WriteValue();
+            }
+            if (dto.PrinterConveyorSpeed.HasValue)
+            {
+                Variables["PVI.Speed[1]"].Value.Assign(dto.PrinterConveyorSpeed.Value);
+                Variables["PVI.Speed[1]"].WriteValue();
+            }
+            if (dto.StartConveyor.HasValue)
+            {
+                Variables["PVI.Command[0]"].Value.Assign(dto.StartConveyor.Value);
+                Variables["PVI.Command[0]"].WriteValue();
+            }
+            if (dto.StopConveyor.HasValue)
+            {
+                Variables["PVI.Command[1]"].Value.Assign(dto.StopConveyor.Value);
+                Variables["PVI.Command1]"].WriteValue();
             }
         }
 
-
-
-    private void Variable_ValueChanged(object sender, BR.AN.PviServices.VariableEventArgs e)
+        private void Variable_ValueChanged(object sender, BR.AN.PviServices.VariableEventArgs e)
         {
             Variable v = sender as Variable;
 

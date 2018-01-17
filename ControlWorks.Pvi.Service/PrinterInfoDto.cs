@@ -17,7 +17,7 @@ namespace ControlWorks.Pvi.Service
         public int? InfeedSpeed { get; set; }
         public int? PrinterConveyorSpeed { get; set; }
         public string StatusText { get; set; }
-        public bool? LabelApplyFormat { get; set; }
+        public int? LabelApplyFormat { get; set; }
         public bool? NumberOfBoxes { get; set; }
         public bool? NumberOfFrontLabels { get; set; }
         public bool? NumberOfSideLabels { get; set; }
