@@ -383,6 +383,7 @@
             // 
             // txtLeftOffset
             // 
+            this.txtLeftOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLeftOffset.Location = new System.Drawing.Point(300, 55);
             this.txtLeftOffset.Multiline = true;
             this.txtLeftOffset.Name = "txtLeftOffset";
@@ -402,6 +403,7 @@
             // 
             // cboOrientation
             // 
+            this.cboOrientation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboOrientation.FormattingEnabled = true;
             this.cboOrientation.Items.AddRange(new object[] {
             "Portrait",
@@ -425,6 +427,7 @@
             // 
             // txtPrinterSpeed
             // 
+            this.txtPrinterSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPrinterSpeed.Location = new System.Drawing.Point(39, 165);
             this.txtPrinterSpeed.Multiline = true;
             this.txtPrinterSpeed.Name = "txtPrinterSpeed";
@@ -467,6 +470,7 @@
             // 
             // txtInfeedSpeed
             // 
+            this.txtInfeedSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtInfeedSpeed.Location = new System.Drawing.Point(39, 110);
             this.txtInfeedSpeed.Multiline = true;
             this.txtInfeedSpeed.Name = "txtInfeedSpeed";

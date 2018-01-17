@@ -97,6 +97,9 @@ namespace ControlWorks.UI.BarTender
             this.btnStop.BackColor = Color.Red;
             this.btnStop.ForeColor = Color.White;
 
+            cboOrientation.SelectedIndex = 0;
+            cboLabelPlacement.SelectedIndex = 0;
+
             _pvicontroller = new PviController();
             _pvicontroller.VariablesChanged += _pvicontroller_VariablesChanged;
             _pvicontroller.Start();
@@ -152,7 +155,7 @@ namespace ControlWorks.UI.BarTender
             this.btnStart.BackColor = Color.Green;
             this.btnStart.ForeColor = Color.White;
 
-            txtJobStartTime.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm:ss");
+            txtJobStartTime.Text = DateTime.Now.ToString("MM/dd/yyyy   HH:mm:ss");
 
             _jobRunStopwatch.Reset();
             _jobRunStopwatch.Start();
@@ -234,17 +237,9 @@ namespace ControlWorks.UI.BarTender
 
         private void cboLabelPlacement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var cb = sender as ComboBox;
-            if (cb != null)
+            if (sender is ComboBox cb)
             {
-                if (cb.Text == "Front and Side")
-                {
-                    txtLabelsPerBox.Text = "2";
-                }
-                else
-                {
-                    txtLabelsPerBox.Text = "1";
-                }
+                txtLabelsPerBox.Text = cb.Text == "Front and Side" ? "2" : "1";
             }
         }
 
