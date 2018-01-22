@@ -62,6 +62,8 @@ namespace ControlWorks.Pvi.Service
             CreateVariable(_cpu, "PVI.Command[7]"); //Number of Front Labels Reset
             CreateVariable(_cpu, "PVI.Command[8]"); //Number of Side Labels Reset
             CreateVariable(_cpu, "PVI.Command[9]"); //Total Labels Applied Reset
+            CreateVariable(_cpu, "PVI.Command[10]"); //Manual Front
+            CreateVariable(_cpu, "PVI.Command[11]"); //Manual Side
 
             CreateVariable(_cpu, "PVI.Status[0]"); //Conveyors Running
             CreateVariable(_cpu, "PVI.Status[1]"); //Printer is ON and OK

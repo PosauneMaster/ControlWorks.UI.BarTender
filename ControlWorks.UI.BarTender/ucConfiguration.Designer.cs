@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.btnBTFilesLocation = new System.Windows.Forms.Button();
             this.txtBtFilesLocation = new System.Windows.Forms.TextBox();
@@ -38,6 +39,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDefaultBoxHeight = new System.Windows.Forms.TextBox();
             this.txtDefaultBoxWidth = new System.Windows.Forms.TextBox();
+            this.btnManualFront = new System.Windows.Forms.Button();
+            this.btnManualSide = new System.Windows.Forms.Button();
+            this.lblManualFront = new System.Windows.Forms.Label();
+            this.lblManualSide = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnBTFilesLocation
@@ -121,10 +127,57 @@
             this.txtDefaultBoxWidth.TabIndex = 8;
             this.txtDefaultBoxWidth.MouseUp += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
+            // btnManualFront
+            // 
+            this.btnManualFront.Location = new System.Drawing.Point(35, 293);
+            this.btnManualFront.Name = "btnManualFront";
+            this.btnManualFront.Size = new System.Drawing.Size(144, 51);
+            this.btnManualFront.TabIndex = 9;
+            this.btnManualFront.Text = "Manual Front";
+            this.btnManualFront.UseVisualStyleBackColor = false;
+            this.btnManualFront.Click += new System.EventHandler(this.btnManualFront_Click);
+            // 
+            // btnManualSide
+            // 
+            this.btnManualSide.Location = new System.Drawing.Point(35, 365);
+            this.btnManualSide.Name = "btnManualSide";
+            this.btnManualSide.Size = new System.Drawing.Size(144, 51);
+            this.btnManualSide.TabIndex = 10;
+            this.btnManualSide.Text = "Manual Side";
+            this.btnManualSide.UseVisualStyleBackColor = false;
+            this.btnManualSide.Click += new System.EventHandler(this.btnManualSide_Click);
+            // 
+            // lblManualFront
+            // 
+            this.lblManualFront.AutoSize = true;
+            this.lblManualFront.Location = new System.Drawing.Point(186, 312);
+            this.lblManualFront.Name = "lblManualFront";
+            this.lblManualFront.Size = new System.Drawing.Size(35, 13);
+            this.lblManualFront.TabIndex = 11;
+            this.lblManualFront.Text = "label3";
+            // 
+            // lblManualSide
+            // 
+            this.lblManualSide.AutoSize = true;
+            this.lblManualSide.Location = new System.Drawing.Point(186, 384);
+            this.lblManualSide.Name = "lblManualSide";
+            this.lblManualSide.Size = new System.Drawing.Size(35, 13);
+            this.lblManualSide.TabIndex = 12;
+            this.lblManualSide.Text = "label4";
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 3000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // ucConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.lblManualSide);
+            this.Controls.Add(this.lblManualFront);
+            this.Controls.Add(this.btnManualSide);
+            this.Controls.Add(this.btnManualFront);
             this.Controls.Add(this.txtDefaultBoxWidth);
             this.Controls.Add(this.txtDefaultBoxHeight);
             this.Controls.Add(this.label2);
@@ -155,5 +208,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDefaultBoxHeight;
         private System.Windows.Forms.TextBox txtDefaultBoxWidth;
+        private System.Windows.Forms.Button btnManualFront;
+        private System.Windows.Forms.Button btnManualSide;
+        private System.Windows.Forms.Label lblManualFront;
+        private System.Windows.Forms.Label lblManualSide;
+        private System.Windows.Forms.Timer timer1;
     }
 }

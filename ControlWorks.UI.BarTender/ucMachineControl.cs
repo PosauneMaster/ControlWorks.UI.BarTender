@@ -100,7 +100,7 @@ namespace ControlWorks.UI.BarTender
             cboOrientation.SelectedIndex = 0;
             cboLabelPlacement.SelectedIndex = 0;
 
-            _pvicontroller = new PviController();
+            _pvicontroller = PviController.Controller;
             _pvicontroller.VariablesChanged += _pvicontroller_VariablesChanged;
             _pvicontroller.Start();
 

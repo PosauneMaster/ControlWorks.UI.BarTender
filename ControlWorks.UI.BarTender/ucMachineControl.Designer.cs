@@ -325,7 +325,8 @@
             this.cboLabelPlacement.Items.AddRange(new object[] {
             "Front",
             "Side",
-            "Front and Side"});
+            "Front and Side",
+            "None"});
             this.cboLabelPlacement.Location = new System.Drawing.Point(39, 220);
             this.cboLabelPlacement.Name = "cboLabelPlacement";
             this.cboLabelPlacement.Size = new System.Drawing.Size(180, 28);

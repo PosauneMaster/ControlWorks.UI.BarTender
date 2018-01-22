@@ -9,11 +9,14 @@ namespace ControlWorks.UI.BarTender
 {
     public class PviController
     {
+        private static PviController _controller;
+        public static PviController Controller => _controller ?? (_controller = new PviController());
+
         private PviApplication _application;
 
         public event EventHandler<VariableEventArgs> VariablesChanged;
         
-        public PviController()
+        private PviController()
         {
             _application = new PviApplication();
         }
