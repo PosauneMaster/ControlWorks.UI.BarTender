@@ -128,7 +128,7 @@ namespace ControlWorks.UI.BarTender
                 txtSideLabels.Text = dto.NumberOfSideLabels?.ToString() ?? String.Empty;
                 txtTotalLabels.Text = dto.TotalLabelsApplied?.ToString() ?? String.Empty;
 
-                if (dto.RefreshLabel.HasValue && _currentTemplate != null)
+                if (dto.RefreshLabel.HasValue)
                 {
                     if (dto.RefreshLabel.Value)
                     {
@@ -172,7 +172,32 @@ namespace ControlWorks.UI.BarTender
 
         private PrinterInfoDto GetVariables()
         {
-            var dto = new PrinterInfoDto {LabelApplyFormat = cboLabelPlacement.SelectedIndex};
+
+            var dto = new PrinterInfoDto();
+
+            if (cboLabelPlacement.Text == "Front")
+            {
+                dto.LabelApplyFormat = 2;
+                txtLabelsPerBox.Text = "1";
+            }
+            else if (cboLabelPlacement.Text == "Side")
+            {
+                dto.LabelApplyFormat = 1;
+                txtLabelsPerBox.Text = "1";
+
+            }
+            else if (cboLabelPlacement.Text == "Front and Side")
+            {
+                dto.LabelApplyFormat = 3;
+                txtLabelsPerBox.Text = "2";
+
+            }
+            else
+            {
+                dto.LabelApplyFormat = 0;
+                txtLabelsPerBox.Text = "0";
+
+            }
 
             if (_serviceRunning)
             {
@@ -200,6 +225,12 @@ namespace ControlWorks.UI.BarTender
             if (Double.TryParse(txtPrinterSpeed.Text, out var print))
             {
                 dto.PrinterConveyorSpeed = (int)print;
+            }
+
+            if (Double.TryParse(txtWidth.Text, out var width))
+            {
+                dto.BoxDimension = width;
+            
             }
 
             return dto;
@@ -252,10 +283,12 @@ namespace ControlWorks.UI.BarTender
 
         private void cboLabelPlacement_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sender is ComboBox cb)
+
+            if (_pvicontroller != null)
             {
-                txtLabelsPerBox.Text = cb.Text == "Front and Side" ? "2" : "1";
+                _pvicontroller.SetVariables(GetVariables());
             }
+
         }
 
         private void groupBox4_VisibleChanged(object sender, EventArgs e)
@@ -334,13 +367,20 @@ namespace ControlWorks.UI.BarTender
 
         private string GetOrientation()
         {
+
+        //Portrait
+        //Landscape
+        //Portrait 180
+        //Landscape 180
+
+
             if (cboOrientation.SelectedIndex == 0)
             {
-                return "0";
+                return "1";
             }
             if (cboOrientation.SelectedIndex == 1)
             {
-                return "1";
+                return "0";
             }
             if (cboOrientation.SelectedIndex == 2)
             {
@@ -352,6 +392,12 @@ namespace ControlWorks.UI.BarTender
             }
 
             return "0";
+
+        }
+
+
+        private void cboOrientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }

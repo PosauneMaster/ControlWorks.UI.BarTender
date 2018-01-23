@@ -76,19 +76,16 @@ namespace ControlWorks.UI.BarTender
             toolStripLabel2.Width = toolStrip1.ClientSize.Width -10;
         }
 
-        private bool _heartbeat = true;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (_heartbeat)
-            {
-                toolStripLabel2.Image = Properties.Resources.TransparentLight;
-            }
-            else
+            if (PviController.Controller.IsServiceConnected())
             {
                 toolStripLabel2.Image = Properties.Resources.greenlight2;
             }
-
-            _heartbeat = !_heartbeat;
+            else
+            {
+                toolStripLabel2.Image = Properties.Resources.TransparentLight;
+            }
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

@@ -257,6 +257,7 @@
             this.txtWidth.Size = new System.Drawing.Size(43, 26);
             this.txtWidth.TabIndex = 54;
             this.txtWidth.Text = "12";
+            this.txtWidth.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // label16
             // 
@@ -276,6 +277,7 @@
             this.txtHeight.Size = new System.Drawing.Size(43, 26);
             this.txtHeight.TabIndex = 52;
             this.txtHeight.Text = "12";
+            this.txtHeight.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
             // 
             // label17
             // 
@@ -415,6 +417,7 @@
             this.cboOrientation.Name = "cboOrientation";
             this.cboOrientation.Size = new System.Drawing.Size(180, 28);
             this.cboOrientation.TabIndex = 39;
+            this.cboOrientation.SelectedIndexChanged += new System.EventHandler(this.cboOrientation_SelectedIndexChanged);
             // 
             // label2
             // 

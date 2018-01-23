@@ -29,6 +29,7 @@ namespace ControlWorks.Pvi.Service
         public bool? ConyorsRunning { get; set; }
         public bool? PrinterOnOk { get; set; }
         public bool? RefreshLabel { get; set; }
+        public double? BoxDimension { get; set; }
 
     }
 

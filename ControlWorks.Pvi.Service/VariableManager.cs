@@ -68,8 +68,10 @@ namespace ControlWorks.Pvi.Service
             CreateVariable(_cpu, "PVI.Status[0]"); //Conveyors Running
             CreateVariable(_cpu, "PVI.Status[1]"); //Printer is ON and OK
 
+            CreateVariable(_cpu, "PVI.BoxDimension"); //The width of the box
 
-            Variables = _cpu.Variables;
+
+
         }
 
         private Variable CreateVariable(Cpu cpu, string name)
@@ -98,6 +100,15 @@ namespace ControlWorks.Pvi.Service
 
         private void Variable_Connected(object sender, PviEventArgs e)
         {
+            var v = sender as Variable;
+            var text = e.Name;
+
+            Variables = _cpu.Variables;
+
+            if (v.Name == "PVI.BoxDimension")
+            {
+            }
+
         }
 
         private void OnVariableChanged(PrinterInfoDto dto)
@@ -137,6 +148,12 @@ namespace ControlWorks.Pvi.Service
             {
                 Variables["PVI.Command[1]"].Value.Assign(dto.StopConveyor.Value);
                 Variables["PVI.Command[1]"].WriteValue();
+            }
+
+            if (dto.BoxDimension.HasValue)
+            {
+                Variables["PVI.BoxDimension"].Value.Assign(dto.BoxDimension.Value);
+                Variables["PVI.BoxDimension"].WriteValue();
             }
         }
 
