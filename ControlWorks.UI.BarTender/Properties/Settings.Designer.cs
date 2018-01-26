@@ -37,7 +37,7 @@ namespace ControlWorks.UI.BarTender.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("D:\\ControlWorks\\BarTender\\Settings")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Data\\cw\\templates")]
         public string TemplateFilesLocation {
             get {
                 return ((string)(this["TemplateFilesLocation"]));

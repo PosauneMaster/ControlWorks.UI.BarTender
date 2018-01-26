@@ -150,7 +150,8 @@
             this.cboLabelPlacement.Items.AddRange(new object[] {
             "Front",
             "Side",
-            "Front and Side"});
+            "Front and Side",
+            "None"});
             this.cboLabelPlacement.Location = new System.Drawing.Point(23, 85);
             this.cboLabelPlacement.Name = "cboLabelPlacement";
             this.cboLabelPlacement.Size = new System.Drawing.Size(193, 28);
@@ -241,6 +242,7 @@
             this.txtTemplateName.Name = "txtTemplateName";
             this.txtTemplateName.Size = new System.Drawing.Size(442, 27);
             this.txtTemplateName.TabIndex = 25;
+            this.txtTemplateName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTemplateName_MouseClick);
             // 
             // label13
             // 

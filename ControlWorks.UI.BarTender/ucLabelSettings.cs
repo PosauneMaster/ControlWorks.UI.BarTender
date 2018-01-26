@@ -8,6 +8,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -49,7 +50,6 @@ namespace ControlWorks.UI.BarTender
 
             Initialize();
             Reset();
-
         }
 
         private void Initialize()
@@ -348,9 +348,16 @@ namespace ControlWorks.UI.BarTender
 
         private void btnSaveTemplate_Click(object sender, EventArgs e)
         {
-            var template = new TemplateSettings()
+
+            var templateName = txtTemplateName.Text;
+            if (!templateName.EndsWith("xml"))
             {
-                TemplateName = txtTemplateName.Text,
+                templateName = $"{templateName}.xml";
+            }
+
+            var template = new TemplateSettings
+            {
+                TemplateName = templateName,
                 LabelPlacement = cboLabelPlacement.Text,
                 InfeedSpeed = txtInfeedSpeed.Text,
                 PrinterSpeed = txtPrinterSpeed.Text,
@@ -360,26 +367,31 @@ namespace ControlWorks.UI.BarTender
                 LabelPositon = cboLabelPosition.Text,
                 LeftOffset = lblLeftDistance.Text.Replace(" inches", String.Empty),
                 RightOffset = lblRightDistance.Text.Replace(" inches", String.Empty),
-                LabelLocation = _selectedLabelPath
+                LabelLocation = _selectedLabelPath,
+                CurrentBox = new BoxSettings()
+                {
+                    LabelToRightStartInches = Math.Round(_currentBox.LabelToRightStartInches, 2,
+                        MidpointRounding.ToEven),
+                    LabelToRightStartPixels = Math.Round(_currentBox.LabelToRightStartPixels, 2,
+                        MidpointRounding.ToEven),
+                    LabelToRightCurrentInches = Math.Round(_currentBox.LabelToRightCurrentInches, 2,
+                        MidpointRounding.ToEven),
+                    PixelsPerTenthInchRight =
+                        Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
+                    LabelToLeftStartInches = Math.Round(_currentBox.LabelToLeftStartInches, 2, MidpointRounding.ToEven),
+                    LabelToLeftStartPixels = Math.Round(_currentBox.LabelToLeftCurrentInches, 2,
+                        MidpointRounding.ToEven),
+                    LabelToLeftCurrentInches = Math.Round(_currentBox.LabelToLeftCurrentInches, 2,
+                        MidpointRounding.ToEven),
+                    PixelsPerTenthInchLeft = Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
+                    FixedPanelRightEdge = Math.Round(_currentBox.FixedPanelRightEdge, 2, MidpointRounding.ToEven),
+                    FixedPanelLeftEdge = Math.Round(_currentBox.FixedPanelLeftEdge, 2, MidpointRounding.ToEven),
+                    LablePosition = _currentBox.CurrentLabel.Location,
+                    LabelSize = _currentBox.LabelSize,
+                    CurrentLabelRotation = _currentBox.CurrentLabelRotation
+                }
             };
 
-            template.CurrentBox = new BoxSettings()
-            {
-                LabelToRightStartInches = Math.Round(_currentBox.LabelToRightStartInches, 2, MidpointRounding.ToEven),
-                LabelToRightStartPixels = Math.Round(_currentBox.LabelToRightStartPixels, 2, MidpointRounding.ToEven),
-                LabelToRightCurrentInches = Math.Round(_currentBox.LabelToRightCurrentInches, 2, MidpointRounding.ToEven),
-                PixelsPerTenthInchRight = Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
-                LabelToLeftStartInches = Math.Round(_currentBox.LabelToLeftStartInches, 2, MidpointRounding.ToEven),
-                LabelToLeftStartPixels = Math.Round(_currentBox.LabelToLeftCurrentInches, 2, MidpointRounding.ToEven),
-                LabelToLeftCurrentInches = Math.Round(_currentBox.LabelToLeftCurrentInches, 2, MidpointRounding.ToEven),
-                PixelsPerTenthInchLeft = Math.Round(_currentBox.PixelsPerTenthInchLeft, 2, MidpointRounding.ToEven),
-                FixedPanelRightEdge = Math.Round(_currentBox.FixedPanelRightEdge, 2, MidpointRounding.ToEven),
-                FixedPanelLeftEdge = Math.Round(_currentBox.FixedPanelLeftEdge, 2, MidpointRounding.ToEven),
-                LablePosition = _currentBox.CurrentLabel.Location,
-                LabelSize = _currentBox.LabelSize,
-                CurrentLabelRotation =_currentBox.CurrentLabelRotation
-
-    };
 
             SaveTemplate(template);
         }
@@ -480,7 +492,7 @@ namespace ControlWorks.UI.BarTender
         private void button2_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Properties.Settings.Default.TemplateFilesLocation;
-            openFileDialog1.Filter = "Template Files (*.xml) | *.xml | All files(*.*) | *.*";
+            openFileDialog1.FileName = String.Empty;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var xml = File.ReadAllText(openFileDialog1.FileName);
@@ -553,10 +565,24 @@ namespace ControlWorks.UI.BarTender
                 {
                     txtLabelsPerBox.Text = "2";
                 }
+                else if (cb.Text == "None")
+                {
+                    txtLabelsPerBox.Text = "0";
+                }
                 else
                 {
                     txtLabelsPerBox.Text = "1";
                 }
+            }
+        }
+
+        private void txtTemplateName_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (sender is TextBox tb)
+            {
+                tb.Text = String.Empty;
+                Process process = Process.Start(new ProcessStartInfo(
+                    ((Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\osk.exe"))));
             }
         }
     }

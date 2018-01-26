@@ -48,6 +48,8 @@ namespace ControlWorks.UI.BarTender
 
         private void btnLoadTemplate_Click(object sender, EventArgs e)
         {
+            openFileDialog1.InitialDirectory = Properties.Settings.Default.TemplateFilesLocation;
+            openFileDialog1.FileName = String.Empty;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 try
@@ -58,16 +60,21 @@ namespace ControlWorks.UI.BarTender
 
                     _currentTemplate = TemplateSettings.CreateFromXml(xml);
 
-                    var service = new BartenderService();
-                    var previewImagePath = service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
+                    //var service = new BartenderService();
+                    //var previewImagePath = service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
 
-                    pictureBox1.ImageLocation = String.Empty;
+                    //pictureBox1.ImageLocation = String.Empty;
 
-                    var path = service.GetMessage(previewImagePath);
-                    if (!String.IsNullOrEmpty(path) && File.Exists(path))
-                    {
-                        pictureBox1.ImageLocation = path;
-                    }
+                    //var path = service.GetMessage(previewImagePath);
+                    //if (!String.IsNullOrEmpty(path) && File.Exists(path))
+                    //{
+                    //    pictureBox1.ImageLocation = path;
+                    //}
+
+                    cboOrientation.SelectedIndex = _currentTemplate.CurrentBox.CurrentLabelRotation;
+
+
+
                 }
                 catch (Exception ex)
                 {
