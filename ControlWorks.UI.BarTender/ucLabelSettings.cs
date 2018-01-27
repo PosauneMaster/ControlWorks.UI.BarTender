@@ -361,6 +361,7 @@ namespace ControlWorks.UI.BarTender
 
             var template = new TemplateSettings
             {
+                
                 TemplateName = templateName,
                 LabelPlacement = cboLabelPlacement.Text,
                 InfeedSpeed = txtInfeedSpeed.Text,

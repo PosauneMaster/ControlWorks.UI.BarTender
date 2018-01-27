@@ -31,6 +31,69 @@ namespace ControlWorks.UI.BarTender
             temp?.Invoke(this, new PreviewFileEventArgs(){Filename = filename});
         }
 
+        public async Task<string> Cancel()
+        {
+            const string methodname = "api/Print/Cancel";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:9001"); //api/Print/Cancel/";
+
+                try
+                {
+                    var result = await client.PutAsync(methodname, null).ConfigureAwait(false);
+
+                    var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                    return resultContent;
+                }
+                catch (Exception ex)
+                {
+                    _log.Error($"BartenderService - Operation = Cancel");
+                    _log.Error($"url={client.BaseAddress}; methodname={methodname}");
+                    _log.Error(ex.Message, ex);
+                }
+
+                return null;
+            }
+        }
+
+        public async Task<string> Cancel(string command)
+        {
+            var methodname = $"api/Print/Cancel/{command}";
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:9001"); //api/Print/Cancel/";
+                var content = new FormUrlEncodedContent(new[]
+                {
+                    new KeyValuePair<string, string>("Filename", ""),
+                    new KeyValuePair<string, string>("Orientation", ""),
+                    new KeyValuePair<string, string>("NumberOfLables", ""),
+                    new KeyValuePair<string, string>("PrintCommand", command)
+                });
+
+                try
+                {
+                    var result = await client.PostAsync(methodname, content).ConfigureAwait(false);
+
+                    var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                    return resultContent;
+                }
+                catch (Exception ex)
+                {
+                    _log.Error($"BartenderService - Operation = Cancel");
+                    _log.Error($"url={client.BaseAddress}; methodname={methodname}");
+                    _log.Error(ex.Message, ex);
+                }
+
+                return null;
+            }
+        }
+
+
+
         public async Task<string> PrintFile(string filename, string orientation, string numberOfLabels)
         {
             const string methodname = "api/Print/SendPrint";
@@ -41,8 +104,8 @@ namespace ControlWorks.UI.BarTender
                 {
                     new KeyValuePair<string, string>("Filename", filename),
                     new KeyValuePair<string, string>("Orientation", orientation),
-                    new KeyValuePair<string, string>("NumberOfLables", numberOfLabels)
-
+                    new KeyValuePair<string, string>("NumberOfLables", numberOfLabels),
+                    new KeyValuePair<string, string>("Command", "")
                 });
 
                 try

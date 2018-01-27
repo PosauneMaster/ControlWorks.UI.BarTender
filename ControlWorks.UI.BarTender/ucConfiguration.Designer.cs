@@ -44,6 +44,7 @@
             this.lblManualFront = new System.Windows.Forms.Label();
             this.lblManualSide = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnClearQueue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnBTFilesLocation
@@ -170,10 +171,21 @@
             this.timer1.Interval = 3000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // btnClearQueue
+            // 
+            this.btnClearQueue.Location = new System.Drawing.Point(35, 431);
+            this.btnClearQueue.Name = "btnClearQueue";
+            this.btnClearQueue.Size = new System.Drawing.Size(144, 51);
+            this.btnClearQueue.TabIndex = 13;
+            this.btnClearQueue.Text = "Clear Printer";
+            this.btnClearQueue.UseVisualStyleBackColor = false;
+            this.btnClearQueue.Click += new System.EventHandler(this.btnClearQueue_Click);
+            // 
             // ucConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnClearQueue);
             this.Controls.Add(this.lblManualSide);
             this.Controls.Add(this.lblManualFront);
             this.Controls.Add(this.btnManualSide);
@@ -213,5 +225,6 @@
         private System.Windows.Forms.Label lblManualFront;
         private System.Windows.Forms.Label lblManualSide;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button btnClearQueue;
     }
 }

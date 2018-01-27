@@ -60,16 +60,6 @@ namespace ControlWorks.UI.BarTender
 
                     _currentTemplate = TemplateSettings.CreateFromXml(xml);
 
-                    //var service = new BartenderService();
-                    //var previewImagePath = service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
-
-                    //pictureBox1.ImageLocation = String.Empty;
-
-                    //var path = service.GetMessage(previewImagePath);
-                    //if (!String.IsNullOrEmpty(path) && File.Exists(path))
-                    //{
-                    //    pictureBox1.ImageLocation = path;
-                    //}
 
                     cboOrientation.SelectedIndex = _currentTemplate.CurrentBox.CurrentLabelRotation;
                     txtInfeedSpeed.Text = _currentTemplate.InfeedSpeed;
@@ -80,8 +70,16 @@ namespace ControlWorks.UI.BarTender
                     cboLabelPosition.Text = _currentTemplate.LabelPositon;
                     txtHeight.Text = _currentTemplate.BoxHeight;
                     txtWidth.Text = _currentTemplate.BoxWidth;
+                    _currentFile = _currentTemplate.LabelLocation;
 
+                    var fi = new FileInfo(_currentTemplate.LabelLocation);
+                    if (fi.Exists && fi.Extension == ".btw")
+                    {
+                        var service = GetService();
+                        service.PreviewFileRetrieved += Service_PreviewFileRetrieved;
 
+                        Task.Run(() => service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height));
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -334,7 +332,7 @@ namespace ControlWorks.UI.BarTender
                 _currentFile = openFileDialog1.FileName;
                 pictureBox1.ImageLocation = String.Empty;
 
-                var service = new BartenderService();
+                var service = GetService();
                 service.PreviewFileRetrieved += Service_PreviewFileRetrieved;
 
                 Task.Run(() => service.GetPreviewFile(_currentFile, pictureBox1.Width, pictureBox1.Height));

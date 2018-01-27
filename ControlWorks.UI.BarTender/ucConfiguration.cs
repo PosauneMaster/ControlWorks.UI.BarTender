@@ -144,5 +144,21 @@ namespace ControlWorks.UI.BarTender
 
             timer1.Stop();
         }
+
+        private void btnClearQueue_Click(object sender, EventArgs e)
+        {
+            var service = new BartenderService();
+            Task.Run(() => service.Cancel());
+
+            //Task.Run(() => service.Cancel("~JA"));
+
+            //^ XA
+
+            //~JA
+
+            //^ XZ
+
+
+        }
     }
 }
