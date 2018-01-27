@@ -55,6 +55,7 @@ namespace ControlWorks.UI.BarTender
         private void Initialize()
         {
             txtInfeedSpeed.Text = String.Empty;
+            txtPrinterSpeed.Text = String.Empty;
 
             txtHeight.Text = "12";
             txtWidth.Text = "12";
@@ -338,6 +339,9 @@ namespace ControlWorks.UI.BarTender
             this.pb6x4.Image = Properties.Resources._112_UpArrowLong_Blue_24x24_72;
 
             txtTemplateName.Text = $"{DateTime.Now:yyyyMMddHHmmss}.xml";
+
+            _currentBox.CurrentLabelRotation = 0;
+
             _currentBox.CurrentLabel = pb4x4;
             cboLabelSize.SelectedIndex = 1;
             cboLabelPosition.SelectedIndex = 2;
@@ -493,6 +497,7 @@ namespace ControlWorks.UI.BarTender
         {
             openFileDialog1.InitialDirectory = Properties.Settings.Default.TemplateFilesLocation;
             openFileDialog1.FileName = String.Empty;
+            openFileDialog1.Filter = String.Empty;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var xml = File.ReadAllText(openFileDialog1.FileName);
@@ -576,13 +581,44 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+        private Process _keyboardProc;
         private void txtTemplateName_MouseClick(object sender, MouseEventArgs e)
         {
             if (sender is TextBox tb)
             {
-                tb.Text = String.Empty;
-                Process process = Process.Start(new ProcessStartInfo(
-                    ((Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\osk.exe"))));
+                try
+                {
+                    string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
+                    string keyboardPath = Path.Combine(progFiles, "TabTip.exe");
+                    _keyboardProc = Process.Start(keyboardPath);
+                    tb.Text = String.Empty;
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error(ex.Message, ex);
+                }
+
+
+                //tb.Text = String.Empty;
+                //Process process = Process.Start(new ProcessStartInfo(
+                //    ((Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\osk.exe"))));
+            }
+        }
+
+        private void txtTemplateName_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                Process[] oskProcessArray = Process.GetProcessesByName("TabTip");
+                foreach (Process onscreenProcess in oskProcessArray)
+                {
+                    onscreenProcess.Kill();
+                }
+            }
+            catch (Exception ex)
+            {
+                _log.Error(ex.Message, ex);
             }
         }
     }

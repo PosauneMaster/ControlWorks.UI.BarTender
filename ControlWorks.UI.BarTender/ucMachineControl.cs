@@ -72,7 +72,14 @@ namespace ControlWorks.UI.BarTender
                     //}
 
                     cboOrientation.SelectedIndex = _currentTemplate.CurrentBox.CurrentLabelRotation;
-
+                    txtInfeedSpeed.Text = _currentTemplate.InfeedSpeed;
+                    txtPrinterSpeed.Text = _currentTemplate.PrinterSpeed;
+                    cboLabelPlacement.Text = _currentTemplate.LabelPlacement;
+                    txtLeftOffset.Text = _currentTemplate.CurrentBox.LabelToLeftCurrentInches.ToString("N2");
+                    cboLabelSize.Text = _currentTemplate.LabelSize;
+                    cboLabelPosition.Text = _currentTemplate.LabelPositon;
+                    txtHeight.Text = _currentTemplate.BoxHeight;
+                    txtWidth.Text = _currentTemplate.BoxWidth;
 
 
                 }

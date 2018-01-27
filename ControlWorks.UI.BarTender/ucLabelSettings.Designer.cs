@@ -243,6 +243,7 @@
             this.txtTemplateName.Size = new System.Drawing.Size(442, 27);
             this.txtTemplateName.TabIndex = 25;
             this.txtTemplateName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTemplateName_MouseClick);
+            this.txtTemplateName.Leave += new System.EventHandler(this.txtTemplateName_Leave);
             // 
             // label13
             // 
