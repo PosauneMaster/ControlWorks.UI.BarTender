@@ -18,10 +18,10 @@ namespace ControlWorks.Pvi.Service
         public int? PrinterConveyorSpeed { get; set; }
         public string StatusText { get; set; }
         public int? LabelApplyFormat { get; set; }
-        public bool? NumberOfBoxes { get; set; }
-        public bool? NumberOfFrontLabels { get; set; }
-        public bool? NumberOfSideLabels { get; set; }
-        public bool? TotalLabelsApplied { get; set; }
+        public int? NumberOfBoxes { get; set; }
+        public int? NumberOfFrontLabels { get; set; }
+        public int? NumberOfSideLabels { get; set; }
+        public int? TotalLabelsApplied { get; set; }
         public bool? ResetNumberOfBoxes { get; set; }
         public bool? ResetNumberOfFrontLabels { get; set; }
         public bool? ResetNumberOfSideLabels { get; set; }

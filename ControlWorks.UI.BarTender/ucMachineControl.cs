@@ -169,7 +169,7 @@ namespace ControlWorks.UI.BarTender
                 }
                 if (dto.ResetTotalLabelsApplied.HasValue && dto.ResetTotalLabelsApplied.Value == true)
                 {
-                    txtTotalLabels.Text = String.Empty;
+                    txtBoxCount.Text = String.Empty;
                 }
 
 

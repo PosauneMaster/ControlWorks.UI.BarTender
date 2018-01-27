@@ -2,6 +2,7 @@
 using System;
 using BR.AN.PviServices;
 using log4net;
+using ControlWorks.ConfigurationProvider;
 
 namespace ControlWorks.Pvi.Service
 {
@@ -9,7 +10,7 @@ namespace ControlWorks.Pvi.Service
     internal class CpuManager
     {
         private readonly ILog _log = LogManager.GetLogger("FileLogger");
-        private readonly byte _sourceStationId = 117;
+        private readonly byte _sourceStationId = (byte)Settings.SourceStation;
         private BR.AN.PviServices.Service _service;
         public event EventHandler<CpuConnectEventArgs> CpuConnect;
 

@@ -525,6 +525,12 @@ namespace ControlWorks.UI.BarTender
                     var previewImagePath = service
                         .GetPreviewFile(template.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
 
+                    if (!String.IsNullOrEmpty(previewImagePath) && File.Exists(previewImagePath))
+                    {
+                        pictureBox1.ImageLocation = previewImagePath;
+                    }
+
+
 
                     SetCurrentBox();
 
@@ -602,8 +608,8 @@ namespace ControlWorks.UI.BarTender
             {
                 try
                 {
-                    string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
-                    string keyboardPath = Path.Combine(progFiles, "TabTip.exe");
+                    string progFiles = @"C:\Windows\system32\";
+                    string keyboardPath = Path.Combine(progFiles, "osk.exe");
                     _keyboardProc = Process.Start(keyboardPath);
                     tb.Text = String.Empty;
 
@@ -624,7 +630,7 @@ namespace ControlWorks.UI.BarTender
         {
             try
             {
-                Process[] oskProcessArray = Process.GetProcessesByName("TabTip");
+                Process[] oskProcessArray = Process.GetProcessesByName("osk");
                 foreach (Process onscreenProcess in oskProcessArray)
                 {
                     onscreenProcess.Kill();
