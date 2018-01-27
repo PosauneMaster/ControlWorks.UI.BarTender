@@ -450,6 +450,9 @@ namespace ControlWorks.UI.BarTender
             openFileDialog1.Title = @"Select a label to open...";
 
             openFileDialog1.InitialDirectory = Properties.Settings.Default.BartenderFilesLocation;
+            openFileDialog1.Filter = String.Empty;
+            openFileDialog1.FileName = String.Empty;
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var b = sender as Button;
@@ -501,43 +504,53 @@ namespace ControlWorks.UI.BarTender
             openFileDialog1.Filter = String.Empty;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                var xml = File.ReadAllText(openFileDialog1.FileName);
-                var template = TemplateSettings.CreateFromXml(xml);
-
-                txtTemplateName.Text = template.TemplateName;
-                txtInfeedSpeed.Text = template.InfeedSpeed;
-                txtPrinterSpeed.Text = template.PrinterSpeed;
-                cboLabelPlacement.Text = template.LabelPlacement;
-                txtHeight.Text = template.BoxHeight;
-                txtWidth.Text = template.BoxWidth;
-                cboLabelSize.Text = template.LabelSize;
-                cboLabelPosition.Text = template.LabelPositon;
-                lblLeftDistance.Text = template.LeftOffset;
-                lblRightDistance.Text = template.RightOffset;
-
-                if (!String.IsNullOrEmpty(template.LabelLocation))
+                try
                 {
-                    pictureBox1.Load(template.LabelLocation);
+                    var xml = File.ReadAllText(openFileDialog1.FileName);
+                    var template = TemplateSettings.CreateFromXml(xml);
+
+                    txtTemplateName.Text = template.TemplateName;
+                    txtInfeedSpeed.Text = template.InfeedSpeed;
+                    txtPrinterSpeed.Text = template.PrinterSpeed;
+                    cboLabelPlacement.Text = template.LabelPlacement;
+                    txtHeight.Text = template.BoxHeight;
+                    txtWidth.Text = template.BoxWidth;
+                    cboLabelSize.Text = template.LabelSize;
+                    cboLabelPosition.Text = template.LabelPositon;
+                    lblLeftDistance.Text = template.LeftOffset;
+                    lblRightDistance.Text = template.RightOffset;
+
+
+                    var service = new BartenderService();
+                    var previewImagePath = service
+                        .GetPreviewFile(template.LabelLocation, pictureBox1.Width, pictureBox1.Height).Result;
+
+
+                    SetCurrentBox();
+
+                    var boxSettings = template.CurrentBox;
+
+                    _currentBox.LabelToRightStartInches = boxSettings.LabelToRightStartInches;
+                    _currentBox.LabelToRightStartPixels = boxSettings.LabelToRightStartPixels;
+                    _currentBox.PixelsPerTenthInchLeft = boxSettings.PixelsPerTenthInchRight;
+                    _currentBox.LabelToLeftStartInches = boxSettings.LabelToLeftStartInches;
+                    _currentBox.LabelToLeftCurrentInches = boxSettings.LabelToLeftStartPixels;
+                    _currentBox.PixelsPerTenthInchLeft = boxSettings.PixelsPerTenthInchLeft;
+                    _currentBox.FixedPanelRightEdge = boxSettings.FixedPanelRightEdge;
+                    _currentBox.FixedPanelLeftEdge = boxSettings.FixedPanelLeftEdge;
+
+                    _currentBox.MoveLabel(boxSettings.LablePosition, boxSettings.LabelToLeftCurrentInches, boxSettings.LabelToRightCurrentInches);
+
+                    for (int i = 0; i < template.CurrentBox.CurrentLabelRotation; i++)
+                    {
+                        SetRotation(_currentBox.LabelSize);
+                    }
                 }
-
-                SetCurrentBox();
-
-                var boxSettings = template.CurrentBox;
-
-                _currentBox.LabelToRightStartInches = boxSettings.LabelToRightStartInches;
-                _currentBox.LabelToRightStartPixels = boxSettings.LabelToRightStartPixels;
-                _currentBox.PixelsPerTenthInchLeft = boxSettings.PixelsPerTenthInchRight;
-                _currentBox.LabelToLeftStartInches = boxSettings.LabelToLeftStartInches;
-                _currentBox.LabelToLeftCurrentInches = boxSettings.LabelToLeftStartPixels;
-                _currentBox.PixelsPerTenthInchLeft = boxSettings.PixelsPerTenthInchLeft;
-                _currentBox.FixedPanelRightEdge = boxSettings.FixedPanelRightEdge;
-                _currentBox.FixedPanelLeftEdge = boxSettings.FixedPanelLeftEdge;
-
-                _currentBox.MoveLabel(boxSettings.LablePosition, boxSettings.LabelToLeftCurrentInches, boxSettings.LabelToRightCurrentInches);
-
-                for (int i = 0; i < template.CurrentBox.CurrentLabelRotation; i++)
+                catch(Exception ex)
                 {
-                    SetRotation(_currentBox.LabelSize);
+                    _log.Error("Label Settings - Load Template");
+                    _log.Error(ex.Message, ex);
+                    MessageBox.Show("Error Loading Template.", "Preview Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -18,13 +18,13 @@ namespace ControlWorks.UI.BarTender
         
         private PviController()
         {
-           // _application = new PviApplication();
+            _application = new PviApplication();
         }
 
         public void Start()
         {
-            //_application.Connect();
-            //_application.VariablesChanged += _application_VariablesChanged;
+            _application.Connect();
+            _application.VariablesChanged += _application_VariablesChanged;
         }
 
         private void _application_VariablesChanged(object sender, VariableEventArgs e)
@@ -35,24 +35,24 @@ namespace ControlWorks.UI.BarTender
 
         public string GetServiceName()
         {
-            //return _application.GetServiceName();
+            return _application.GetServiceName();
             return String.Empty;
         }
         
         public bool IsServiceConnected()
         {
-            //return _application.IsPviServiceConnected();
+            return _application.IsPviServiceConnected();
             return true;
         }
 
         public void SetVariable(string name, object val)
         {
-            //_application.SetVariable(name, val);
+            _application.SetVariable(name, val);
         }
 
         public void SetVariables(PrinterInfoDto dto)
         {
-            //_application.SetVariables(dto);
+            _application.SetVariables(dto);
         }
     }
 }

@@ -76,6 +76,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tmrJobRun = new System.Windows.Forms.Timer(this.components);
+            this.tmrButtonPress = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -595,6 +596,11 @@
             this.tmrJobRun.Interval = 1000;
             this.tmrJobRun.Tick += new System.EventHandler(this.tmrJobRun_Tick);
             // 
+            // tmrButtonPress
+            // 
+            this.tmrButtonPress.Interval = 2000;
+            this.tmrButtonPress.Tick += new System.EventHandler(this.tmrButtonPress_Tick);
+            // 
             // ucMachineControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -664,5 +670,6 @@
         private System.Windows.Forms.TextBox txtHeight;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Timer tmrButtonPress;
     }
 }

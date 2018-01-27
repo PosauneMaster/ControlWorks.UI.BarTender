@@ -36,6 +36,12 @@ namespace ControlWorks.UI.BarTender
         }
         private Color _defaultBackColor;
         private Color _defaultForeColor;
+
+
+        private Color _defaultTestBackColor;
+        private Color _defaultTestForeColor;
+
+
         private TemplateSettings _currentTemplate;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -80,6 +86,10 @@ namespace ControlWorks.UI.BarTender
 
                         Task.Run(() => service.GetPreviewFile(_currentTemplate.LabelLocation, pictureBox1.Width, pictureBox1.Height));
                     }
+                    else
+                    {
+                        pictureBox1.ImageLocation = String.Empty;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -109,7 +119,11 @@ namespace ControlWorks.UI.BarTender
             this.btnStop.BackColor = Color.Red;
             this.btnStop.ForeColor = Color.White;
 
-            cboOrientation.SelectedIndex = 0;
+            _defaultTestBackColor = btnTestPrint.BackColor;
+            _defaultTestForeColor = btnTestPrint.ForeColor;
+
+
+        cboOrientation.SelectedIndex = 0;
             cboLabelPlacement.SelectedIndex = 0;
 
             _pvicontroller = PviController.Controller;
@@ -140,6 +154,25 @@ namespace ControlWorks.UI.BarTender
                 txtSideLabels.Text = dto.NumberOfSideLabels?.ToString() ?? String.Empty;
                 txtTotalLabels.Text = dto.TotalLabelsApplied?.ToString() ?? String.Empty;
 
+                if (dto.ResetNumberOfBoxes.HasValue && dto.ResetNumberOfBoxes.Value == true)
+                {
+                    txtBoxCount.Text = String.Empty;
+                }
+
+                if (dto.ResetNumberOfFrontLabels.HasValue && dto.ResetNumberOfFrontLabels.Value == true)
+                {
+                    txtFrontLabels.Text = String.Empty;
+                }
+                if (dto.ResetNumberOfSideLabels.HasValue && dto.ResetNumberOfSideLabels.Value == true)
+                {
+                    txtSideLabels.Text = String.Empty;
+                }
+                if (dto.ResetTotalLabelsApplied.HasValue && dto.ResetTotalLabelsApplied.Value == true)
+                {
+                    txtTotalLabels.Text = String.Empty;
+                }
+
+
                 if (dto.RefreshLabel.HasValue)
                 {
                     if (dto.RefreshLabel.Value)
@@ -168,6 +201,7 @@ namespace ControlWorks.UI.BarTender
 
                 this.btnStart.BackColor = Color.Green;
                 this.btnStart.ForeColor = Color.White;
+                btnStart.Text = "Running...";
 
                 txtJobStartTime.Text = DateTime.Now.ToString("MM/dd/yyyy   HH:mm:ss");
 
@@ -261,6 +295,7 @@ namespace ControlWorks.UI.BarTender
                 _pvicontroller.SetVariables(GetVariables());
                 btnStart.BackColor = _defaultBackColor;
                 btnStart.ForeColor = _defaultForeColor;
+                btnStart.Text = "Start";
 
                 _jobRunStopwatch.Stop();
             }
@@ -326,9 +361,18 @@ namespace ControlWorks.UI.BarTender
         private void btnChooseLabel_Click(object sender, EventArgs e)
         {
             openFileDialog1.InitialDirectory = Properties.Settings.Default.BartenderFilesLocation;
+            openFileDialog1.FileName = String.Empty;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
+                var b = sender as Button;
+                if (b != null)
+                {
+                    b.BackColor = Color.Green;
+                    b.ForeColor = Color.White;
+                    tmrButtonPress.Start();
+                }
+
                 _currentFile = openFileDialog1.FileName;
                 pictureBox1.ImageLocation = String.Empty;
 
@@ -363,8 +407,16 @@ namespace ControlWorks.UI.BarTender
 
         private void btnTestPrint_Click(object sender, EventArgs e)
         {
+
             if (!String.IsNullOrEmpty(_currentFile))
             {
+                var b = sender as Button;
+                if (b != null)
+                {
+                    b.BackColor = Color.Green;
+                    b.ForeColor = Color.White;
+                    tmrButtonPress.Start();
+                }
                 var orientation = GetOrientation();
 
                 var service = GetService();
@@ -411,6 +463,17 @@ namespace ControlWorks.UI.BarTender
         private void cboOrientation_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void tmrButtonPress_Tick(object sender, EventArgs e)
+        {
+            tmrButtonPress.Stop();
+
+            btnTestPrint.ForeColor = _defaultTestForeColor;
+            btnTestPrint.BackColor = _defaultTestBackColor;
+
+            btnChooseLabel.BackColor = _defaultTestBackColor;
+            btnChooseLabel.ForeColor = _defaultTestForeColor;
         }
     }
 }

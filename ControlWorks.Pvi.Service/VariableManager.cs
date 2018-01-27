@@ -53,10 +53,18 @@ namespace ControlWorks.Pvi.Service
             CreateVariable(_cpu, "PVI.Command[4]"); //RefreshLabel
 
 
-            CreateVariable(_cpu, "PVI.Counter[0]"); //Number of Boxes
-            CreateVariable(_cpu, "PVI.Counter[1]"); //Number of Front Labels
-            CreateVariable(_cpu, "PVI.Counter[2]"); //Number of Side Labels
-            CreateVariable(_cpu, "PVI.Counter[3]"); //Total Labels Applied
+            CreateVariable(_cpu, "PVI.Counter[0].CountValue"); //Number of Boxes
+            CreateVariable(_cpu, "PVI.Counter[0].Reset"); //Number of Boxes - reset
+
+            CreateVariable(_cpu, "PVI.Counter[1].CountValue"); //Number of Front Labels
+            CreateVariable(_cpu, "PVI.Counter[1].Reset"); //Number of Front Labels - reset
+
+            CreateVariable(_cpu, "PVI.Counter[2].CountValue"); //Number of Side Labels
+            CreateVariable(_cpu, "PVI.Counter[2].Reset"); //Number of Side Labels - reset
+
+            CreateVariable(_cpu, "PVI.Counter[3].CountValue"); //Total Labels Applied
+            CreateVariable(_cpu, "PVI.Counter[3].Reset"); //Total Labels Applied - reset
+
 
             CreateVariable(_cpu, "PVI.Command[6]"); //Number of Boxes Reset
             CreateVariable(_cpu, "PVI.Command[7]"); //Number of Front Labels Reset
@@ -175,10 +183,19 @@ namespace ControlWorks.Pvi.Service
                 printerInfo.SetProperty(nameof(printerInfo.StopConveyor), Variables["PVI.Command[1]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetConveyor), Variables["PVI.Command[2]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.PrinterOnOff), Variables["PVI.Command[3]"].Value);
-                printerInfo.SetProperty(nameof(printerInfo.NumberOfBoxes), Variables["PVI.Counter[0]"].Value);
-                printerInfo.SetProperty(nameof(printerInfo.NumberOfFrontLabels), Variables["PVI.Counter[1]"].Value);
-                printerInfo.SetProperty(nameof(printerInfo.NumberOfSideLabels), Variables["PVI.Counter[2]"].Value);
-                printerInfo.SetProperty(nameof(printerInfo.TotalLabelsApplied), Variables["PVI.Counter[3]"].Value);
+
+                printerInfo.SetProperty(nameof(printerInfo.NumberOfBoxes), Variables["PVI.Counter[0].CountValue"].Value);
+                printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfBoxes), Variables["PVI.Counter[0].Reset"].Value);
+
+                printerInfo.SetProperty(nameof(printerInfo.NumberOfFrontLabels), Variables["PVI.Counter[1].CountValue"].Value);
+                printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfFrontLabels), Variables["PVI.Counter[1].Reset"].Value);
+
+                printerInfo.SetProperty(nameof(printerInfo.NumberOfSideLabels), Variables["PVI.Counter[2].CountValue"].Value);
+                printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfSideLabels), Variables["PVI.Counter[2].Reset"].Value);
+
+                printerInfo.SetProperty(nameof(printerInfo.TotalLabelsApplied), Variables["PVI.Counter[3].CountValue"].Value);
+                printerInfo.SetProperty(nameof(printerInfo.ResetTotalLabelsApplied), Variables["PVI.Counter[3].Reset"].Value);
+
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfBoxes), Variables["PVI.Command[0]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfFrontLabels), Variables["PVI.Command[1]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfSideLabels), Variables["PVI.Command[2]"].Value);
