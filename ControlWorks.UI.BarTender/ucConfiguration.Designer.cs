@@ -217,6 +217,7 @@
             this.groupBox1.TabIndex = 14;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Default Settings";
+            this.groupBox1.Visible = false;
             // 
             // cboLabelPlacement
             // 

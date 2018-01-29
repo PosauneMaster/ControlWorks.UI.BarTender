@@ -94,13 +94,13 @@ namespace ControlWorks.UI.BarTender
         {
             if (Visible)
             {
-                cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
-                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
-                txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
-                txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
-                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
-                txtDefaultBoxHeight.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxHeight;
-                txtDefaultBoxWidth.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxWidth;
+                //cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+                //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                //txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+                //txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+                //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                //txtDefaultBoxHeight.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxHeight;
+                //txtDefaultBoxWidth.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxWidth;
 
             }
         }

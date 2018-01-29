@@ -122,11 +122,16 @@ namespace ControlWorks.UI.BarTender
             _defaultTestBackColor = btnTestPrint.BackColor;
             _defaultTestForeColor = btnTestPrint.ForeColor;
 
-            cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
-            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
-            txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
-            txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
-            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            cboLabelPlacement.SelectedIndex = 0;
+            cboOrientation.SelectedIndex = 2;
+            txtInfeedSpeed.Text = "70";
+            txtPrinterSpeed.Text = "50";
+
+            //cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+            //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            //txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+            //txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+            //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
 
             _pvicontroller = PviController.Controller;
             _pvicontroller.VariablesChanged += _pvicontroller_VariablesChanged;
@@ -561,11 +566,11 @@ namespace ControlWorks.UI.BarTender
         {
             if (Visible)
             {
-                cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
-                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
-                txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
-                txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
-                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                //cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+                //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                //txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+                //txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+                //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
             }
         }
     }
