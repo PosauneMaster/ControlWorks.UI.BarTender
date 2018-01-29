@@ -609,6 +609,7 @@
             this.Name = "ucMachineControl";
             this.Size = new System.Drawing.Size(969, 644);
             this.Load += new System.EventHandler(this.ucMachineControl_Load);
+            this.VisibleChanged += new System.EventHandler(this.ucMachineControl_VisibleChanged);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.groupBox4.ResumeLayout(false);

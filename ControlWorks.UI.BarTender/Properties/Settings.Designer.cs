@@ -70,5 +70,53 @@ namespace ControlWorks.UI.BarTender.Properties {
                 this["DefaultBoxWidth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Landscape")]
+        public string DefaultOrientation {
+            get {
+                return ((string)(this["DefaultOrientation"]));
+            }
+            set {
+                this["DefaultOrientation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public string DefaultInfeedSpeed {
+            get {
+                return ((string)(this["DefaultInfeedSpeed"]));
+            }
+            set {
+                this["DefaultInfeedSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public string DefaultPrinterSpeed {
+            get {
+                return ((string)(this["DefaultPrinterSpeed"]));
+            }
+            set {
+                this["DefaultPrinterSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Front and Side")]
+        public string DefaultLabelPlacement {
+            get {
+                return ((string)(this["DefaultLabelPlacement"]));
+            }
+            set {
+                this["DefaultLabelPlacement"] = value;
+            }
+        }
     }
 }

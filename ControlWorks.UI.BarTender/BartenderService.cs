@@ -13,10 +13,10 @@ namespace ControlWorks.UI.BarTender
 {
     public interface IBartenderService
     {
-        Task<string> PrintFile(string filename, string orientation, string numberOfLabels);
+        Task<string> PrintFile(string filename, string orientation, string numberOfLabels, bool isTest);
         Task<string> GetPreviewFile(string filename, int width, int height);
         string GetMessage(string message);
-        
+       
     }
 
     public class BartenderService : IBartenderService
@@ -24,6 +24,7 @@ namespace ControlWorks.UI.BarTender
         private readonly ILog _log = LogManager.GetLogger("FileLogger");
 
         public event EventHandler<PreviewFileEventArgs> PreviewFileRetrieved;
+        public event EventHandler<EventArgs> PrintSent;
 
         private void OnPreviewFileRetrieved(string filename)
         {
@@ -92,9 +93,16 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+        private void OnPrintSent()
+        {
+            var temp = PrintSent;
+            if (temp != null)
+            {
+                temp(this, new EventArgs());
+            }
+        }
 
-
-        public async Task<string> PrintFile(string filename, string orientation, string numberOfLabels)
+        public async Task<string> PrintFile(string filename, string orientation, string numberOfLabels, bool isTest = false)
         {
             const string methodname = "api/Print/SendPrint";
             using (var client = new HttpClient())
@@ -113,6 +121,8 @@ namespace ControlWorks.UI.BarTender
                     var result = await client.PostAsync(methodname, content).ConfigureAwait(false);
 
                     var resultContent = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+
+                    OnPrintSent();
 
                     return resultContent;
                 }

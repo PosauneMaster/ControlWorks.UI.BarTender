@@ -32,6 +32,13 @@ namespace ControlWorks.UI.BarTender
 
             _defaultBackColor = btnManualFront.BackColor;
             _defaultForeColor = btnManualFront.ForeColor;
+
+            cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+            txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+
         }
 
         private void btnBTFilesLocation_Click(object sender, EventArgs e)
@@ -68,9 +75,15 @@ namespace ControlWorks.UI.BarTender
 
                 frm.FormClosed += (s, ea) =>
                 {
-                    Properties.Settings.Default.DefaultBoxHeight = txtDefaultBoxHeight.Text;
-                    Properties.Settings.Default.DefaultBoxWidth = txtDefaultBoxWidth.Text;
-                    Properties.Settings.Default.Save();
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxHeight = txtDefaultBoxHeight.Text;
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxWidth = txtDefaultBoxWidth.Text;
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation = cboOrientation.Text;
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement = cboLabelPlacement.Text;
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed = txtInfeedSpeed.Text;
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed = txtPrinterSpeed.Text;
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement = cboLabelPlacement.Text;
+
+                    ControlWorks.UI.BarTender.Properties.Settings.Default.Save();
                 };
 
                 frm.Show();
@@ -79,8 +92,17 @@ namespace ControlWorks.UI.BarTender
 
         private void ucConfiguration_VisibleChanged(object sender, EventArgs e)
         {
-            txtDefaultBoxHeight.Text = Properties.Settings.Default.DefaultBoxHeight;
-            txtDefaultBoxWidth.Text = Properties.Settings.Default.DefaultBoxWidth;
+            if (Visible)
+            {
+                cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+                txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                txtDefaultBoxHeight.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxHeight;
+                txtDefaultBoxWidth.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxWidth;
+
+            }
         }
 
         private void btnManualFront_Click(object sender, EventArgs e)
@@ -160,5 +182,6 @@ namespace ControlWorks.UI.BarTender
 
 
         }
+
     }
 }

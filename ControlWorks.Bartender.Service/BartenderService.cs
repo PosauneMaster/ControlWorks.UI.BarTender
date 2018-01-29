@@ -19,6 +19,7 @@ namespace ControlWorks.Bartender.Service
 
         public BartenderService()
         {
+            _pvicontroller = pvicontroller;
             _engine = new Engine(true);
 
             var printers = new Printers();

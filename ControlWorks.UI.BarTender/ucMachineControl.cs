@@ -122,9 +122,11 @@ namespace ControlWorks.UI.BarTender
             _defaultTestBackColor = btnTestPrint.BackColor;
             _defaultTestForeColor = btnTestPrint.ForeColor;
 
-
-        cboOrientation.SelectedIndex = 0;
-            cboLabelPlacement.SelectedIndex = 0;
+            cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+            txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
 
             _pvicontroller = PviController.Controller;
             _pvicontroller.VariablesChanged += _pvicontroller_VariablesChanged;
@@ -172,6 +174,11 @@ namespace ControlWorks.UI.BarTender
                     txtBoxCount.Text = String.Empty;
                 }
 
+                if (dto.ClearPrinter.HasValue && dto.ClearPrinter.Value)
+                {
+                    var service = GetService();
+                    Task.Run(() => service.Cancel());
+                }
 
                 if (dto.RefreshLabel.HasValue)
                 {
@@ -184,9 +191,56 @@ namespace ControlWorks.UI.BarTender
                         Task.Run(() => service.PrintFile(_currentFile, orientation, numberOfLabels));
                     }
                 }
-            }
 
+                if (dto.ConyorsRunning.HasValue && dto.ConyorsRunning.Value)
+                {
+                    SetStartConveyor();
+                }
+                else
+                {
+                    SetStopConveyor();
+                }
+
+            }
         }
+
+        private void SetStartConveyor()
+        {
+            if (InvokeRequired)
+            {
+                Action a = SetStartConveyor;
+                Invoke(a);
+            }
+            else
+            {
+                this.btnStart.BackColor = Color.Green;
+                this.btnStart.ForeColor = Color.White;
+                btnStart.Text = "Running...";
+
+                if (!_jobRunStopwatch.IsRunning)
+                {
+                    _jobRunStopwatch.Start();
+                }
+            }
+        }
+
+        private void SetStopConveyor()
+        {
+            if (InvokeRequired)
+            {
+                Action a = SetStopConveyor;
+                Invoke(a);
+            }
+            else
+            {
+                btnStart.BackColor = _defaultBackColor;
+                btnStart.ForeColor = _defaultForeColor;
+                btnStart.Text = "Start";
+
+                _jobRunStopwatch.Stop();
+            }
+        }
+
 
         private void btnStart_Click(object sender, EventArgs e)
         {
@@ -199,14 +253,9 @@ namespace ControlWorks.UI.BarTender
                 SetControlsEnabledTo(false);
                 _pvicontroller.SetVariables(GetVariables());
 
-                this.btnStart.BackColor = Color.Green;
-                this.btnStart.ForeColor = Color.White;
-                btnStart.Text = "Running...";
-
                 txtJobStartTime.Text = DateTime.Now.ToString("MM/dd/yyyy   HH:mm:ss");
 
                 _jobRunStopwatch.Reset();
-                _jobRunStopwatch.Start();
                 tmrJobRun.Start();
             }
             catch (Exception ex)
@@ -216,6 +265,8 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+
+
         private PrinterInfoDto GetVariables()
         {
 
@@ -224,25 +275,20 @@ namespace ControlWorks.UI.BarTender
             if (cboLabelPlacement.Text == "Front")
             {
                 dto.LabelApplyFormat = 2;
-                txtLabelsPerBox.Text = "1";
             }
             else if (cboLabelPlacement.Text == "Side")
             {
                 dto.LabelApplyFormat = 1;
-                txtLabelsPerBox.Text = "1";
 
             }
             else if (cboLabelPlacement.Text == "Front and Side")
             {
                 dto.LabelApplyFormat = 3;
-                txtLabelsPerBox.Text = "2";
 
             }
             else
             {
                 dto.LabelApplyFormat = 0;
-                txtLabelsPerBox.Text = "0";
-
             }
 
             if (_serviceRunning)
@@ -293,11 +339,6 @@ namespace ControlWorks.UI.BarTender
                 SetControlsEnabledTo(true);
 
                 _pvicontroller.SetVariables(GetVariables());
-                btnStart.BackColor = _defaultBackColor;
-                btnStart.ForeColor = _defaultForeColor;
-                btnStart.Text = "Start";
-
-                _jobRunStopwatch.Stop();
             }
             catch (Exception ex)
             {
@@ -330,12 +371,32 @@ namespace ControlWorks.UI.BarTender
 
         private void cboLabelPlacement_SelectedIndexChanged(object sender, EventArgs e)
         {
+            var cb = sender as ComboBox;
+            if (sender != null)
+            {
+                if (cb.Text == "Front")
+                {
+                    txtLabelsPerBox.Text = "1";
+                }
+                else if (cb.Text == "Side")
+                {
+                    txtLabelsPerBox.Text = "1";
+
+                }
+                else if (cb.Text == "Front and Side")
+                {
+                    txtLabelsPerBox.Text = "2";
+                }
+                else
+                {
+                    txtLabelsPerBox.Text = "0";
+                }
+            }
 
             if (_pvicontroller != null)
             {
                 _pvicontroller.SetVariables(GetVariables());
             }
-
         }
 
         private void groupBox4_VisibleChanged(object sender, EventArgs e)
@@ -405,8 +466,10 @@ namespace ControlWorks.UI.BarTender
             }
         }
 
+        private bool _testPrint = false;
         private void btnTestPrint_Click(object sender, EventArgs e)
         {
+            _testPrint = true;
 
             if (!String.IsNullOrEmpty(_currentFile))
             {
@@ -420,13 +483,31 @@ namespace ControlWorks.UI.BarTender
                 var orientation = GetOrientation();
 
                 var service = GetService();
-                Task.Run(() => service.PrintFile(_currentFile, orientation, "1"));
+                Task.Run(() => service.PrintFile(_currentFile, orientation, "1", true));
             }
         }
 
         private BartenderService GetService()
         {
-            return _service ?? (_service = new BartenderService());
+            if (_service == null)
+            {
+                _service = new BartenderService();
+                _service.PrintSent += _service_PrintSent;
+            }
+            return _service;
+        }
+
+        private object _syncLock = new Object();
+        private void _service_PrintSent(object sender, EventArgs e)
+        {
+            lock(_syncLock)
+            {
+                if (_testPrint)
+                {
+                    _pvicontroller.SetVariable("PVI.Command[12]", 1);
+                }
+                _testPrint = false;
+            }
         }
 
         private string GetOrientation()
@@ -474,6 +555,18 @@ namespace ControlWorks.UI.BarTender
 
             btnChooseLabel.BackColor = _defaultTestBackColor;
             btnChooseLabel.ForeColor = _defaultTestForeColor;
+        }
+
+        private void ucMachineControl_VisibleChanged(object sender, EventArgs e)
+        {
+            if (Visible)
+            {
+                cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+                txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+                txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+                cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            }
         }
     }
 }

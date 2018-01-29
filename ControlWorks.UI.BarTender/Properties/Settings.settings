@@ -14,5 +14,17 @@
     <Setting Name="DefaultBoxWidth" Type="System.String" Scope="User">
       <Value Profile="(Default)">12</Value>
     </Setting>
+    <Setting Name="DefaultOrientation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Landscape</Value>
+    </Setting>
+    <Setting Name="DefaultInfeedSpeed" Type="System.String" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="DefaultPrinterSpeed" Type="System.String" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="DefaultLabelPlacement" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Front and Side</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

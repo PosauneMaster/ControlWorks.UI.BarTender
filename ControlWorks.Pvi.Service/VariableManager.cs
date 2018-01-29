@@ -73,6 +73,10 @@ namespace ControlWorks.Pvi.Service
             CreateVariable(_cpu, "PVI.Command[10]"); //Manual Front
             CreateVariable(_cpu, "PVI.Command[11]"); //Manual Side
 
+            CreateVariable(_cpu, "PVI.Command[12]"); //Test Print
+            CreateVariable(_cpu, "PVI.Command[13]"); //Clear Printer
+
+
             CreateVariable(_cpu, "PVI.Status[0]"); //Conveyors Running
             CreateVariable(_cpu, "PVI.Status[1]"); //Printer is ON and OK
 
@@ -201,6 +205,8 @@ namespace ControlWorks.Pvi.Service
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfSideLabels), Variables["PVI.Command[2]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetTotalLabelsApplied), Variables["PVI.Command[3]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.RefreshLabel), Variables["PVI.Command[4]"].Value);
+                printerInfo.SetProperty(nameof(printerInfo.ClearPrinter), Variables["PVI.Command[13]"].Value);
+
                 printerInfo.SetProperty(nameof(printerInfo.ConyorsRunning), Variables["PVI.Status[0]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.PrinterOnOk), Variables["PVI.Status[1]"].Value);
 
@@ -210,6 +216,17 @@ namespace ControlWorks.Pvi.Service
                 {
                     SetVariable(v.Name, 0);
                 }
+
+                if (v.Name == "PVI.Command[13]")
+                {
+                    SetVariable(v.Name, 0);
+                }
+
+                //if (v.Name == "PVI.Status[0]")
+                //{
+                //    SetVariable(v.Name, 0);
+                //}
+
             }
         }
     }

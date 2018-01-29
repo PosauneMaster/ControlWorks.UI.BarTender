@@ -30,6 +30,7 @@ namespace ControlWorks.Pvi.Service
         public bool? PrinterOnOk { get; set; }
         public bool? RefreshLabel { get; set; }
         public double? BoxDimension { get; set; }
+        public bool? ClearPrinter { get; set; }
 
     }
 
