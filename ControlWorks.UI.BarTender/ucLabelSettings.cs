@@ -641,6 +641,7 @@ namespace ControlWorks.UI.BarTender
                 _log.Error(ex.Message, ex);
             }
         }
+
     }
 
     public class UserControlEventArgs : EventArgs

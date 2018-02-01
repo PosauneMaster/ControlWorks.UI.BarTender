@@ -17,7 +17,7 @@ namespace ControlWorks.UI.BarTender
 
         private readonly Stopwatch _jobRunStopwatch = new Stopwatch();
         private readonly string _labelsizesmall = "4 x 4";
-        private readonly string _labelsizelarge = "4 x 6";
+        private readonly string _labelsizelarge = "6 x 4";
 
         private bool _serviceRunning = false;
         private BartenderService _service;
@@ -68,8 +68,6 @@ namespace ControlWorks.UI.BarTender
 
 
                     cboOrientation.SelectedIndex = _currentTemplate.CurrentBox.CurrentLabelRotation;
-                    txtInfeedSpeed.Text = _currentTemplate.InfeedSpeed;
-                    txtPrinterSpeed.Text = _currentTemplate.PrinterSpeed;
                     cboLabelPlacement.Text = _currentTemplate.LabelPlacement;
                     txtLeftOffset.Text = _currentTemplate.CurrentBox.LabelToLeftCurrentInches.ToString("N2");
                     cboLabelSize.Text = _currentTemplate.LabelSize;
@@ -106,9 +104,9 @@ namespace ControlWorks.UI.BarTender
 
             cboLabelSize.Items.Clear();
 
-            cboLabelSize.Items.Add(_labelsizesmall);
             cboLabelSize.Items.Add(_labelsizelarge);
-            cboLabelSize.SelectedIndex = 1;
+            cboLabelSize.Items.Add(_labelsizesmall);
+            cboLabelSize.SelectedIndex = 0;
 
             cboLabelPosition.DataSource = Enum.GetValues(typeof(LabelPositon));
             cboLabelPosition.SelectedIndex = 2;
@@ -124,9 +122,6 @@ namespace ControlWorks.UI.BarTender
 
             cboLabelPlacement.SelectedIndex = 0;
             cboOrientation.SelectedIndex = 2;
-            txtInfeedSpeed.Text = "70";
-            txtPrinterSpeed.Text = "50";
-
             //cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
             //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
             //txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
@@ -154,8 +149,6 @@ namespace ControlWorks.UI.BarTender
             else
             {
                 Status = dto.StatusText;
-                txtInfeedSpeed.Text = dto.InfeedSpeed?.ToString() ?? String.Empty;
-                txtPrinterSpeed.Text = dto.PrinterConveyorSpeed?.ToString() ?? String.Empty;
                 txtBoxCount.Text = dto.NumberOfBoxes?.ToString() ?? String.Empty;
                 txtFrontLabels.Text = dto.NumberOfFrontLabels?.ToString() ?? String.Empty;
                 txtSideLabels.Text = dto.NumberOfSideLabels?.ToString() ?? String.Empty;
@@ -314,16 +307,6 @@ namespace ControlWorks.UI.BarTender
                 dto.SideLabelPosition = offset;
             }
 
-            if (Double.TryParse(txtInfeedSpeed.Text, out var infeed))
-            {
-                dto.InfeedSpeed = (int) infeed;
-            }
-
-            if (Double.TryParse(txtPrinterSpeed.Text, out var print))
-            {
-                dto.PrinterConveyorSpeed = (int)print;
-            }
-
             if (Double.TryParse(txtWidth.Text, out var width))
             {
                 dto.BoxDimension = width;
@@ -416,8 +399,6 @@ namespace ControlWorks.UI.BarTender
             txtHeight.Enabled = enabled;
             txtWidth.Enabled = enabled;
             txtLeftOffset.Enabled = enabled;
-            txtInfeedSpeed.Enabled = enabled;
-            txtPrinterSpeed.Enabled = enabled;
             cboLabelPlacement.Enabled = enabled;
             cboLabelPosition.Enabled = enabled;
             cboLabelSize.Enabled = enabled;
@@ -431,8 +412,7 @@ namespace ControlWorks.UI.BarTender
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                var b = sender as Button;
-                if (b != null)
+                if (sender is Button b)
                 {
                     b.BackColor = Color.Green;
                     b.ForeColor = Color.White;
@@ -478,8 +458,7 @@ namespace ControlWorks.UI.BarTender
 
             if (!String.IsNullOrEmpty(_currentFile))
             {
-                var b = sender as Button;
-                if (b != null)
+                if (sender is Button b)
                 {
                     b.BackColor = Color.Green;
                     b.ForeColor = Color.White;
@@ -502,7 +481,7 @@ namespace ControlWorks.UI.BarTender
             return _service;
         }
 
-        private object _syncLock = new Object();
+        private readonly object _syncLock = new Object();
         private void _service_PrintSent(object sender, EventArgs e)
         {
             lock(_syncLock)
@@ -560,6 +539,9 @@ namespace ControlWorks.UI.BarTender
 
             btnChooseLabel.BackColor = _defaultTestBackColor;
             btnChooseLabel.ForeColor = _defaultTestForeColor;
+
+            btnResetCounters.BackColor = _defaultTestBackColor;
+            btnResetCounters.ForeColor = _defaultTestForeColor;
         }
 
         private void ucMachineControl_VisibleChanged(object sender, EventArgs e)
@@ -572,6 +554,17 @@ namespace ControlWorks.UI.BarTender
                 //txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
                 //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
             }
+        }
+
+        private void btnResetCounters_Click(object sender, EventArgs e)
+        {
+            if (sender is Button b)
+            {
+                b.BackColor = Color.Green;
+                b.ForeColor = Color.White;
+                tmrButtonPress.Start();
+            }
+
         }
     }
 }
