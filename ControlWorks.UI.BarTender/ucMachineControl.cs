@@ -154,24 +154,6 @@ namespace ControlWorks.UI.BarTender
                 txtSideLabels.Text = dto.NumberOfSideLabels?.ToString() ?? String.Empty;
                 txtTotalLabels.Text = dto.TotalLabelsApplied?.ToString() ?? String.Empty;
 
-                if (dto.ResetNumberOfBoxes.HasValue && dto.ResetNumberOfBoxes.Value == true)
-                {
-                    txtBoxCount.Text = String.Empty;
-                }
-
-                if (dto.ResetNumberOfFrontLabels.HasValue && dto.ResetNumberOfFrontLabels.Value == true)
-                {
-                    txtFrontLabels.Text = String.Empty;
-                }
-                if (dto.ResetNumberOfSideLabels.HasValue && dto.ResetNumberOfSideLabels.Value == true)
-                {
-                    txtSideLabels.Text = String.Empty;
-                }
-                if (dto.ResetTotalLabelsApplied.HasValue && dto.ResetTotalLabelsApplied.Value == true)
-                {
-                    txtBoxCount.Text = String.Empty;
-                }
-
                 if (dto.ClearPrinter.HasValue && dto.ClearPrinter.Value)
                 {
                     var service = GetService();
@@ -564,12 +546,15 @@ namespace ControlWorks.UI.BarTender
                 b.ForeColor = Color.White;
                 tmrButtonPress.Start();
 
-                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[6]", 1));
-                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[7]", 1));
-                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[8]", 1));
-                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[9]", 1));
-            }
+                var dto = new PrinterInfoDto();
+                dto.ResetNumberOfBoxes = 1;
+                dto.ResetNumberOfFrontLabels = 1;
+                dto.ResetNumberOfSideLabels = 1;
+                dto.ResetTotalLabelsApplied = 1;
 
+                Task.Run(() => _pvicontroller.SetVariables(dto));
+
+            }
         }
     }
 }

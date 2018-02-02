@@ -22,10 +22,10 @@ namespace ControlWorks.Pvi.Service
         public int? NumberOfFrontLabels { get; set; }
         public int? NumberOfSideLabels { get; set; }
         public int? TotalLabelsApplied { get; set; }
-        public bool? ResetNumberOfBoxes { get; set; }
-        public bool? ResetNumberOfFrontLabels { get; set; }
-        public bool? ResetNumberOfSideLabels { get; set; }
-        public bool? ResetTotalLabelsApplied { get; set; }
+        public int? ResetNumberOfBoxes { get; set; }
+        public int? ResetNumberOfFrontLabels { get; set; }
+        public int? ResetNumberOfSideLabels { get; set; }
+        public int? ResetTotalLabelsApplied { get; set; }
         public bool? ConyorsRunning { get; set; }
         public bool? PrinterOnOk { get; set; }
         public bool? RefreshLabel { get; set; }
