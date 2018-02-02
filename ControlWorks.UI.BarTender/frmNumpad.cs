@@ -12,7 +12,7 @@ namespace ControlWorks.UI.BarTender
 {
     public partial class frmNumpad : Form
     {
-        private readonly TextBox _textBox;
+        public TextBox Box { get; }
         private readonly string _startValue;
         private string _value = String.Empty;
 
@@ -30,8 +30,8 @@ namespace ControlWorks.UI.BarTender
         public frmNumpad(TextBox txtBox)
         {
             InitializeComponent();
-            _textBox = txtBox;
-            _startValue = _textBox.Text;
+            Box = txtBox;
+            _startValue = Box.Text;
             MaxValue = Decimal.MaxValue;
 
         }
@@ -73,27 +73,27 @@ namespace ControlWorks.UI.BarTender
 
                         if (!IsValid(_value))
                         {
-                            _textBox.Text = _startValue;
+                            Box.Text = _startValue;
                         }
 
                         Close();
                         return;
                     case "Clear":
                         _value = String.Empty;
-                        _textBox.Text = String.Empty;
+                        Box.Text = String.Empty;
                         break;
                     case "Back":
                         if (_value.Length > 0)
                         {
                             _value = _value.Substring(0, _value.Length - 1);
-                            _textBox.Text = _value;
+                            Box.Text = _value;
                         }
                         break;
                     case "dot":
                         if (!_value.Contains("."))
                         {
                             _value += ".";
-                            _textBox.Text = _value;
+                            Box.Text = _value;
                         }
                         break;
                     default:
@@ -102,12 +102,12 @@ namespace ControlWorks.UI.BarTender
                         if (!exceeds)
                         {
                             _value += arg;
-                            _textBox.Text = _value;
+                            Box.Text = _value;
                         }
                         break;
                 }
 
-                _textBox.Text = _value;
+                Box.Text = _value;
 
             }
         }

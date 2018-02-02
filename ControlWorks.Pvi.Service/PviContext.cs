@@ -16,7 +16,7 @@ namespace ControlWorks.Pvi.Service
 
         public PviContext()
         {
-            ConnectPvi();
+            //ConnectPvi();
         }
 
         private void ConnectPvi()

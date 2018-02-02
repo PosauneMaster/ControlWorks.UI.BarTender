@@ -54,6 +54,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtInfeedSpeed = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnSavePassword = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -308,10 +311,44 @@
             this.label14.TabIndex = 48;
             this.label14.Text = "Infeed Speed:";
             // 
+            // txtPassword
+            // 
+            this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPassword.Location = new System.Drawing.Point(35, 539);
+            this.txtPassword.Multiline = true;
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.Size = new System.Drawing.Size(205, 28);
+            this.txtPassword.TabIndex = 15;
+            this.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(32, 520);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 16);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Change Password:";
+            // 
+            // btnSavePassword
+            // 
+            this.btnSavePassword.Location = new System.Drawing.Point(96, 574);
+            this.btnSavePassword.Name = "btnSavePassword";
+            this.btnSavePassword.Size = new System.Drawing.Size(144, 51);
+            this.btnSavePassword.TabIndex = 17;
+            this.btnSavePassword.Text = "Select Password";
+            this.btnSavePassword.UseVisualStyleBackColor = false;
+            this.btnSavePassword.VisibleChanged += new System.EventHandler(this.btnSavePassword_VisibleChanged);
+            this.btnSavePassword.Click += new System.EventHandler(this.btnSavePassword_Click);
+            // 
             // ucConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnSavePassword);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtPassword);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnClearQueue);
             this.Controls.Add(this.lblManualSide);
@@ -361,5 +398,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtInfeedSpeed;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnSavePassword;
     }
 }

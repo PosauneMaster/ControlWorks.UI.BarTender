@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucMachineControl));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnResetCounters = new System.Windows.Forms.Button();
             this.txtRunTime = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTotalLabels = new System.Windows.Forms.TextBox();
@@ -73,7 +74,6 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tmrJobRun = new System.Windows.Forms.Timer(this.components);
             this.tmrButtonPress = new System.Windows.Forms.Timer(this.components);
-            this.btnResetCounters = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -107,6 +107,17 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(969, 644);
             this.panel1.TabIndex = 0;
+            // 
+            // btnResetCounters
+            // 
+            this.btnResetCounters.BackColor = System.Drawing.SystemColors.Control;
+            this.btnResetCounters.Location = new System.Drawing.Point(211, 574);
+            this.btnResetCounters.Name = "btnResetCounters";
+            this.btnResetCounters.Size = new System.Drawing.Size(140, 50);
+            this.btnResetCounters.TabIndex = 46;
+            this.btnResetCounters.Text = "Reset Counters";
+            this.btnResetCounters.UseVisualStyleBackColor = false;
+            this.btnResetCounters.Click += new System.EventHandler(this.btnResetCounters_Click);
             // 
             // txtRunTime
             // 
@@ -554,17 +565,6 @@
             // 
             this.tmrButtonPress.Interval = 2000;
             this.tmrButtonPress.Tick += new System.EventHandler(this.tmrButtonPress_Tick);
-            // 
-            // btnResetCounters
-            // 
-            this.btnResetCounters.BackColor = System.Drawing.SystemColors.Control;
-            this.btnResetCounters.Location = new System.Drawing.Point(231, 574);
-            this.btnResetCounters.Name = "btnResetCounters";
-            this.btnResetCounters.Size = new System.Drawing.Size(120, 50);
-            this.btnResetCounters.TabIndex = 46;
-            this.btnResetCounters.Text = "Rest Counters";
-            this.btnResetCounters.UseVisualStyleBackColor = false;
-            this.btnResetCounters.Click += new System.EventHandler(this.btnResetCounters_Click);
             // 
             // ucMachineControl
             // 

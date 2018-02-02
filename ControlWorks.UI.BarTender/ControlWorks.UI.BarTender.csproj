@@ -85,17 +85,17 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmNumpad.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmNumpad.Designer.cs">
-      <DependentUpon>frmNumpad.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmPassword.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmPassword.Designer.cs">
       <DependentUpon>frmPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNumpad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNumpad.Designer.cs">
+      <DependentUpon>frmNumpad.cs</DependentUpon>
     </Compile>
     <Compile Include="LabelService.cs" />
     <Compile Include="Program.cs" />
@@ -132,11 +132,11 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmNumpad.resx">
-      <DependentUpon>frmNumpad.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmPassword.resx">
       <DependentUpon>frmPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNumpad.resx">
+      <DependentUpon>frmNumpad.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -183,5 +183,35 @@ namespace ControlWorks.UI.BarTender
 
         }
 
+        private void btnSavePassword_Click(object sender, EventArgs e)
+        {
+            if (sender is Button b)
+            {
+                if (b.Text.Contains("Select"))
+                {
+                    var frm = new frmNumpad(txtPassword) {StartPosition = FormStartPosition.CenterParent};
+                    frm.ShowDialog(this);
+                    b.Text = "Save Password";
+                }
+                else
+                {
+                    if (txtPassword.Text.Length > 0)
+                    {
+                        ControlWorks.UI.BarTender.Properties.Settings.Default.Password = txtPassword.Text;
+                        ControlWorks.UI.BarTender.Properties.Settings.Default.Save();
+                        MessageBox.Show($"Password changed to {txtPassword.Text}", "Password Changed",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    b.Text = "Select Password";
+                    txtPassword.Text = String.Empty;
+                }
+            }
+        }
+
+        private void btnSavePassword_VisibleChanged(object sender, EventArgs e)
+        {
+            btnSavePassword.Text = "Select Password";
+            txtPassword.Text = String.Empty;
+        }
     }
 }

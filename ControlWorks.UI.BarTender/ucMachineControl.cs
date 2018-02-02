@@ -563,6 +563,11 @@ namespace ControlWorks.UI.BarTender
                 b.BackColor = Color.Green;
                 b.ForeColor = Color.White;
                 tmrButtonPress.Start();
+
+                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[6]", 1));
+                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[7]", 1));
+                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[8]", 1));
+                Task.Run(() => _pvicontroller.SetVariable("PVI.Command[9]", 1));
             }
 
         }

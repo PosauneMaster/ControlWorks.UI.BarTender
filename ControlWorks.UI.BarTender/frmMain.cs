@@ -132,9 +132,31 @@ namespace ControlWorks.UI.BarTender
 
         private void btnConfiguration_Click(object sender, EventArgs e)
         {
-            pnlLabelSettings.Visible = false;
-            pnlMachineControl.Visible = false;
-            pnlConfiguration.Visible = true;
+            using (var passwordForm = new frmPassword())
+            {
+                passwordForm.PasswordValidated += (s, ea) =>
+                {
+                    if (ea.Valid)
+                    {
+                        pnlLabelSettings.Visible = false;
+                        pnlMachineControl.Visible = false;
+                        pnlConfiguration.Visible = true;
+
+                    }
+                    else
+                    {
+                        pnlLabelSettings.Visible = false;
+                        pnlMachineControl.Visible = true;
+                        pnlConfiguration.Visible = false;
+                    }
+
+                    if (s is Form f)
+                    {
+                        f.Close();
+                    }
+                };
+                passwordForm.ShowDialog(this);
+            }
         }
     }
 

@@ -13,7 +13,7 @@ namespace ControlWorks.Pvi.Service
         private readonly ILog _log = LogManager.GetLogger("FileLogger");
 
         public event EventHandler<VariableEventArgs> VariablesChanged;
-        private Cpu _cpu;
+        private readonly Cpu _cpu;
         public VariableCollection Variables { get; private set; }
 
         public VariableManager(Cpu cpu)
@@ -39,7 +39,7 @@ namespace ControlWorks.Pvi.Service
             Variables[name].WriteValue();
         }
 
-        public void CreateVariables()
+        private void CreateVariables()
         {
             CreateVariable(_cpu, "PVI.SideLabelPosition");
             CreateVariable(_cpu, "PVI.StatusText");
@@ -51,39 +51,25 @@ namespace ControlWorks.Pvi.Service
             CreateVariable(_cpu, "PVI.Command[2]"); //Reset Conveyor
             CreateVariable(_cpu, "PVI.Command[3]"); //Printer ON/OFF
             CreateVariable(_cpu, "PVI.Command[4]"); //RefreshLabel
-
-
             CreateVariable(_cpu, "PVI.Counter[0].CountValue"); //Number of Boxes
             CreateVariable(_cpu, "PVI.Counter[0].Reset"); //Number of Boxes - reset
-
             CreateVariable(_cpu, "PVI.Counter[1].CountValue"); //Number of Front Labels
             CreateVariable(_cpu, "PVI.Counter[1].Reset"); //Number of Front Labels - reset
-
             CreateVariable(_cpu, "PVI.Counter[2].CountValue"); //Number of Side Labels
             CreateVariable(_cpu, "PVI.Counter[2].Reset"); //Number of Side Labels - reset
-
             CreateVariable(_cpu, "PVI.Counter[3].CountValue"); //Total Labels Applied
             CreateVariable(_cpu, "PVI.Counter[3].Reset"); //Total Labels Applied - reset
-
-
             CreateVariable(_cpu, "PVI.Command[6]"); //Number of Boxes Reset
             CreateVariable(_cpu, "PVI.Command[7]"); //Number of Front Labels Reset
             CreateVariable(_cpu, "PVI.Command[8]"); //Number of Side Labels Reset
             CreateVariable(_cpu, "PVI.Command[9]"); //Total Labels Applied Reset
             CreateVariable(_cpu, "PVI.Command[10]"); //Manual Front
             CreateVariable(_cpu, "PVI.Command[11]"); //Manual Side
-
             CreateVariable(_cpu, "PVI.Command[12]"); //Test Print
             CreateVariable(_cpu, "PVI.Command[13]"); //Clear Printer
-
-
             CreateVariable(_cpu, "PVI.Status[0]"); //Conveyors Running
             CreateVariable(_cpu, "PVI.Status[1]"); //Printer is ON and OK
-
             CreateVariable(_cpu, "PVI.BoxDimension"); //The width of the box
-
-
-
         }
 
         private Variable CreateVariable(Cpu cpu, string name)
@@ -99,11 +85,6 @@ namespace ControlWorks.Pvi.Service
             return variable;
         }
 
-        private void Variable_ValueChanged1(object sender, BR.AN.PviServices.VariableEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void Variable_Error(object sender, PviEventArgs e)
         {
             string message = PviMessage.FormatMessage("Variable error: ", e);
@@ -116,11 +97,6 @@ namespace ControlWorks.Pvi.Service
             var text = e.Name;
 
             Variables = _cpu.Variables;
-
-            if (v.Name == "PVI.BoxDimension")
-            {
-            }
-
         }
 
         private void OnVariableChanged(PrinterInfoDto dto)
@@ -187,26 +163,20 @@ namespace ControlWorks.Pvi.Service
                 printerInfo.SetProperty(nameof(printerInfo.StopConveyor), Variables["PVI.Command[1]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetConveyor), Variables["PVI.Command[2]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.PrinterOnOff), Variables["PVI.Command[3]"].Value);
-
                 printerInfo.SetProperty(nameof(printerInfo.NumberOfBoxes), Variables["PVI.Counter[0].CountValue"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfBoxes), Variables["PVI.Counter[0].Reset"].Value);
-
                 printerInfo.SetProperty(nameof(printerInfo.NumberOfFrontLabels), Variables["PVI.Counter[1].CountValue"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfFrontLabels), Variables["PVI.Counter[1].Reset"].Value);
-
                 printerInfo.SetProperty(nameof(printerInfo.NumberOfSideLabels), Variables["PVI.Counter[2].CountValue"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfSideLabels), Variables["PVI.Counter[2].Reset"].Value);
-
                 printerInfo.SetProperty(nameof(printerInfo.TotalLabelsApplied), Variables["PVI.Counter[3].CountValue"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetTotalLabelsApplied), Variables["PVI.Counter[3].Reset"].Value);
-
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfBoxes), Variables["PVI.Command[0]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfFrontLabels), Variables["PVI.Command[1]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetNumberOfSideLabels), Variables["PVI.Command[2]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ResetTotalLabelsApplied), Variables["PVI.Command[3]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.RefreshLabel), Variables["PVI.Command[4]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.ClearPrinter), Variables["PVI.Command[13]"].Value);
-
                 printerInfo.SetProperty(nameof(printerInfo.ConyorsRunning), Variables["PVI.Status[0]"].Value);
                 printerInfo.SetProperty(nameof(printerInfo.PrinterOnOk), Variables["PVI.Status[1]"].Value);
 
@@ -221,12 +191,6 @@ namespace ControlWorks.Pvi.Service
                 {
                     SetVariable(v.Name, 0);
                 }
-
-                //if (v.Name == "PVI.Status[0]")
-                //{
-                //    SetVariable(v.Name, 0);
-                //}
-
             }
         }
     }

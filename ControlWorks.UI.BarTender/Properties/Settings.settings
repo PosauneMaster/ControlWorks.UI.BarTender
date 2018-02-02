@@ -26,5 +26,8 @@
     <Setting Name="DefaultLabelPlacement" Type="System.String" Scope="User">
       <Value Profile="(Default)">Front and Side</Value>
     </Setting>
+    <Setting Name="Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">12345</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
