@@ -31,16 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ucLabelSettings));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtPrinterSpeed = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.txtLabelsPerBox = new System.Windows.Forms.TextBox();
             this.cboLabelPlacement = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnTestPrint = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnChooseLabel = new System.Windows.Forms.Button();
-            this.txtInfeedSpeed = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtTemplateName = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -70,6 +66,8 @@
             this.btnSaveTemplate = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.btnCearTemplateName = new System.Windows.Forms.Button();
+            this.btnResetName = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.pnlBox.SuspendLayout();
@@ -82,16 +80,14 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.groupBox1.Controls.Add(this.txtPrinterSpeed);
-            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.btnResetName);
+            this.groupBox1.Controls.Add(this.btnCearTemplateName);
             this.groupBox1.Controls.Add(this.txtLabelsPerBox);
             this.groupBox1.Controls.Add(this.cboLabelPlacement);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnTestPrint);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.btnChooseLabel);
-            this.groupBox1.Controls.Add(this.txtInfeedSpeed);
-            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.txtTemplateName);
             this.groupBox1.Controls.Add(this.label13);
@@ -112,32 +108,11 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
             // 
-            // txtPrinterSpeed
-            // 
-            this.txtPrinterSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrinterSpeed.Location = new System.Drawing.Point(276, 185);
-            this.txtPrinterSpeed.Multiline = true;
-            this.txtPrinterSpeed.Name = "txtPrinterSpeed";
-            this.txtPrinterSpeed.Size = new System.Drawing.Size(189, 28);
-            this.txtPrinterSpeed.TabIndex = 38;
-            this.txtPrinterSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.Color.Transparent;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(273, 166);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(93, 16);
-            this.label9.TabIndex = 37;
-            this.label9.Text = "Printer Speed:";
-            // 
             // txtLabelsPerBox
             // 
             this.txtLabelsPerBox.Enabled = false;
             this.txtLabelsPerBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLabelsPerBox.Location = new System.Drawing.Point(276, 85);
+            this.txtLabelsPerBox.Location = new System.Drawing.Point(276, 148);
             this.txtLabelsPerBox.Multiline = true;
             this.txtLabelsPerBox.Name = "txtLabelsPerBox";
             this.txtLabelsPerBox.Size = new System.Drawing.Size(189, 28);
@@ -152,7 +127,7 @@
             "Side",
             "Front and Side",
             "None"});
-            this.cboLabelPlacement.Location = new System.Drawing.Point(23, 85);
+            this.cboLabelPlacement.Location = new System.Drawing.Point(23, 148);
             this.cboLabelPlacement.Name = "cboLabelPlacement";
             this.cboLabelPlacement.Size = new System.Drawing.Size(193, 28);
             this.cboLabelPlacement.TabIndex = 35;
@@ -163,7 +138,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(28, 66);
+            this.label6.Location = new System.Drawing.Point(28, 129);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(112, 16);
             this.label6.TabIndex = 34;
@@ -202,33 +177,12 @@
             this.btnChooseLabel.UseVisualStyleBackColor = false;
             this.btnChooseLabel.Click += new System.EventHandler(this.btnChooseLabel_Click);
             // 
-            // txtInfeedSpeed
-            // 
-            this.txtInfeedSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInfeedSpeed.Location = new System.Drawing.Point(23, 185);
-            this.txtInfeedSpeed.Multiline = true;
-            this.txtInfeedSpeed.Name = "txtInfeedSpeed";
-            this.txtInfeedSpeed.Size = new System.Drawing.Size(192, 28);
-            this.txtInfeedSpeed.TabIndex = 29;
-            this.txtInfeedSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(27, 166);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(92, 16);
-            this.label8.TabIndex = 28;
-            this.label8.Text = "Infeed Speed:";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(274, 66);
+            this.label7.Location = new System.Drawing.Point(274, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(102, 16);
             this.label7.TabIndex = 26;
@@ -242,8 +196,6 @@
             this.txtTemplateName.Name = "txtTemplateName";
             this.txtTemplateName.Size = new System.Drawing.Size(442, 27);
             this.txtTemplateName.TabIndex = 25;
-            this.txtTemplateName.MouseClick += new System.Windows.Forms.MouseEventHandler(this.txtTemplateName_MouseClick);
-            this.txtTemplateName.Leave += new System.EventHandler(this.txtTemplateName_Leave);
             // 
             // label13
             // 
@@ -260,7 +212,7 @@
             // 
             this.cboLabelPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboLabelPosition.FormattingEnabled = true;
-            this.cboLabelPosition.Location = new System.Drawing.Point(276, 135);
+            this.cboLabelPosition.Location = new System.Drawing.Point(276, 198);
             this.cboLabelPosition.Name = "cboLabelPosition";
             this.cboLabelPosition.Size = new System.Drawing.Size(189, 28);
             this.cboLabelPosition.TabIndex = 8;
@@ -272,7 +224,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(274, 116);
+            this.label5.Location = new System.Drawing.Point(274, 179);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 16);
             this.label5.TabIndex = 7;
@@ -282,7 +234,7 @@
             // 
             this.cboLabelSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboLabelSize.FormattingEnabled = true;
-            this.cboLabelSize.Location = new System.Drawing.Point(23, 135);
+            this.cboLabelSize.Location = new System.Drawing.Point(23, 198);
             this.cboLabelSize.Name = "cboLabelSize";
             this.cboLabelSize.Size = new System.Drawing.Size(192, 28);
             this.cboLabelSize.TabIndex = 6;
@@ -294,7 +246,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(28, 116);
+            this.label4.Location = new System.Drawing.Point(28, 179);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 16);
             this.label4.TabIndex = 5;
@@ -549,6 +501,28 @@
             // 
             this.openFileDialog1.Filter = "Bartender Files (*.btw)|*.btw|All files (*.*)|*.*";
             // 
+            // btnCearTemplateName
+            // 
+            this.btnCearTemplateName.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCearTemplateName.Location = new System.Drawing.Point(219, 69);
+            this.btnCearTemplateName.Name = "btnCearTemplateName";
+            this.btnCearTemplateName.Size = new System.Drawing.Size(120, 50);
+            this.btnCearTemplateName.TabIndex = 37;
+            this.btnCearTemplateName.Text = "Clear Name";
+            this.btnCearTemplateName.UseVisualStyleBackColor = false;
+            this.btnCearTemplateName.Click += new System.EventHandler(this.btnCearTemplateName_Click);
+            // 
+            // btnResetName
+            // 
+            this.btnResetName.BackColor = System.Drawing.SystemColors.Control;
+            this.btnResetName.Location = new System.Drawing.Point(345, 69);
+            this.btnResetName.Name = "btnResetName";
+            this.btnResetName.Size = new System.Drawing.Size(120, 50);
+            this.btnResetName.TabIndex = 38;
+            this.btnResetName.Text = "Reset Name";
+            this.btnResetName.UseVisualStyleBackColor = false;
+            this.btnResetName.Click += new System.EventHandler(this.btnResetName_Click);
+            // 
             // ucLabelSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -600,8 +574,6 @@
         private System.Windows.Forms.Timer tmrMoveLeft;
         private System.Windows.Forms.PictureBox pb6x4;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.TextBox txtInfeedSpeed;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtTemplateName;
         private System.Windows.Forms.Label label13;
@@ -616,7 +588,7 @@
         private System.Windows.Forms.TextBox txtLabelsPerBox;
         private System.Windows.Forms.ComboBox cboLabelPlacement;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtPrinterSpeed;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button btnCearTemplateName;
+        private System.Windows.Forms.Button btnResetName;
     }
 }

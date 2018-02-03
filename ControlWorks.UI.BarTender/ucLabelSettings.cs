@@ -25,7 +25,7 @@ namespace ControlWorks.UI.BarTender
         private bool _isRotated = false;
 
         private readonly string _labelsizesmall = "4 x 4";
-        private readonly string _labelsizelarge = "4 x 6";
+        private readonly string _labelsizelarge = "6 x 4";
 
         private Point _smallLabelCenterLocation; //165, 190
         private Point _largeLabelCenterLocation; //165, 160
@@ -54,9 +54,6 @@ namespace ControlWorks.UI.BarTender
 
         private void Initialize()
         {
-            txtInfeedSpeed.Text = String.Empty;
-            txtPrinterSpeed.Text = String.Empty;
-
             txtHeight.Text = "12";
             txtWidth.Text = "12";
 
@@ -66,9 +63,9 @@ namespace ControlWorks.UI.BarTender
 
             cboLabelSize.Items.Clear();
 
-            cboLabelSize.Items.Add(_labelsizesmall);
             cboLabelSize.Items.Add(_labelsizelarge);
-            cboLabelSize.SelectedIndex = 1;
+            cboLabelSize.Items.Add(_labelsizesmall);
+            cboLabelSize.SelectedIndex = 0;
 
             _smallLabelCenterLocation = pb4x4.Location;
             _largeLabelCenterLocation = pb4x6.Location;
@@ -361,11 +358,9 @@ namespace ControlWorks.UI.BarTender
 
             var template = new TemplateSettings
             {
-                
+
                 TemplateName = templateName,
                 LabelPlacement = cboLabelPlacement.Text,
-                InfeedSpeed = txtInfeedSpeed.Text,
-                PrinterSpeed = txtPrinterSpeed.Text,
                 BoxHeight = txtHeight.Text,
                 BoxWidth = txtWidth.Text,
                 LabelSize = cboLabelSize.Text,
@@ -510,8 +505,6 @@ namespace ControlWorks.UI.BarTender
                     var template = TemplateSettings.CreateFromXml(xml);
 
                     txtTemplateName.Text = template.TemplateName;
-                    txtInfeedSpeed.Text = template.InfeedSpeed;
-                    txtPrinterSpeed.Text = template.PrinterSpeed;
                     cboLabelPlacement.Text = template.LabelPlacement;
                     txtHeight.Text = template.BoxHeight;
                     txtWidth.Text = template.BoxWidth;
@@ -552,7 +545,7 @@ namespace ControlWorks.UI.BarTender
                         SetRotation(_currentBox.LabelSize);
                     }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     _log.Error("Label Settings - Load Template");
                     _log.Error(ex.Message, ex);
@@ -604,45 +597,51 @@ namespace ControlWorks.UI.BarTender
         private Process _keyboardProc;
         private void txtTemplateName_MouseClick(object sender, MouseEventArgs e)
         {
-            if (sender is TextBox tb)
-            {
-                try
-                {
-                    string progFiles = @"C:\Windows\system32\";
-                    string keyboardPath = Path.Combine(progFiles, "osk.exe");
-                    _keyboardProc = Process.Start(keyboardPath);
-                    tb.Text = String.Empty;
-
-                }
-                catch (Exception ex)
-                {
-                    _log.Error(ex.Message, ex);
-                }
+            //try
+            //{
+            //    string progFiles = @"C:\Program Files\Common Files\Microsoft Shared\ink";
+            //    string keyboardPath = Path.Combine(progFiles, "TabTip.exe");
+            //    var keyboardProc = Process.Start(keyboardPath);
+            //}
+            //catch (Exception ex)
+            //{
+            //    _log.Error(ex.Message, ex);
+            //}
 
 
-                //tb.Text = String.Empty;
-                //Process process = Process.Start(new ProcessStartInfo(
-                //    ((Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\osk.exe"))));
-            }
+            //if (sender is TextBox tb)
+            //{
+            //    try
+            //    {
+            //        string progFiles = @"C:\Windows\system32\";
+            //        string keyboardPath = Path.Combine(progFiles, "osk.exe");
+            //        _keyboardProc = Process.Start(keyboardPath);
+            //        tb.Text = String.Empty;
+
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _log.Error(ex.Message, ex);
+            //    }
+
+
+            //tb.Text = String.Empty;
+            //Process process = Process.Start(new ProcessStartInfo(
+            //    ((Environment.GetFolderPath(Environment.SpecialFolder.System) + @"\osk.exe"))));
+            //}
         }
 
-        private void txtTemplateName_Leave(object sender, EventArgs e)
+        private void btnCearTemplateName_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Process[] oskProcessArray = Process.GetProcessesByName("osk");
-                foreach (Process onscreenProcess in oskProcessArray)
-                {
-                    onscreenProcess.Kill();
-                }
-            }
-            catch (Exception ex)
-            {
-                _log.Error(ex.Message, ex);
-            }
+            txtTemplateName.Text = String.Empty;
         }
 
+        private void btnResetName_Click(object sender, EventArgs e)
+        {
+            txtTemplateName.Text = $"{DateTime.Now:yyyyMMddHHmmss}.xml";
+        }
     }
+
 
     public class UserControlEventArgs : EventArgs
     {

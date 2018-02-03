@@ -74,6 +74,7 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.tmrJobRun = new System.Windows.Forms.Timer(this.components);
             this.tmrButtonPress = new System.Windows.Forms.Timer(this.components);
+            this.tmrStart = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -380,6 +381,7 @@
             this.cboLabelSize.Name = "cboLabelSize";
             this.cboLabelSize.Size = new System.Drawing.Size(220, 32);
             this.cboLabelSize.TabIndex = 43;
+            this.cboLabelSize.SelectedIndexChanged += new System.EventHandler(this.cboLabelSize_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -566,6 +568,11 @@
             this.tmrButtonPress.Interval = 2000;
             this.tmrButtonPress.Tick += new System.EventHandler(this.tmrButtonPress_Tick);
             // 
+            // tmrStart
+            // 
+            this.tmrStart.Interval = 2000;
+            this.tmrStart.Tick += new System.EventHandler(this.tmrStart_Tick);
+            // 
             // ucMachineControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -634,5 +641,6 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Timer tmrButtonPress;
         private System.Windows.Forms.Button btnResetCounters;
+        private System.Windows.Forms.Timer tmrStart;
     }
 }

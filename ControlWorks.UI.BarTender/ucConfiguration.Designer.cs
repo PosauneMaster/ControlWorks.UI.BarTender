@@ -50,13 +50,13 @@
             this.label13 = new System.Windows.Forms.Label();
             this.cboOrientation = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnSavePassword = new System.Windows.Forms.Button();
             this.txtPrinterSpeed = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtInfeedSpeed = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.txtPassword = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnSavePassword = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,12 +206,8 @@
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.cboOrientation);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txtPrinterSpeed);
-            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtDefaultBoxWidth);
-            this.groupBox1.Controls.Add(this.txtInfeedSpeed);
             this.groupBox1.Controls.Add(this.txtDefaultBoxHeight);
-            this.groupBox1.Controls.Add(this.label14);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(544, 168);
@@ -271,46 +267,6 @@
             this.label3.TabIndex = 52;
             this.label3.Text = "Label Orientation:";
             // 
-            // txtPrinterSpeed
-            // 
-            this.txtPrinterSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrinterSpeed.Location = new System.Drawing.Point(47, 152);
-            this.txtPrinterSpeed.Multiline = true;
-            this.txtPrinterSpeed.Name = "txtPrinterSpeed";
-            this.txtPrinterSpeed.Size = new System.Drawing.Size(180, 28);
-            this.txtPrinterSpeed.TabIndex = 51;
-            this.txtPrinterSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(47, 135);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 16);
-            this.label6.TabIndex = 50;
-            this.label6.Text = "Printer Speed:";
-            // 
-            // txtInfeedSpeed
-            // 
-            this.txtInfeedSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInfeedSpeed.Location = new System.Drawing.Point(47, 98);
-            this.txtInfeedSpeed.Multiline = true;
-            this.txtInfeedSpeed.Name = "txtInfeedSpeed";
-            this.txtInfeedSpeed.Size = new System.Drawing.Size(180, 28);
-            this.txtInfeedSpeed.TabIndex = 49;
-            this.txtInfeedSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(47, 81);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(92, 16);
-            this.label14.TabIndex = 48;
-            this.label14.Text = "Infeed Speed:";
-            // 
             // txtPassword
             // 
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -342,10 +298,54 @@
             this.btnSavePassword.VisibleChanged += new System.EventHandler(this.btnSavePassword_VisibleChanged);
             this.btnSavePassword.Click += new System.EventHandler(this.btnSavePassword_Click);
             // 
+            // txtPrinterSpeed
+            // 
+            this.txtPrinterSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPrinterSpeed.Location = new System.Drawing.Point(251, 195);
+            this.txtPrinterSpeed.Multiline = true;
+            this.txtPrinterSpeed.Name = "txtPrinterSpeed";
+            this.txtPrinterSpeed.Size = new System.Drawing.Size(180, 28);
+            this.txtPrinterSpeed.TabIndex = 55;
+            this.txtPrinterSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(251, 178);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(93, 16);
+            this.label6.TabIndex = 54;
+            this.label6.Text = "Printer Speed:";
+            // 
+            // txtInfeedSpeed
+            // 
+            this.txtInfeedSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtInfeedSpeed.Location = new System.Drawing.Point(35, 195);
+            this.txtInfeedSpeed.Multiline = true;
+            this.txtInfeedSpeed.Name = "txtInfeedSpeed";
+            this.txtInfeedSpeed.Size = new System.Drawing.Size(180, 28);
+            this.txtInfeedSpeed.TabIndex = 53;
+            this.txtInfeedSpeed.MouseClick += new System.Windows.Forms.MouseEventHandler(this.OnMouseUp);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(35, 178);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(92, 16);
+            this.label14.TabIndex = 52;
+            this.label14.Text = "Infeed Speed:";
+            // 
             // ucConfiguration
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.txtPrinterSpeed);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtInfeedSpeed);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.btnSavePassword);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPassword);
@@ -394,12 +394,12 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ComboBox cboOrientation;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnSavePassword;
         private System.Windows.Forms.TextBox txtPrinterSpeed;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtInfeedSpeed;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox txtPassword;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnSavePassword;
     }
 }

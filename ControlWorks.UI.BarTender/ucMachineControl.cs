@@ -99,6 +99,7 @@ namespace ControlWorks.UI.BarTender
 
         private void ucMachineControl_Load(object sender, EventArgs e)
         {
+
             txtHeight.Text = Properties.Settings.Default.DefaultBoxHeight;
             txtWidth.Text = Properties.Settings.Default.DefaultBoxWidth;
 
@@ -132,6 +133,9 @@ namespace ControlWorks.UI.BarTender
             _pvicontroller.VariablesChanged += _pvicontroller_VariablesChanged;
             _pvicontroller.Start();
 
+            tmrStart.Start();
+
+
         }
 
         private void _pvicontroller_VariablesChanged(object sender, Pvi.Service.VariableEventArgs e)
@@ -153,6 +157,7 @@ namespace ControlWorks.UI.BarTender
                 txtFrontLabels.Text = dto.NumberOfFrontLabels?.ToString() ?? String.Empty;
                 txtSideLabels.Text = dto.NumberOfSideLabels?.ToString() ?? String.Empty;
                 txtTotalLabels.Text = dto.TotalLabelsApplied?.ToString() ?? String.Empty;
+                txtLeftOffset.Text = dto.SideLabelPosition?.ToString() ?? String.Empty;
 
                 if (dto.ClearPrinter.HasValue && dto.ClearPrinter.Value)
                 {
@@ -328,8 +333,16 @@ namespace ControlWorks.UI.BarTender
             if (sender is TextBox txt)
             {
                 var frm = new frmNumpad(txt);
+                frm.FormClosed += (s, ea) =>
+                {
+                    if (txt.Name == txtWidth.Name)
+                    {
+                        SetSideLabelPosition();
+                    }
+                };
                 frm.SetLocation(txt.Right, txt.Top);
                 frm.Show();
+
             }
         }
 
@@ -555,6 +568,43 @@ namespace ControlWorks.UI.BarTender
                 Task.Run(() => _pvicontroller.SetVariables(dto));
 
             }
+        }
+
+        private void SetSideLabelPosition()
+        {
+            double width = 4d;
+            if (cboLabelSize.SelectedItem.ToString() == _labelsizelarge)
+            {
+                width = 6d;
+            }
+
+            Double.TryParse(txtWidth.Text, out var d);
+
+            var offset = Math.Round((d - width) / 2, 2);
+
+            var dto = new PrinterInfoDto();
+            dto.SideLabelPosition = offset;
+
+            if (_pvicontroller != null)
+            {
+                Task.Run(() => _pvicontroller.SetVariables(dto));
+            }
+
+        }
+
+        private void cboLabelSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetSideLabelPosition();
+        }
+
+        private void tmrStart_Tick(object sender, EventArgs e)
+        {
+            var t = sender as Timer;
+            if (t != null)
+            {
+                t.Stop();
+            }
+            SetSideLabelPosition();
         }
     }
 }

@@ -146,26 +146,38 @@ namespace ControlWorks.Pvi.Service
 
             if (dto.ResetNumberOfBoxes.HasValue)
             {
-                Variables["PVI.Counter[0].Reset"].Value.Assign(dto.ResetNumberOfBoxes.Value);
-                Variables["PVI.Counter[0].Reset"].WriteValue();
+                if (dto.ResetNumberOfBoxes.Value == 1)
+                {
+                    Variables["PVI.Counter[0].Reset"].Value.Assign(dto.ResetNumberOfBoxes.Value);
+                    Variables["PVI.Counter[0].Reset"].WriteValue();
+                }
             }
 
             if (dto.ResetNumberOfFrontLabels.HasValue)
             {
-                Variables["PVI.Counter[1].Reset"].Value.Assign(dto.ResetNumberOfFrontLabels.Value);
-                Variables["PVI.Counter[1].Reset"].WriteValue();
+                if (dto.ResetNumberOfBoxes.Value == 1)
+                {
+                    Variables["PVI.Counter[1].Reset"].Value.Assign(dto.ResetNumberOfFrontLabels.Value);
+                    Variables["PVI.Counter[1].Reset"].WriteValue();
+                }
             }
 
             if (dto.ResetNumberOfSideLabels.HasValue)
             {
-                Variables["PVI.Counter[2].Reset"].Value.Assign(dto.ResetNumberOfSideLabels.Value);
-                Variables["PVI.Counter[2].Reset"].WriteValue();
+                if (dto.ResetNumberOfSideLabels.Value == 1)
+                {
+                    Variables["PVI.Counter[2].Reset"].Value.Assign(dto.ResetNumberOfSideLabels.Value);
+                    Variables["PVI.Counter[2].Reset"].WriteValue();
+                }
             }
 
             if (dto.ResetTotalLabelsApplied.HasValue)
             {
-                Variables["PVI.Counter[3].Reset"].Value.Assign(dto.ResetTotalLabelsApplied.Value);
-                Variables["PVI.Counter[3].Reset"].WriteValue();
+                if (dto.ResetTotalLabelsApplied.Value == 1)
+                {
+                    Variables["PVI.Counter[3].Reset"].Value.Assign(dto.ResetTotalLabelsApplied.Value);
+                    Variables["PVI.Counter[3].Reset"].WriteValue();
+                }
             }
 
         }

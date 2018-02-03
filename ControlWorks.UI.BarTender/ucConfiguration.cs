@@ -8,12 +8,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using log4net;
+using ControlWorks.Pvi.Service;
 
 namespace ControlWorks.UI.BarTender
 {
     public partial class ucConfiguration : UserControl
     {
         private readonly ILog _log = LogManager.GetLogger("FileLogger");
+
+        private PviController _pviController;
 
         private Color _defaultBackColor;
         private Color _defaultForeColor;
@@ -24,6 +27,10 @@ namespace ControlWorks.UI.BarTender
 
         private void ucConfiguration_Load(object sender, EventArgs e)
         {
+
+            _pviController = PviController.Controller;
+            _pviController.VariablesChanged += _pviController_VariablesChanged;
+
             txtBtFilesLocation.Text = Properties.Settings.Default.BartenderFilesLocation;
             txtTemplateFilesLocation.Text = Properties.Settings.Default.TemplateFilesLocation;
 
@@ -33,11 +40,25 @@ namespace ControlWorks.UI.BarTender
             _defaultBackColor = btnManualFront.BackColor;
             _defaultForeColor = btnManualFront.ForeColor;
 
-            cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
-            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
-            txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
-            txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
-            cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            //cboOrientation.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation;
+            //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+            //txtInfeedSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed;
+            //txtPrinterSpeed.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed;
+            //cboLabelPlacement.Text = ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement;
+
+        }
+
+        private void _pviController_VariablesChanged(object sender, Pvi.Service.VariableEventArgs e)
+        {
+            if (e.PrinterInfo.InfeedSpeed.HasValue)
+            {
+                txtInfeedSpeed.Text = e.PrinterInfo.InfeedSpeed.Value.ToString();
+            }
+
+            if (e.PrinterInfo.PrinterConveyorSpeed.HasValue)
+            {
+                txtPrinterSpeed.Text = e.PrinterInfo.PrinterConveyorSpeed.Value.ToString();
+            }
 
         }
 
@@ -75,15 +96,25 @@ namespace ControlWorks.UI.BarTender
 
                 frm.FormClosed += (s, ea) =>
                 {
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxHeight = txtDefaultBoxHeight.Text;
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultBoxWidth = txtDefaultBoxWidth.Text;
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultOrientation = cboOrientation.Text;
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement = cboLabelPlacement.Text;
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultInfeedSpeed = txtInfeedSpeed.Text;
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultPrinterSpeed = txtPrinterSpeed.Text;
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.DefaultLabelPlacement = cboLabelPlacement.Text;
+                    var dto = new PrinterInfoDto();
 
-                    ControlWorks.UI.BarTender.Properties.Settings.Default.Save();
+                    if (!String.IsNullOrEmpty(txtPrinterSpeed.Text))
+                    {
+                        if (Int32.TryParse(txtPrinterSpeed.Text, out var i))
+                        {
+                            dto.PrinterConveyorSpeed = i;
+                        }
+                    }
+
+                    if (!String.IsNullOrEmpty(txtInfeedSpeed.Text))
+                    {
+                        if (Int32.TryParse(txtInfeedSpeed.Text, out var j))
+                        {
+                            dto.InfeedSpeed = j;
+                        }
+                    }
+
+                    _pviController.SetVariables(dto);
                 };
 
                 frm.Show();

@@ -35,14 +35,12 @@ namespace ControlWorks.UI.BarTender
 
         public string GetServiceName()
         {
-            //return _application.GetServiceName();
-            return String.Empty;
+            return _application.GetServiceName();
         }
         
         public bool IsServiceConnected()
         {
-            //return _application.IsPviServiceConnected();
-            return true;
+            return _application.IsPviServiceConnected();
         }
 
         public void SetVariable(string name, object val)
